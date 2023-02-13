@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// We could not retrieve columns for the underlying table. Either it has none or you are missing rights to see them. Please check your privileges.
+// model Times {
+// }
+
+model Tracks {
+  id          Int    @id @default(autoincrement())
+  name        String @unique @default("")
+  length      Int    @default(0) @db.SmallInt
+  country     String @default("")
+  track_image String @default("")
+}
+
+/// We could not retrieve columns for the underlying table. Either it has none or you are missing rights to see them. Please check your privileges.
+// model Users {
+// }
