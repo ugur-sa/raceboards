@@ -4,13 +4,58 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-type Data = {
-  name: string;
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  res.status(200).json({ data: 'Hello World' });
+  if (req.method === 'GET') {
+    const { id } = req.query;
+    //get user id from user_uuid
+    const user = await prisma.users.findFirst({
+      where: {
+        user_uuid: id as string,
+      },
+    });
+    const user_id = user?.id;
+
+    const times = await prisma.times.findMany({
+      where: {
+        user_id: Number(user_id),
+      },
+    });
+    res.status(200).json(times);
+  } else if (req.method === 'POST') {
+    const { track, user_id, time } = req.body;
+    // Get user id from user_uuid
+    const user = await prisma.users.findFirst({
+      where: {
+        user_uuid: user_id,
+      },
+    });
+    const id = user?.id;
+
+    //Get track id from track name
+    const trackFromDB = await prisma.tracks.findFirst({
+      where: {
+        name: track,
+      },
+    });
+
+    const track_id = trackFromDB?.id;
+
+    // Create new time
+    const newTime = await prisma.times.create({
+      data: {
+        time: time,
+        user_id: id == undefined ? 0 : id,
+        track_id: track_id == undefined ? 0 : track_id,
+        user_name: user?.name,
+      },
+    });
+
+    res.status(201).json(newTime);
+  } else {
+    res.setHeader('Allow', ['GET', 'POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 }
