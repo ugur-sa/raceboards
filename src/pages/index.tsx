@@ -54,7 +54,7 @@ export default function Home() {
         <Login />
       ) : (
         <>
-          <header className="h-20 grid grid-cols-3 bg-blue-200">
+          <header className="h-20 grid grid-cols-3 bg-[#3D3D3D]">
             <Link
               className="place-self-center justify-self-start pl-5 text-xl"
               href={'/times'}
