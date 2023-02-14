@@ -10,7 +10,7 @@ datasource db {
 model Times {
   id        Int    @id @default(autoincrement())
   track_id  Int
-  time      Int    @default(0) @db.SmallInt
+  time      String @default("")
   user_name String @default("")
   user_id   Int
   Tracks    Tracks @relation(fields: [track_id], references: [id])
@@ -29,7 +29,7 @@ model Tracks {
 model Users {
   id        Int     @id @default(autoincrement())
   name      String  @unique @default("")
-  password  String  @default("")
   email     String  @default("")
+  user_uuid String  @unique @db.Uuid
   Times     Times[]
 }
