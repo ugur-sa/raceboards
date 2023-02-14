@@ -5,3 +5,11 @@ export type Track = {
   country: string;
   track_image: string;
 };
+
+export type Time = {
+  id: number;
+  time: string;
+  track_id: number;
+  user_name: string;
+  user_id: number;
+};
