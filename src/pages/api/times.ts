@@ -29,16 +29,37 @@ export default async function handler(
 
     const track_id = trackFromDB?.id;
 
-    // Create new time
-    const newTime = await prisma.times.create({
-      data: {
-        time: time,
-        user_id: user_id == undefined ? 0 : user_id,
-        track_id: track_id == undefined ? 0 : track_id,
+    //check if time already exists
+    const timeFromDB = await prisma.times.findFirst({
+      where: {
+        user_id: user_id,
+        track_id: track_id,
       },
     });
 
-    res.status(201).json(newTime);
+    if (timeFromDB != null) {
+      // Update time
+      const updatedTime = await prisma.times.update({
+        where: {
+          id: timeFromDB?.id,
+        },
+        data: {
+          time: time,
+        },
+      });
+      res.status(201).json(updatedTime);
+    } else {
+      // Create new time
+      const newTime = await prisma.times.create({
+        data: {
+          time: time,
+          user_id: user_id == undefined ? 0 : user_id,
+          track_id: track_id == undefined ? 0 : track_id,
+        },
+      });
+
+      res.status(201).json(newTime);
+    }
   } else {
     res.setHeader('Allow', ['GET', 'POST']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
