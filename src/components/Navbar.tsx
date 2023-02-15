@@ -1,4 +1,4 @@
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,8 +7,7 @@ export default function Navbar() {
   //get the current route
   const router = useRouter();
   const supabase = useSupabaseClient();
-
-  console.log(router);
+  const session = useSession();
 
   //create a nav bar with links to the home page and the tracks page and times page
   return (
@@ -25,18 +24,6 @@ export default function Navbar() {
         <span className="pl-5 text-xl font-semibold tracking-tight">
           Raceboards
         </span>
-      </div>
-      <div className="block lg:hidden">
-        <button className="flex items-center rounded border border-gray-400 px-3 py-2 text-gray-200 hover:border-white hover:text-white">
-          <svg
-            className="h-3 w-3 fill-current"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-          </svg>
-        </button>
       </div>
       <div className="block w-full flex-grow lg:flex lg:w-auto lg:items-center">
         <div className="text-sm lg:flex-grow">
@@ -70,6 +57,16 @@ export default function Navbar() {
           >
             Sign out
           </button>
+        </div>
+        <div className="flex items-center justify-center gap-5 text-gray-200 hover:text-white">
+          <p>Welcome, {session?.user.user_metadata.full_name}</p>
+          <Image
+            className="rounded-full"
+            src={session?.user.user_metadata.avatar_url}
+            alt="avatar"
+            width={50}
+            height={50}
+          />
         </div>
       </div>
     </nav>
