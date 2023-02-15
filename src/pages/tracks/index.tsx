@@ -5,6 +5,7 @@ import Times from '@/components/Times';
 import Link from 'next/link';
 import Tracks from '@/components/Tracks';
 import Head from 'next/head';
+import Navbar from '@/components/Navbar';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -28,8 +29,10 @@ export default function TracksPage() {
       <Head>
         <title>Tracks</title>
       </Head>
-      <Link href={'/'}>Back to homepage</Link>
-      <Tracks tracks={tracks} />
+      <Navbar />
+      <div className="bg-gray-800 text-white">
+        <Tracks tracks={tracks} />
+      </div>
     </>
   );
 }

@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Login from '@/components/Login';
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -60,37 +61,9 @@ export default function Home() {
         <Login />
       ) : (
         <>
-          <header className="grid h-20 grid-cols-3 bg-[#3D3D3D]">
-            <div className="place-self-center justify-self-start">
-              <Link className="pl-5 text-xl text-white" href={'/times'}>
-                Times
-              </Link>
-              <Link className="pl-5 text-xl text-white" href={'/tracks'}>
-                Tracks
-              </Link>
-            </div>
-            <div className="col-start-2 flex items-center gap-5 place-self-center">
-              <h1 className="text-3xl font-light text-white">
-                Willkommen zu Raceboards,{' '}
-                {session?.user.user_metadata.full_name}
-              </h1>
-              <Image
-                src={session.user.user_metadata.avatar_url}
-                className="rounded-full"
-                alt="avatar"
-                width={50}
-                height={50}
-              />
-            </div>
-            <button
-              className="place-self-center justify-self-end pr-5"
-              onClick={() => supabase.auth.signOut()}
-            >
-              <Image src="/logout.svg" width={20} height={20} alt="logout" />
-            </button>
-          </header>
+          <Navbar />
           <main>
-            <div className="flex h-[calc(100vh-5rem)]  items-center justify-center bg-gray-800">
+            <div className="flex h-[calc(100vh-6.1rem)]  items-center justify-center bg-gray-800">
               <div className="w-1/3 rounded-lg border border-gray-600 bg-gray-600 p-2  shadow-xl">
                 <form onSubmit={submitTime}>
                   <div>
@@ -98,7 +71,7 @@ export default function Home() {
                       className="mb-2 block text-sm font-medium text-white"
                       htmlFor="track"
                     >
-                      Track
+                      Select a Track
                     </label>
                     <select
                       className=" block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white placeholder-gray-400 focus:border-blue-500  focus:ring-blue-500 "
@@ -118,7 +91,7 @@ export default function Home() {
                       className="mb-2 block text-sm font-medium text-white"
                       htmlFor="time"
                     >
-                      Time
+                      Your Time
                     </label>
                     <div className="flex">
                       <input

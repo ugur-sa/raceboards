@@ -3,7 +3,7 @@ import { Track } from 'types';
 export default function Tracks({ tracks }: { tracks: Track[] }) {
   //display all tracks in a table
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex min-h-[calc(100vh-6.1rem)] flex-col items-center justify-center py-2">
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
         <h1 className="text-6xl font-bold">Tracks</h1>
         <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
