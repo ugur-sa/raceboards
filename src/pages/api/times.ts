@@ -15,6 +15,9 @@ export default async function handler(
       where: {
         user_id: id as string,
       },
+      orderBy: {
+        time: 'asc',
+      },
     });
     res.status(200).json(times);
   } else if (req.method === 'POST') {
