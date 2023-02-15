@@ -31,6 +31,8 @@ function submitTime(e: any) {
     if (res.ok === true) {
       alert('Time submitted!');
       e.target.reset();
+    } else {
+      alert('Something went wrong!');
     }
   });
 }
