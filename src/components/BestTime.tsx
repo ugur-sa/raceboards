@@ -1,55 +1,66 @@
-import { Time, Track, BestTime } from 'types';
+import { Time, Track, BestTimeArr } from 'types';
 import useSWR from 'swr';
 import { useSession } from '@supabase/auth-helpers-react';
+import Link from 'next/link';
+import Spinner from './Spinner';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function BestTimeTable() {
   const session = useSession();
 
-  const { data: bestTimes, error: timesError } = useSWR<BestTime[]>(
+  const { data: bestTimes, error: timesError } = useSWR<BestTimeArr[]>(
     `/api/bestTimes`,
     fetcher
   );
 
-  const { data: tracks, error: tracksError } = useSWR<Track[]>(
-    '/api/track',
-    fetcher
-  );
+  if (timesError) return <div>failed to load</div>;
+  if (!bestTimes) return <Spinner />;
 
-  if (timesError || tracksError) return <div>failed to load</div>;
-  if (!bestTimes || !tracks) return <div>loading...</div>;
+  console.log(bestTimes);
 
-  //display each track and the best time and the user who set it in a table
+  // create a grid of cards for each track and display the times for each track
+  // return (
+  //   <div>
+  //     {bestTimes.map((bestTimeObject) => (
+  //       <div key={bestTimeObject.track}>
+  //         <h1>{bestTimeObject.track}</h1>
+  //         {bestTimeObject.times.map((time) => (
+  //           <div key={time.id}>
+  //             <p>{time.time}</p>
+  //           </div>
+  //         ))}
+  //       </div>
+  //     ))}
+  //   </div>
+  // );
+
+  //with the logic from above create a grid with cards for each track and display the times for each track
+  //also display 1,2,3 for the top 3 times
   return (
-    <div className="flex flex-col items-center bg-gray-800 text-white">
-      <table className="table-auto">
-        <thead>
-          <tr>
-            <th className="px-4 py-2">Track</th>
-            <th className="px-4 py-2">Time</th>
-            <th className="px-4 py-2">User</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tracks.map((track) => {
-            const bestTime = bestTimes.find(
-              (time) => time.track_id === track.id
-            );
-            return (
-              <tr key={track.id}>
-                <td className="border px-4 py-2">{track.name}</td>
-                <td className="border px-4 py-2">
-                  {bestTime ? bestTime.time : 'N/A'}
-                </td>
-                <td className="border px-4 py-2">
-                  {bestTime ? bestTime.username : 'N/A'}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {bestTimes.map((bestTimeObject) => (
+        <div
+          key={bestTimeObject.track}
+          className="rounded-lg bg-gray-800 p-4 shadow-lg"
+        >
+          <h1 className="text-2xl font-bold text-white">
+            {bestTimeObject.track}
+          </h1>
+
+          {bestTimeObject.times.map((time, index) => (
+            <div key={time.id}>
+              <p className="text-white">
+                {index === 0 && '🥇'}
+                {index === 1 && '🥈'}
+                {index === 2 && '🥉'}
+                {'.'}
+                {time.time} {'-'} {time.username}
+              </p>
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
