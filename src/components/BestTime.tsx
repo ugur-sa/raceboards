@@ -54,7 +54,6 @@ export default function BestTimeTable() {
                 {index === 0 && '🥇'}
                 {index === 1 && '🥈'}
                 {index === 2 && '🥉'}
-                {'.'}
                 {time.time} {'-'} {time.username}
               </p>
             </div>
