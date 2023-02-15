@@ -56,16 +56,26 @@ export default function Home() {
         <Login />
       ) : (
         <>
-          <header className="h-20 grid grid-cols-3 bg-[#3D3D3D]">
+          <header className="grid h-20 grid-cols-3 bg-[#3D3D3D]">
             <Link
               className="place-self-center justify-self-start pl-5 text-xl"
               href={'/times'}
             >
               Times
             </Link>
-            <h1 className="text-3xl font-light col-start-2 place-self-center">
-              Willkommen zu Raceboards, {session?.user.user_metadata.full_name}
-            </h1>
+            <div className="col-start-2 flex items-center gap-5 place-self-center">
+              <h1 className="text-3xl font-light text-white">
+                Willkommen zu Raceboards,{' '}
+                {session?.user.user_metadata.full_name}
+              </h1>
+              <Image
+                src={session.user.user_metadata.avatar_url}
+                className="rounded-full"
+                alt="avatar"
+                width={50}
+                height={50}
+              />
+            </div>
             <button
               className="place-self-center justify-self-end pr-5"
               onClick={() => supabase.auth.signOut()}
@@ -74,8 +84,8 @@ export default function Home() {
             </button>
           </header>
           <main>
-            <div className="bg-gray-200 dark:bg-gray-800 h-[calc(100vh-5rem)]  flex justify-center items-center">
-              <div className="w-1/3 border border-gray-600 rounded-lg shadow-xl bg-gray-300 dark:bg-gray-600  p-2">
+            <div className="flex h-[calc(100vh-5rem)]  items-center justify-center bg-gray-800">
+              <div className="w-1/3 rounded-lg border border-gray-600 bg-gray-600 p-2  shadow-xl">
                 <form
                   method="POST"
                   action="localhost:3000/api/times"
@@ -83,13 +93,13 @@ export default function Home() {
                 >
                   <div>
                     <label
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      className="mb-2 block text-sm font-medium text-white"
                       htmlFor="track"
                     >
                       Track
                     </label>
                     <select
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className=" block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white placeholder-gray-400 focus:border-blue-500  focus:ring-blue-500 "
                       name="track"
                       id="track"
                     >
@@ -103,13 +113,13 @@ export default function Home() {
 
                   <div>
                     <label
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      className="mb-2 block text-sm font-medium text-white"
                       htmlFor="time"
                     >
                       Time
                     </label>
                     <input
-                      className='"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                      className='"bg-gray-50 block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 '
                       type="text"
                       name="time"
                       id="time"
@@ -119,7 +129,7 @@ export default function Home() {
 
                   <div>
                     <button
-                      className="bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm w-full sm:w-auto mt-3 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 rounded-lg text-white "
+                      className="mt-3 w-full  rounded-lg bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-800 sm:w-auto "
                       type="submit"
                     >
                       Submit
