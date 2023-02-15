@@ -10,29 +10,15 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     const { id } = req.query;
-    //get user id from user_uuid
-    const user = await prisma.users.findFirst({
-      where: {
-        user_uuid: id as string,
-      },
-    });
-    const user_id = user?.id;
 
     const times = await prisma.times.findMany({
       where: {
-        user_id: Number(user_id),
+        user_id: id as string,
       },
     });
     res.status(200).json(times);
   } else if (req.method === 'POST') {
     const { track, user_id, time } = req.body;
-    // Get user id from user_uuid
-    const user = await prisma.users.findFirst({
-      where: {
-        user_uuid: user_id,
-      },
-    });
-    const id = user?.id;
 
     //Get track id from track name
     const trackFromDB = await prisma.tracks.findFirst({
@@ -47,9 +33,8 @@ export default async function handler(
     const newTime = await prisma.times.create({
       data: {
         time: time,
-        user_id: id == undefined ? 0 : id,
+        user_id: user_id == undefined ? 0 : user_id,
         track_id: track_id == undefined ? 0 : track_id,
-        user_name: user?.name,
       },
     });
 

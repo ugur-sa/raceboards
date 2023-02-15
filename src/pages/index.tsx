@@ -40,6 +40,8 @@ export default function Home() {
   if (tracksError) return <div>failed to load</div>;
   if (!tracks) return <div>loading...</div>;
 
+  console.log(session);
+
   user_uuid = session?.user.id;
 
   return (
