@@ -14,8 +14,13 @@ export type Time = {
   user_id: number;
 };
 
-export type BestTime = {
-  track_id: number;
-  time: string;
-  username: string;
+export type BestTimeArr = {
+  track: string;
+  times: [
+    {
+      id: number;
+      time: string;
+      username: string;
+    }
+  ];
 };
