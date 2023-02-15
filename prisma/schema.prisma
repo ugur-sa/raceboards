@@ -8,13 +8,12 @@ datasource db {
 }
 
 model Times {
-  id        Int    @id @default(autoincrement())
-  track_id  Int
-  time      String @default("")
-  user_name String @default("")
-  user_id   Int
-  Tracks    Tracks @relation(fields: [track_id], references: [id])
-  Users     Users  @relation(fields: [user_id], references: [id])
+  id       Int    @id @default(autoincrement())
+  track_id Int
+  time     String @default("")
+  user_id  String
+  Tracks   Tracks @relation(fields: [track_id], references: [id])
+  Users    Users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model Tracks {
@@ -27,9 +26,9 @@ model Tracks {
 }
 
 model Users {
-  id        Int     @id @default(autoincrement())
-  name      String  @unique @default("")
-  email     String  @default("")
-  user_uuid String  @unique @db.Uuid
-  Times     Times[]
+  id         String  @id
+  email      String  @unique
+  name       String  @default("")
+  avatar_url String  @default("")
+  Times      Times[]
 }
