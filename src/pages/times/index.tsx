@@ -3,6 +3,7 @@ import { Time, Track } from 'types';
 import useSWR from 'swr';
 import Times from '@/components/Times';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -23,8 +24,11 @@ export default function TimesPage() {
 
   return (
     <>
-      <Times times={userTimes} tracks={tracks} />
+      <Head>
+        <title>Times</title>
+      </Head>
       <Link href={'/'}>Back to homepage</Link>
+      <Times times={userTimes} tracks={tracks} />
     </>
   );
 }
