@@ -63,6 +63,16 @@ export default async function handler(
 
       res.status(201).json(newTime);
     }
+  } else if (req.method === 'DELETE') {
+    const { id } = req.body;
+
+    const deletedTime = await prisma.times.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    res.status(200).json(deletedTime);
   } else {
     res.setHeader('Allow', ['GET', 'POST']);
     res.status(405).end(`Method ${req.method} Not Allowed`);

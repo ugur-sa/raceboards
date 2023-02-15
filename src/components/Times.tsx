@@ -3,9 +3,11 @@ import { Time, Track } from 'types';
 export default function Times({
   times,
   tracks,
+  mutate,
 }: {
   times: Time[];
   tracks: Track[];
+  mutate: any;
 }) {
   //show the times for the user in a table with the track name and country as columns and the time as the row
   return (
@@ -19,6 +21,7 @@ export default function Times({
                   <th className="px-4 py-2">Track</th>
                   <th className="px-4 py-2">Country</th>
                   <th className="px-4 py-2">Time</th>
+                  <th className="px-4 py-2">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -39,6 +42,17 @@ export default function Times({
                       ))}
                     </td>
                     <td className="border px-4 py-2">{time.time}</td>
+                    <td className="border px-4 py-2">
+                      <button
+                        className="rounded bg-red-500 py-2 px-4 font-bold text-white hover:bg-red-700"
+                        onClick={() => {
+                          deleteTime(time.id);
+                          mutate();
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -48,4 +62,21 @@ export default function Times({
       </div>
     </>
   );
+}
+
+function deleteTime(id: number) {
+  //delete the time from the database
+  fetch('/api/times/', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: id }),
+  }).then((res) => {
+    if (res.status === 200) {
+      alert('Time deleted');
+    } else {
+      alert('Error deleting time');
+    }
+  });
 }

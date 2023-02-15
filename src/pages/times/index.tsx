@@ -64,7 +64,7 @@ export default function TimesPage() {
       <Navbar />
       <div className="flex min-h-[calc(100vh-6.1rem)] flex-col items-center gap-20 bg-gray-800 text-white">
         <h1 className="place-self-center text-6xl font-bold">Times</h1>
-        <Times times={userTimes} tracks={tracks} />
+        <Times times={userTimes} tracks={tracks} mutate={mutate} />
         <div className="w-1/3 rounded-lg border border-gray-600 bg-gray-600 p-2  shadow-xl">
           <form onSubmit={submitTime}>
             <div>
