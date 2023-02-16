@@ -7,6 +7,7 @@ const nextConfig = {
       'www.seekpng.com',
       'upload.wikimedia.org',
       'cdn.countryflags.com',
+      'raw.githubusercontent.com',
     ],
   },
 };
