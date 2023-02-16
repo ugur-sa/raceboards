@@ -22,10 +22,10 @@ export default function BestTimeTable() {
   //also display 1,2,3 for the top 3 times
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {bestTimes.map((bestTimeObject) => (
+      {bestTimes.map((bestTimeObject, index) => (
         <div
           key={bestTimeObject.track.id}
-          className="rounded-lg bg-gray-800 p-4 shadow-lg"
+          className="rounded-lg border border-gray-600 bg-gray-800 p-4 shadow-lg"
         >
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-white">
