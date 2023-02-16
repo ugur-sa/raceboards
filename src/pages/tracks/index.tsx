@@ -26,13 +26,24 @@ export default function TracksPage() {
 
   return (
     <>
-      <Head>
-        <title>Tracks</title>
-      </Head>
-      <Navbar />
-      <div className="bg-gray-800 text-white">
-        <Tracks tracks={tracks} />
-      </div>
+      {session?.user.aud == 'authenticated' ? (
+        <>
+          <Head>
+            <title>Tracks</title>
+          </Head>
+          <Navbar />
+          <div className="bg-gray-800 text-white">
+            <Tracks tracks={tracks} />
+          </div>
+        </>
+      ) : (
+        <div className="flex h-screen flex-col items-center justify-center">
+          <h1 className="text-6xl font-bold">You are not logged in</h1>
+          <Link className="link" href="/">
+            Go to login
+          </Link>
+        </div>
+      )}
     </>
   );
 }
