@@ -50,6 +50,7 @@ export default function BestTimeTable() {
               {bestTimeObject.track.name}
             </h1>
             <Image
+              className="rounded-full"
               src={bestTimeObject.track.country_flag}
               alt="flag"
               width={30}

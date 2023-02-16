@@ -36,6 +36,7 @@ export default function Tracks({ tracks }: { tracks: Track[] }) {
                   <td className="flex justify-between px-4 py-2">
                     {track.country}
                     <Image
+                      className="rounded-full"
                       src={track.country_flag}
                       width={30}
                       height={30}
