@@ -33,7 +33,7 @@ export default function BestTimeTable() {
             </h1>
             <Image
               className="rounded-full"
-              src={`/flags/${bestTimeObject.track.country}.png`}
+              src={`/flags/${bestTimeObject.track.country.toLowerCase()}.png`}
               alt="flag"
               width={30}
               height={30}
