@@ -17,7 +17,7 @@ export type Time = {
 };
 
 export type BestTimeArr = {
-  track: string;
+  track: Track;
   times: [
     {
       id: number;
