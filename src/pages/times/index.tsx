@@ -2,9 +2,9 @@ import { useSession } from '@supabase/auth-helpers-react';
 import { Time, Track } from 'types';
 import useSWR from 'swr';
 import Times from '@/components/Times';
-import Link from 'next/link';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
+import { useState } from 'react';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -29,10 +29,10 @@ function submitTime(e: any) {
     }),
   }).then((res) => {
     if (res.ok === true) {
-      alert('Time submitted!');
       e.target.reset();
+      console.log('success');
     } else {
-      alert('Something went wrong!');
+      console.log('error');
     }
   });
 }
@@ -66,7 +66,7 @@ export default function TimesPage() {
         <h1 className="place-self-center text-6xl font-bold">Times</h1>
         <Times times={userTimes} tracks={tracks} mutate={mutate} />
         <div className="w-1/3 rounded-lg border border-gray-600 bg-gray-600 p-2  shadow-xl">
-          <form onSubmit={submitTime}>
+          <form onSubmit={(e) => submitTime(e)}>
             <div>
               <label
                 className="mb-2 block text-sm font-medium text-white"
