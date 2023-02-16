@@ -45,8 +45,7 @@ export default function Times({
                     <button
                       className="rounded bg-red-500 py-2 px-4 font-bold text-white hover:bg-red-700"
                       onClick={() => {
-                        deleteTime(time.id);
-                        mutate();
+                        deleteTime(time.id, mutate);
                       }}
                     >
                       Delete
@@ -62,7 +61,7 @@ export default function Times({
   );
 }
 
-function deleteTime(id: number) {
+function deleteTime(id: number, mutate: any) {
   //delete the time from the database
   fetch('/api/times/', {
     method: 'DELETE',
@@ -72,9 +71,10 @@ function deleteTime(id: number) {
     body: JSON.stringify({ id: id }),
   }).then((res) => {
     if (res.status === 200) {
-      alert('Time deleted');
+      console.log('Time deleted');
+      mutate();
     } else {
-      alert('Error deleting time');
+      console.log('Error deleting time');
     }
   });
 }
