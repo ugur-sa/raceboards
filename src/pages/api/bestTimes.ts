@@ -9,7 +9,11 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     //get all tracks
-    const tracks = await prisma.tracks.findMany();
+    const tracks = await prisma.tracks.findMany({
+      orderBy: {
+        season_order: 'asc',
+      },
+    });
 
     //get all times
     const times = await prisma.times.findMany();
@@ -61,7 +65,7 @@ export default async function handler(
         .slice(0, 3);
 
       return {
-        track: track.name,
+        track: track,
         times: bestTimes.map((time) => ({
           id: time.id,
           time: time.time,

@@ -3,6 +3,7 @@ import useSWR from 'swr';
 import { useSession } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
 import Spinner from './Spinner';
+import Image from 'next/image';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -41,12 +42,20 @@ export default function BestTimeTable() {
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {bestTimes.map((bestTimeObject) => (
         <div
-          key={bestTimeObject.track}
+          key={bestTimeObject.track.id}
           className="rounded-lg bg-gray-800 p-4 shadow-lg"
         >
-          <h1 className="text-2xl font-bold text-white">
-            {bestTimeObject.track}
-          </h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-bold text-white">
+              {bestTimeObject.track.name}
+            </h1>
+            <Image
+              src={bestTimeObject.track.country_flag}
+              alt="flag"
+              width={30}
+              height={30}
+            />
+          </div>
 
           {bestTimeObject.times.map((time, index) => (
             <div key={time.id}>
