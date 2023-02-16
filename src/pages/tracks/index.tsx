@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Tracks from '@/components/Tracks';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
+import Error from '@/components/Error';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -37,12 +38,7 @@ export default function TracksPage() {
           </div>
         </>
       ) : (
-        <div className="flex h-screen flex-col items-center justify-center">
-          <h1 className="text-6xl font-bold">You are not logged in</h1>
-          <Link className="link" href="/">
-            Go to login
-          </Link>
-        </div>
+        <Error />
       )}
     </>
   );

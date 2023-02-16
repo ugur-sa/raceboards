@@ -18,24 +18,6 @@ export default function BestTimeTable() {
   if (timesError) return <div>failed to load</div>;
   if (!bestTimes) return <Spinner />;
 
-  console.log(bestTimes);
-
-  // create a grid of cards for each track and display the times for each track
-  // return (
-  //   <div>
-  //     {bestTimes.map((bestTimeObject) => (
-  //       <div key={bestTimeObject.track}>
-  //         <h1>{bestTimeObject.track}</h1>
-  //         {bestTimeObject.times.map((time) => (
-  //           <div key={time.id}>
-  //             <p>{time.time}</p>
-  //           </div>
-  //         ))}
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
-
   //with the logic from above create a grid with cards for each track and display the times for each track
   //also display 1,2,3 for the top 3 times
   return (
