@@ -14,12 +14,7 @@ export default function Navbar() {
     <nav className="flex flex-wrap items-center justify-between bg-gray-800 p-6">
       <div className="mr-6 flex flex-shrink-0 items-center text-white">
         <Link href={'/'}>
-          <Image
-            src="/helmet.png"
-            alt="Raceboards Logo"
-            width={50}
-            height={50}
-          />
+          <Image src="/f1.svg" alt="Raceboards Logo" width={50} height={50} />
         </Link>
         <span className="pl-5 text-xl font-semibold tracking-tight">
           Raceboards
