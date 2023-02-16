@@ -37,7 +37,7 @@ export default function Tracks({ tracks }: { tracks: Track[] }) {
                     {track.country}
                     <Image
                       className="rounded-full"
-                      src={track.country_flag}
+                      src={`/flags/${track.country}.png`}
                       width={30}
                       height={30}
                       alt="flag"

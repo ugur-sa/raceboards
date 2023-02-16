@@ -23,7 +23,6 @@ model Tracks {
   country      String  @default("")
   track_image  String  @default("")
   season_order Int?    @db.SmallInt
-  country_flag String? @default("")
   Times        Times[]
 }
 

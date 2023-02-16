@@ -5,7 +5,6 @@ export type Track = {
   country: string;
   track_image: string;
   season_order: number;
-  country_flag: string;
 };
 
 export type Time = {
