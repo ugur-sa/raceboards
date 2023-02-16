@@ -14,7 +14,11 @@ export default async function handler(
 ) {
   switch (req.method) {
     case 'GET':
-      const tracks = await prisma.tracks.findMany();
+      const tracks = await prisma.tracks.findMany({
+        orderBy: {
+          season_order: 'asc',
+        },
+      });
       res.status(200).json(tracks);
       break;
     case 'POST':

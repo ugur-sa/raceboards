@@ -17,12 +17,13 @@ model Times {
 }
 
 model Tracks {
-  id          Int     @id @default(autoincrement())
-  name        String  @unique @default("")
-  length      Int     @default(0) @db.SmallInt
-  country     String  @default("")
-  track_image String  @default("")
-  Times       Times[]
+  id           Int     @id @default(autoincrement())
+  name         String  @unique @default("")
+  length       Int     @default(0) @db.SmallInt
+  country      String  @default("")
+  track_image  String  @default("")
+  season_order Int?    @db.SmallInt
+  Times        Times[]
 }
 
 model Users {
