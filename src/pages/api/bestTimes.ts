@@ -33,6 +33,7 @@ export default async function handler(
         times: bestTimes.map((time) => ({
           id: time.id,
           time: time.time,
+          updated_at: time.updated_at,
           username: users.find((user) => user.id === time.user_id)?.name,
         })),
       };
