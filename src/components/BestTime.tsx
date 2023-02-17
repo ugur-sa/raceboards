@@ -37,7 +37,9 @@ export default function BestTimeTable() {
           </p>
           <div className="col-span-10 flex flex-col  items-start justify-center place-self-start pl-10">
             <h1 className="text-xl font-bold text-white">
-              {bestTimeObject.track.name}
+              <Link href={`/tracks/${bestTimeObject.track.name.toLowerCase()}`}>
+                {bestTimeObject.track.name}
+              </Link>
             </h1>
             {bestTimeObject.times.map((time, index) => (
               <div key={time.id} className="flex items-center gap-2">
