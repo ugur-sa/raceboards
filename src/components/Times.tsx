@@ -1,5 +1,47 @@
 import { Time, Track } from 'types';
 
+function deleteTime(id: number, mutate: any, setShowToast: any) {
+  //delete the time from the database
+  fetch('/api/times/', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: id }),
+  }).then((res) => {
+    if (res.status === 200) {
+      mutate();
+      setShowToast({
+        success: true,
+        error: false,
+        message: 'Time deleted successfully',
+      });
+      //wait 3 seconds and then hide the toast
+      setTimeout(() => {
+        setShowToast({
+          success: false,
+          error: false,
+          message: '',
+        });
+      }, 3000);
+    } else {
+      setShowToast({
+        success: false,
+        error: true,
+        message: 'Error deleting time',
+      });
+      //wait 3 seconds and then hide the toast
+      setTimeout(() => {
+        setShowToast({
+          success: false,
+          error: false,
+          message: '',
+        });
+      }, 3000);
+    }
+  });
+}
+
 export default function Times({
   times,
   tracks,
@@ -61,46 +103,4 @@ export default function Times({
       </div>
     </>
   );
-}
-
-function deleteTime(id: number, mutate: any, setShowToast: any) {
-  //delete the time from the database
-  fetch('/api/times/', {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id: id }),
-  }).then((res) => {
-    if (res.status === 200) {
-      mutate();
-      setShowToast({
-        success: true,
-        error: false,
-        message: 'Time deleted successfully',
-      });
-      //wait 3 seconds and then hide the toast
-      setTimeout(() => {
-        setShowToast({
-          success: false,
-          error: false,
-          message: '',
-        });
-      }, 3000);
-    } else {
-      setShowToast({
-        success: false,
-        error: true,
-        message: 'Error deleting time',
-      });
-      //wait 3 seconds and then hide the toast
-      setTimeout(() => {
-        setShowToast({
-          success: false,
-          error: false,
-          message: '',
-        });
-      }, 3000);
-    }
-  });
 }
