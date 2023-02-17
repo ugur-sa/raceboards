@@ -40,6 +40,13 @@ export default async function handler(
       },
     });
 
+    //convert the time from 1:23.456 to 83456
+    const timeArray = time.split(':');
+    const minutes = parseInt(timeArray[0]);
+    const seconds = parseInt(timeArray[1].split('.')[0]);
+    const milliseconds = parseInt(timeArray[1].split('.')[1]);
+    const timeInMilliseconds = minutes * 60000 + seconds * 1000 + milliseconds;
+
     if (timeFromDB != null) {
       // Update time
       const updatedTime = await prisma.times.update({
@@ -48,6 +55,8 @@ export default async function handler(
         },
         data: {
           time: time,
+          updated_at: new Date(Date.now()),
+          time_in_ms: timeInMilliseconds,
         },
       });
       res.status(201).json(updatedTime);
@@ -58,6 +67,8 @@ export default async function handler(
           time: time,
           user_id: user_id == undefined ? 0 : user_id,
           track_id: track_id == undefined ? 0 : track_id,
+          updated_at: new Date(Date.now()),
+          time_in_ms: timeInMilliseconds,
         },
       });
 
