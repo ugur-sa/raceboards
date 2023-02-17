@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Error from '@/components/Error';
 import Spinner from '@/components/Spinner';
+import TimesLoading from '@/components/TimesLoading';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -84,7 +85,6 @@ export default function TimesPage() {
   );
 
   if (timesError || tracksError) return <div>failed to load</div>;
-  if (!userTimes || !tracks) return <Spinner />;
 
   return (
     <>
@@ -97,12 +97,16 @@ export default function TimesPage() {
           <main className="flex min-h-0 flex-grow flex-col p-10">
             <div className="flex flex-col items-center justify-center gap-10 bg-gray-800 text-white">
               <h1 className="text-6xl font-bold">Times</h1>
-              <Times
-                times={userTimes}
-                tracks={tracks}
-                mutate={mutate}
-                setShowToast={setShowToast}
-              />
+              {!userTimes || !tracks ? (
+                <TimesLoading />
+              ) : (
+                <Times
+                  times={userTimes}
+                  tracks={tracks}
+                  setShowToast={setShowToast}
+                  mutate={mutate}
+                />
+              )}
               <div className="card w-1/2 bg-base-100 shadow-xl">
                 <form
                   className="card-body"
