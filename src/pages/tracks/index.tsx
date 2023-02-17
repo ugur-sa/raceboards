@@ -34,7 +34,7 @@ export default function TracksPage() {
             <title>Tracks</title>
           </Head>
           <Navbar />
-          <div className="bg-gray-800 text-white">
+          <div className="bg-gray-800 text-white lg:h-full xl:h-screen">
             <Tracks tracks={tracks} />
           </div>
         </>
