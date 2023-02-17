@@ -7,6 +7,7 @@ import Tracks from '@/components/Tracks';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Error from '@/components/Error';
+import Spinner from '@/components/Spinner';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -23,7 +24,7 @@ export default function TracksPage() {
   );
 
   if (timesError || tracksError) return <div>failed to load</div>;
-  if (!userTimes || !tracks) return <div>loading...</div>;
+  if (!userTimes || !tracks) return <Spinner />;
 
   return (
     <>
