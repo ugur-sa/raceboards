@@ -13,6 +13,8 @@ export type Time = {
   track_id: number;
   user_name: string;
   user_id: number;
+  time_in_ms: number;
+  updated_at: Date;
 };
 
 export type BestTimeArr = {
