@@ -8,12 +8,14 @@ datasource db {
 }
 
 model Times {
-  id       Int    @id @default(autoincrement())
-  track_id Int
-  time     String @default("")
-  user_id  String
-  Tracks   Tracks @relation(fields: [track_id], references: [id])
-  Users    Users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id         Int      @id @default(autoincrement())
+  track_id   Int
+  time       String   @default("")
+  user_id    String
+  time_in_ms Int
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+  Tracks     Tracks   @relation(fields: [track_id], references: [id])
+  Users      Users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model Tracks {
@@ -33,3 +35,7 @@ model Users {
   avatar_url String  @default("")
   Times      Times[]
 }
+
+/// We could not retrieve columns for the underlying table. Either it has none or you are missing rights to see them. Please check your privileges.
+// model Races {
+// }
