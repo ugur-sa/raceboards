@@ -21,6 +21,7 @@ export type BestTimeArr = {
     {
       id: number;
       time: string;
+      updated_at: Date;
       username: string;
     }
   ];
