@@ -24,9 +24,6 @@ export default function BestTimeTable() {
 
   if (timesError) return <div>failed to load</div>;
   if (!bestTimes) return BestTimeLoading(loadingArray, topThree);
-  setTimeout(() => {
-    console.log('loading');
-  }, 3000);
 
   return (
     <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
@@ -43,13 +40,18 @@ export default function BestTimeTable() {
               {bestTimeObject.track.name}
             </h1>
             {bestTimeObject.times.map((time, index) => (
-              <div key={time.id}>
+              <div key={time.id} className="flex items-center gap-2">
                 <p className="text-sm text-white">
                   {index === 0 && '🥇'}
                   {index === 1 && '🥈'}
                   {index === 2 && '🥉'}
                   {time.time} {'-'} {time.username}
                 </p>
+                {/* check if the time updated is under 30 minutes ago */}
+                {new Date(time.updated_at) >
+                  new Date(Date.now() - 30 * 60 * 1000) && (
+                  <div className="h-2 w-2 animate-pulse rounded-full bg-green-400 opacity-100 duration-100"></div>
+                )}
               </div>
             ))}
           </div>
