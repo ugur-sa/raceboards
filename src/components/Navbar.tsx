@@ -46,8 +46,19 @@ export default function Navbar() {
           >
             Times
           </Link>
+          <Link
+            href="/races"
+            className={`mt-4 mr-4 block text-gray-200 hover:text-white lg:mt-0 lg:inline-block ${
+              router.pathname === '/races' ? 'text-blue-500' : ''
+            }`}
+          >
+            Races
+          </Link>
           <button
-            onClick={() => supabase.auth.signOut()}
+            onClick={() => {
+              supabase.auth.signOut();
+              router.push('/');
+            }}
             className="rounded-md border-2 border-gray-800 bg-gray-800 text-gray-200 hover:text-white"
           >
             Sign out

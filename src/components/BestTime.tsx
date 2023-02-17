@@ -18,8 +18,6 @@ export default function BestTimeTable() {
   if (timesError) return <div>failed to load</div>;
   if (!bestTimes) return <Spinner />;
 
-  //with the logic from above create a grid with cards for each track and display the times for each track
-  //also display 1,2,3 for the top 3 times
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {bestTimes.map((bestTimeObject, index) => (
