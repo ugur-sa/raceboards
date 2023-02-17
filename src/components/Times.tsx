@@ -3,10 +3,12 @@ import { Time, Track } from 'types';
 export default function Times({
   times,
   tracks,
+  setShowToast,
   mutate,
 }: {
   times: Time[];
   tracks: Track[];
+  setShowToast: any;
   mutate: any;
 }) {
   //show the times for the user in a table with the track name and country as columns and the time as the row
@@ -45,7 +47,7 @@ export default function Times({
                     <button
                       className="rounded bg-red-500 py-2 px-4 font-bold text-white hover:bg-red-700"
                       onClick={() => {
-                        deleteTime(time.id, mutate);
+                        deleteTime(time.id, mutate, setShowToast);
                       }}
                     >
                       Delete
@@ -61,7 +63,7 @@ export default function Times({
   );
 }
 
-function deleteTime(id: number, mutate: any) {
+function deleteTime(id: number, mutate: any, setShowToast: any) {
   //delete the time from the database
   fetch('/api/times/', {
     method: 'DELETE',
@@ -71,10 +73,34 @@ function deleteTime(id: number, mutate: any) {
     body: JSON.stringify({ id: id }),
   }).then((res) => {
     if (res.status === 200) {
-      console.log('Time deleted');
       mutate();
+      setShowToast({
+        success: true,
+        error: false,
+        message: 'Time deleted successfully',
+      });
+      //wait 3 seconds and then hide the toast
+      setTimeout(() => {
+        setShowToast({
+          success: false,
+          error: false,
+          message: '',
+        });
+      }, 3000);
     } else {
-      console.log('Error deleting time');
+      setShowToast({
+        success: false,
+        error: true,
+        message: 'Error deleting time',
+      });
+      //wait 3 seconds and then hide the toast
+      setTimeout(() => {
+        setShowToast({
+          success: false,
+          error: false,
+          message: '',
+        });
+      }, 3000);
     }
   });
 }
