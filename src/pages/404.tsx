@@ -20,7 +20,7 @@ export default function Error() {
           <div className="mx-auto">
             <Image
               src="/safetycar_illustration.653bf6ddc0a7.gif"
-              className="h-80"
+              className="h-auto w-96"
               alt="sc-car"
               height={80}
               width={400}

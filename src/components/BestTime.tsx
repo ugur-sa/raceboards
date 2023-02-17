@@ -53,7 +53,7 @@ export default function BestTimeTable() {
               </div>
             ))}
           </div>
-          <div className="">
+          <div>
             <Image
               className="rounded-full"
               src={`/flags/${bestTimeObject.track.country.toLowerCase()}.png`}
