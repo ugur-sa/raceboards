@@ -3,9 +3,7 @@ import Link from 'next/link';
 import { Track } from 'types';
 
 export default function Tracks({ tracks }: { tracks: Track[] }) {
-  //array of the flags for each country
-
-  //display all tracks in a table
+  // display all tracks in a table
   return (
     <div className="flex flex-col items-center justify-center py-2">
       <main className="flex w-full flex-1 flex-col items-center justify-center gap-10 px-20 text-center">
