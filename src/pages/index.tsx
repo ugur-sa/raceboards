@@ -23,15 +23,15 @@ export default function Home() {
         <Login />
       ) : (
         <>
-          <Navbar />
-          <main>
-            <div className="flex h-[calc(100vh-6.1rem)] flex-col items-center justify-center gap-20 bg-gray-800">
+          <div className="flex h-screen flex-col bg-gray-800">
+            <Navbar />
+            <main className="flex min-h-0 flex-grow flex-col gap-10 p-10">
               <h1 className="place-self-center text-6xl font-bold text-white ">
                 Best Times
               </h1>
               <BestTimeTable />
-            </div>
-          </main>
+            </main>
+          </div>
         </>
       )}
     </>

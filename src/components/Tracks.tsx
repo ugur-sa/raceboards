@@ -7,11 +7,11 @@ export default function Tracks({ tracks }: { tracks: Track[] }) {
 
   //display all tracks in a table
   return (
-    <div className="flex min-h-[calc(100vh-6.1rem)] flex-col items-center justify-center py-2">
+    <div className="flex h-screen flex-col items-center justify-center py-2">
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">Tracks</h1>
-        <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-          <table className="table">
+        <h1 className="font-bold sm:text-xl md:text-3xl lg:text-6xl">Tracks</h1>
+        <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center sm:text-xl md:text-xs lg:text-lg">
+          <table className="table w-full">
             <thead>
               <tr>
                 <th className="px-4 py-2">Order</th>
