@@ -20,7 +20,7 @@ export default function BestTimeTable() {
   if (!bestTimes) return <BestTimeLoading />;
 
   return (
-    <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+    <div className="grid w-full gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:w-4/5">
       {bestTimes.map((bestTimeObject) => (
         <div
           key={bestTimeObject.track.id}
