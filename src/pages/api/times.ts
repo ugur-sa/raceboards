@@ -54,6 +54,9 @@ export default async function handler(
       timeFromDB?.track_id === track_id &&
       timeFromDB?.user_id === user_id
     ) {
+      res.status(400).json({ message: 'Time already exists' });
+      return;
+    } else if (timeFromDB) {
       //add the valid_until field to the time and create a new time
       const updatedTime = await prisma.times.update({
         where: {
@@ -72,18 +75,6 @@ export default async function handler(
         },
       });
       res.status(201).json(newTime);
-    } else if (timeFromDB) {
-      // Update time
-      const updatedTime = await prisma.times.update({
-        where: {
-          id: timeFromDB?.id,
-        },
-        data: {
-          time: time,
-          time_in_ms: timeInMilliseconds,
-        },
-      });
-      res.status(201).json(updatedTime);
       return;
     }
     // Create new time
