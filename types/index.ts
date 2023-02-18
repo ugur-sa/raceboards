@@ -5,6 +5,8 @@ export type Track = {
   country: string;
   track_image: string;
   season_order: number;
+  query_name: string;
+  grand_prix_name: string;
 };
 
 export type Time = {
@@ -27,4 +29,16 @@ export type BestTimeArr = {
       username: string;
     }
   ];
+};
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  avatar_url: string;
+};
+
+export type FastestTime = {
+  time: Time;
+  user: User;
 };
