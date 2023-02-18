@@ -9,6 +9,10 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+      roboto: ['Roboto', 'sans-serif'],
+    },
     extend: {},
   },
   plugins: [require('daisyui')],

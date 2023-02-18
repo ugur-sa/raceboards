@@ -17,8 +17,8 @@ export default function Login() {
   const supabase = useSupabaseClient();
 
   return (
-    <div className="h-screen flex justify-center items-center bg-[#3D3D3D]">
-      <div className="dark:bg-[#1F1F1F] rounded-lg p-10 w-1/3">
+    <div className="flex h-screen items-center justify-center bg-[#3D3D3D]">
+      <div className="w-5/6 rounded-lg p-10 dark:bg-[#1F1F1F] sm:w-2/3 md:w-1/2">
         <Auth
           providers={['discord', 'google']}
           appearance={{ theme: ThemeSupa }}
