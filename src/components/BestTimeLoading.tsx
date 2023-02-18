@@ -6,7 +6,7 @@ export default function BestTimeLoading() {
 
   const topThree = [1, 2, 3];
   return (
-    <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+    <div className="grid w-full gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:w-4/5">
       {loadingArray.map((loading) => (
         <div
           key={loading}
