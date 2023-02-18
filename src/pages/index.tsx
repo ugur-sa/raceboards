@@ -25,7 +25,7 @@ export default function Home() {
         <>
           <div className="flex h-full flex-col bg-gray-800 font-roboto">
             <Navbar />
-            <main className="flex min-h-0 flex-grow flex-col gap-10 p-10">
+            <main className="flex min-h-0 flex-grow flex-col items-center gap-10 p-10">
               <h1 className="place-self-center text-6xl font-bold text-white ">
                 Best Times
               </h1>
