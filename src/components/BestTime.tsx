@@ -56,7 +56,7 @@ export default function BestTimeTable() {
                   {time.time} {'-'} {time.username}
                 </p>
                 {/* check if the time updated is under 30 minutes ago */}
-                {new Date(time.updated_at) >
+                {new Date(time.created_at) >
                   new Date(Date.now() - 30 * 60 * 1000) && (
                   <div className="h-2 w-2 animate-pulse rounded-full bg-green-400 opacity-100 duration-100"></div>
                 )}
