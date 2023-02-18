@@ -8,6 +8,7 @@ const nextConfig = {
       'upload.wikimedia.org',
       'cdn.countryflags.com',
       'raw.githubusercontent.com',
+      'www.formula1.com',
     ],
   },
 };
