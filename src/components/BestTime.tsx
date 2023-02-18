@@ -36,11 +36,17 @@ export default function BestTimeTable() {
             {bestTimeObject.track.season_order}
           </p>
           <div className="col-span-10 flex flex-col  items-start justify-center place-self-start pl-10">
-            <h1 className="text-xl font-bold text-white">
-              <Link href={`/tracks/${bestTimeObject.track.name.toLowerCase()}`}>
+            <div>
+              <h1 className="text-xl font-bold text-white">
+                <Link href={`/tracks/${bestTimeObject.track.query_name}`}>
+                  {bestTimeObject.track.country}
+                </Link>
+              </h1>
+              <p className="relative bottom-2 text-sm">
+                {' '}
                 {bestTimeObject.track.name}
-              </Link>
-            </h1>
+              </p>
+            </div>
             {bestTimeObject.times.map((time, index) => (
               <div key={time.id} className="flex items-center gap-2">
                 <p className="text-sm text-white">
