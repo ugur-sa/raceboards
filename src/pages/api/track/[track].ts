@@ -8,6 +8,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { tid } = req.query;
-  res.status(200).json({ track: tid });
+  const { track } = req.query;
+
+  let trackString = track as string;
+
+  const trackData = await prisma.tracks.findFirst({
+    where: {
+      query_name: trackString,
+    },
+  });
+  res.status(200).json(trackData);
 }
