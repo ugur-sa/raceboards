@@ -16,7 +16,11 @@ export default async function handler(
     });
 
     //get all times
-    const times = await prisma.times.findMany();
+    const times = await prisma.times.findMany({
+      where: {
+        valid_until: null,
+      },
+    });
 
     //get users
     const users = await prisma.users.findMany();
@@ -33,7 +37,7 @@ export default async function handler(
         times: bestTimes.map((time) => ({
           id: time.id,
           time: time.time,
-          updated_at: time.updated_at,
+          created_at: time.created_at,
           username: users.find((user) => user.id === time.user_id)?.name,
         })),
       };

@@ -11,9 +11,11 @@ export default async function handler(
   if (req.method === 'GET') {
     const { id } = req.query;
 
+    //get the times where valid_until is null
     const times = await prisma.times.findMany({
       where: {
         user_id: id as string,
+        valid_until: null,
       },
       orderBy: {
         time: 'asc',
@@ -52,8 +54,24 @@ export default async function handler(
       timeFromDB?.track_id === track_id &&
       timeFromDB?.user_id === user_id
     ) {
-      res.status(400).json({ message: 'Time already exists' });
-      return;
+      //add the valid_until field to the time and create a new time
+      const updatedTime = await prisma.times.update({
+        where: {
+          id: timeFromDB?.id,
+        },
+        data: {
+          valid_until: new Date(Date.now()),
+        },
+      });
+      const newTime = await prisma.times.create({
+        data: {
+          time: time,
+          user_id: user_id == undefined ? 0 : user_id,
+          track_id: track_id == undefined ? 0 : track_id,
+          time_in_ms: timeInMilliseconds,
+        },
+      });
+      res.status(201).json(newTime);
     } else if (timeFromDB) {
       // Update time
       const updatedTime = await prisma.times.update({
@@ -62,7 +80,6 @@ export default async function handler(
         },
         data: {
           time: time,
-          updated_at: new Date(Date.now()),
           time_in_ms: timeInMilliseconds,
         },
       });
@@ -75,7 +92,6 @@ export default async function handler(
         time: time,
         user_id: user_id == undefined ? 0 : user_id,
         track_id: track_id == undefined ? 0 : track_id,
-        updated_at: new Date(Date.now()),
         time_in_ms: timeInMilliseconds,
       },
     });
