@@ -47,7 +47,14 @@ export default async function handler(
     const milliseconds = parseInt(timeArray[1].split('.')[1]);
     const timeInMilliseconds = minutes * 60000 + seconds * 1000 + milliseconds;
 
-    if (timeFromDB != null) {
+    if (
+      timeFromDB?.time === time &&
+      timeFromDB?.track_id === track_id &&
+      timeFromDB?.user_id === user_id
+    ) {
+      res.status(400).json({ message: 'Time already exists' });
+      return;
+    } else if (timeFromDB) {
       // Update time
       const updatedTime = await prisma.times.update({
         where: {
@@ -60,20 +67,20 @@ export default async function handler(
         },
       });
       res.status(201).json(updatedTime);
-    } else {
-      // Create new time
-      const newTime = await prisma.times.create({
-        data: {
-          time: time,
-          user_id: user_id == undefined ? 0 : user_id,
-          track_id: track_id == undefined ? 0 : track_id,
-          updated_at: new Date(Date.now()),
-          time_in_ms: timeInMilliseconds,
-        },
-      });
-
-      res.status(201).json(newTime);
+      return;
     }
+    // Create new time
+    const newTime = await prisma.times.create({
+      data: {
+        time: time,
+        user_id: user_id == undefined ? 0 : user_id,
+        track_id: track_id == undefined ? 0 : track_id,
+        updated_at: new Date(Date.now()),
+        time_in_ms: timeInMilliseconds,
+      },
+    });
+
+    res.status(201).json(newTime);
   } else if (req.method === 'DELETE') {
     const { id } = req.body;
 

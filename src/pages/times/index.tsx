@@ -31,7 +31,7 @@ function submitTime(e: any, setLoading: any, setShowToast: any, mutate: any) {
       track: value.track,
       time: time,
     }),
-  }).then((res) => {
+  }).then(async (res: Response) => {
     if (res.ok === true) {
       e.target.reset();
       setLoading(false);
@@ -46,12 +46,13 @@ function submitTime(e: any, setLoading: any, setShowToast: any, mutate: any) {
         setShowToast({ success: false, error: false, message: '' });
       }, 3000);
     } else {
-      console.log('error');
       setLoading(false);
+      //show toast with error message from res.body.message
+      const err = await res.json();
       setShowToast({
         success: false,
         error: true,
-        message: 'Error Submitting Time',
+        message: err.message,
       });
       //wait 3 seconds and then hide the toast
       setTimeout(() => {
@@ -194,7 +195,7 @@ export default function TimesPage() {
               <div className="toast">
                 <div className="alert alert-error">
                   <div>
-                    <span>Something went wrong</span>
+                    <span>{showToast.message}</span>
                   </div>
                 </div>
               </div>
