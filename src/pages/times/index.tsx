@@ -4,11 +4,11 @@ import useSWR from 'swr';
 import Times from '@/components/Times';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Error from '@/components/Error';
 import Spinner from '@/components/Spinner';
 import TimesLoading from '@/components/TimesLoading';
+import { useRouter } from 'next/router';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -64,6 +64,13 @@ function submitTime(e: any, setLoading: any, setShowToast: any, mutate: any) {
 
 export default function TimesPage() {
   const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session?.user.aud !== 'authenticated') {
+      router.push('/404');
+    }
+  }, [session, router]);
 
   user_uuid = session?.user.id;
 
@@ -92,132 +99,128 @@ export default function TimesPage() {
       <Head>
         <title>Times</title>
       </Head>
-      {session?.user.aud == 'authenticated' ? (
-        <div className="flex h-screen flex-col bg-gray-800">
-          <Navbar />
-          <main className="flex min-h-0 flex-grow flex-col">
-            <div className="flex flex-col items-center justify-center gap-10 bg-gray-800 text-white">
-              <h1 className="text-6xl font-bold">Times</h1>
-              {!userTimes || !tracks ? (
-                <TimesLoading />
-              ) : (
-                <Times
-                  times={userTimes}
-                  tracks={tracks}
-                  setShowToast={setShowToast}
-                  mutate={mutate}
-                />
-              )}
-              <div className="card w-1/2 bg-base-100 shadow-xl">
-                <form
-                  className="card-body"
-                  onSubmit={(e) =>
-                    submitTime(e, setLoading, setShowToast, mutate)
-                  }
-                >
-                  <div>
-                    <label
-                      className="mb-2 block text-sm font-medium text-white"
-                      htmlFor="track"
-                    >
-                      Select a Track
-                    </label>
-                    <select
-                      className="select-bordered select w-full"
-                      name="track"
-                      id="track"
-                    >
-                      {tracks?.map((track) => (
-                        <option key={track.id} value={track.name}>
-                          {track.name} ({track.country})
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+      <div className="flex h-screen flex-col bg-gray-800">
+        <Navbar />
+        <main className="flex min-h-0 flex-grow flex-col">
+          <div className="flex flex-col items-center justify-center gap-10 bg-gray-800 text-white">
+            <h1 className="text-6xl font-bold">Times</h1>
+            {!userTimes || !tracks ? (
+              <TimesLoading />
+            ) : (
+              <Times
+                times={userTimes}
+                tracks={tracks}
+                setShowToast={setShowToast}
+                mutate={mutate}
+              />
+            )}
+            <div className="card w-1/2 bg-base-100 shadow-xl">
+              <form
+                className="card-body"
+                onSubmit={(e) =>
+                  submitTime(e, setLoading, setShowToast, mutate)
+                }
+              >
+                <div>
+                  <label
+                    className="mb-2 block text-sm font-medium text-white"
+                    htmlFor="track"
+                  >
+                    Select a Track
+                  </label>
+                  <select
+                    className="select-bordered select w-full"
+                    name="track"
+                    id="track"
+                  >
+                    {tracks?.map((track) => (
+                      <option key={track.id} value={track.name}>
+                        {track.name} ({track.country})
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-                  <div>
-                    <label
-                      className="mb-2 block text-sm font-medium text-white"
-                      htmlFor="time"
-                    >
-                      Your Time
-                    </label>
-                    <div className="flex">
-                      <input
-                        className="input-bordered input w-full"
-                        type="text"
-                        name="minutes"
-                        id="time"
-                        placeholder="Minutes"
-                        maxLength={1}
-                        minLength={1}
-                        required
-                      />
-                      <p className="place-self-center text-xl text-white">:</p>
-                      <input
-                        className="input-bordered input w-full"
-                        type="text"
-                        name="seconds"
-                        id="time"
-                        placeholder="Seconds"
-                        maxLength={2}
-                        minLength={2}
-                        required
-                      />
-                      <p className="place-self-center text-xl text-white">.</p>
-                      <input
-                        className="input-bordered input w-full"
-                        type="text"
-                        name="milliseconds"
-                        id="time"
-                        placeholder="Milliseconds"
-                        maxLength={3}
-                        minLength={3}
-                        required
-                      />
-                    </div>
+                <div>
+                  <label
+                    className="mb-2 block text-sm font-medium text-white"
+                    htmlFor="time"
+                  >
+                    Your Time
+                  </label>
+                  <div className="flex">
+                    <input
+                      className="input-bordered input w-full"
+                      type="text"
+                      name="minutes"
+                      id="time"
+                      placeholder="Minutes"
+                      maxLength={1}
+                      minLength={1}
+                      required
+                    />
+                    <p className="place-self-center text-xl text-white">:</p>
+                    <input
+                      className="input-bordered input w-full"
+                      type="text"
+                      name="seconds"
+                      id="time"
+                      placeholder="Seconds"
+                      maxLength={2}
+                      minLength={2}
+                      required
+                    />
+                    <p className="place-self-center text-xl text-white">.</p>
+                    <input
+                      className="input-bordered input w-full"
+                      type="text"
+                      name="milliseconds"
+                      id="time"
+                      placeholder="Milliseconds"
+                      maxLength={3}
+                      minLength={3}
+                      required
+                    />
                   </div>
+                </div>
 
-                  <div>
-                    <button
-                      className={`btn-xs btn bg-slate-700 text-white sm:btn-sm md:btn-md lg:btn-lg ${
-                        loading ? 'loading' : ''
-                      }}`}
-                      type="submit"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </form>
+                <div>
+                  <button
+                    className={`btn-xs btn bg-slate-700 text-white sm:btn-sm md:btn-md lg:btn-lg ${
+                      loading ? 'loading' : ''
+                    }}`}
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          {showToast.error ? (
+            <div className="toast">
+              <div className="alert alert-error">
+                <div>
+                  <span>{showToast.message}</span>
+                </div>
               </div>
             </div>
-            {showToast.error ? (
-              <div className="toast">
-                <div className="alert alert-error">
-                  <div>
-                    <span>{showToast.message}</span>
-                  </div>
+          ) : (
+            ''
+          )}
+          {showToast.success ? (
+            <div className="toast">
+              <div className="alert alert-success">
+                <div>
+                  <span>{showToast.message}</span>
                 </div>
               </div>
-            ) : (
-              ''
-            )}
-            {showToast.success ? (
-              <div className="toast">
-                <div className="alert alert-success">
-                  <div>
-                    <span>{showToast.message}</span>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              ''
-            )}
-          </main>
-        </div>
-      ) : (
-        <Error />
-      )}
+            </div>
+          ) : (
+            ''
+          )}
+        </main>
+      </div>
     </>
   );
 }
