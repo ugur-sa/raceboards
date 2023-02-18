@@ -16,7 +16,9 @@ export type Time = {
   user_name: string;
   user_id: number;
   time_in_ms: number;
+  created_at: Date;
   updated_at: Date;
+  valid_until: Date | null;
 };
 
 export type BestTimeArr = {
@@ -25,7 +27,7 @@ export type BestTimeArr = {
     {
       id: number;
       time: string;
-      updated_at: Date;
+      created_at: Date;
       username: string;
     }
   ];
