@@ -16,7 +16,7 @@ export default function Page() {
   const session = useSession();
 
   useEffect(() => {
-    if (session?.user.aud !== 'authenticated') {
+    if (session && session?.user && session?.user.aud !== 'authenticated') {
       router.push('/404');
     }
   }, [session, router]);

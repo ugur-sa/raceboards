@@ -15,7 +15,7 @@ export default function TracksPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (session?.user.aud !== 'authenticated') {
+    if (session && session?.user && session?.user.aud !== 'authenticated') {
       router.push('/404');
     }
   }, [session, router]);
