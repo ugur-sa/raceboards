@@ -27,7 +27,7 @@ export default function Page() {
   );
 
   const { data: fastestTime, error: fastestTimeError } = useSWR<FastestTime>(
-    `/api/fastestTime/${track}`,
+    `/api/times/fastestTime/${track}`,
     fetcher
   );
 

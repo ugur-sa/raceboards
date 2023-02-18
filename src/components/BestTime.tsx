@@ -11,7 +11,7 @@ export default function BestTimeTable() {
   const session = useSession();
 
   const { data: bestTimes, error: timesError } = useSWR<BestTimeArr[]>(
-    `/api/bestTimes`,
+    `/api/times/bestTimes`,
     fetcher
   );
 
