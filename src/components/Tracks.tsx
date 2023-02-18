@@ -24,7 +24,7 @@ export default function Tracks({ tracks }: { tracks: Track[] }) {
                   <td className="px-4 py-2">{track.season_order}</td>
                   <td className="px-4 py-2">
                     <Link
-                      href={track.track_image}
+                      href={`/tracks/${track.query_name}`}
                       className="link hover:text-slate-200"
                     >
                       {track.name}
