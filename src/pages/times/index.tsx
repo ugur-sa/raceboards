@@ -94,7 +94,7 @@ export default function TimesPage() {
       {session?.user.aud == 'authenticated' ? (
         <div className="flex h-screen flex-col bg-gray-800">
           <Navbar />
-          <main className="flex min-h-0 flex-grow flex-col p-10">
+          <main className="flex min-h-0 flex-grow flex-col">
             <div className="flex flex-col items-center justify-center gap-10 bg-gray-800 text-white">
               <h1 className="text-6xl font-bold">Times</h1>
               {!userTimes || !tracks ? (
