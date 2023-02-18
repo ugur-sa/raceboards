@@ -91,15 +91,43 @@ export default async function handler(
   } else if (req.method === 'DELETE') {
     const { id } = req.body;
 
-    const deletedTime = await prisma.times.delete({
+    //get the time that is most recent after the deleted time and set valid_until to null
+    const timeAfterDeletedTime = await prisma.times.findFirst({
       where: {
-        id: id,
+        valid_until: {
+          lt: new Date(Date.now()),
+        },
+      },
+      orderBy: {
+        valid_until: 'asc',
       },
     });
 
-    res.status(200).json(deletedTime);
+    if (timeAfterDeletedTime) {
+      const updatedTime = await prisma.times.update({
+        where: {
+          id: timeAfterDeletedTime?.id,
+        },
+        data: {
+          valid_until: null,
+        },
+      });
+      const deletedTime = await prisma.times.delete({
+        where: {
+          id: id,
+        },
+      });
+      res.status(200).json(deletedTime);
+    } else {
+      const deletedTime = await prisma.times.delete({
+        where: {
+          id: id,
+        },
+      });
+      res.status(200).json(deletedTime);
+    }
   } else {
-    res.setHeader('Allow', ['GET', 'POST']);
+    res.setHeader('Allow', ['GET', 'POST', 'DELETE']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
