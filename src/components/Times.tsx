@@ -1,13 +1,19 @@
 import { Time, Track } from 'types';
 
-function deleteTime(id: number, mutate: any, setShowToast: any) {
+function deleteTime(
+  id: number,
+  mutate: any,
+  setShowToast: any,
+  track_id: number,
+  user_id: string
+) {
   //delete the time from the database
   fetch('/api/times/', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ id: id }),
+    body: JSON.stringify({ id: id, track_id: track_id, user_id: user_id }),
   }).then((res) => {
     if (res.status === 200) {
       mutate();
@@ -89,7 +95,13 @@ export default function Times({
                     <button
                       className="rounded bg-red-500 py-2 px-4 font-bold text-white hover:bg-red-700"
                       onClick={() => {
-                        deleteTime(time.id, mutate, setShowToast);
+                        deleteTime(
+                          time.id,
+                          mutate,
+                          setShowToast,
+                          time.track_id,
+                          time.user_id
+                        );
                       }}
                     >
                       Delete

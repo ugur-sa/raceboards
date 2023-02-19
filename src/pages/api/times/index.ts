@@ -24,7 +24,6 @@ export default async function handler(
     res.status(200).json(times);
   } else if (req.method === 'POST') {
     const { track, user_id, time } = req.body;
-
     //Get track id from track name
     const trackFromDB = await prisma.tracks.findFirst({
       where: {
@@ -56,7 +55,7 @@ export default async function handler(
     ) {
       res.status(400).json({ message: 'Time already exists' });
       return;
-    } else if (timeFromDB) {
+    } else if (timeFromDB != null) {
       //add the valid_until field to the time and create a new time
       const updatedTime = await prisma.times.update({
         where: {
@@ -74,7 +73,7 @@ export default async function handler(
           time_in_ms: timeInMilliseconds,
         },
       });
-      res.status(201).json(newTime);
+      res.status(201).json({ newTime, updatedTime });
       return;
     }
     // Create new time
@@ -89,17 +88,19 @@ export default async function handler(
 
     res.status(201).json(newTime);
   } else if (req.method === 'DELETE') {
-    const { id } = req.body;
+    const { id, track_id, user_id } = req.body;
 
     //get the time that is most recent after the deleted time and set valid_until to null
     const timeAfterDeletedTime = await prisma.times.findFirst({
       where: {
+        track_id: track_id,
+        user_id: user_id,
         valid_until: {
           lt: new Date(Date.now()),
         },
       },
       orderBy: {
-        valid_until: 'asc',
+        valid_until: 'desc',
       },
     });
 

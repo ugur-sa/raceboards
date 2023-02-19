@@ -14,7 +14,7 @@ export type Time = {
   time: string;
   track_id: number;
   user_name: string;
-  user_id: number;
+  user_id: string;
   time_in_ms: number;
   created_at: Date;
   updated_at: Date;

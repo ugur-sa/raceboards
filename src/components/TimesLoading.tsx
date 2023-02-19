@@ -17,10 +17,10 @@ export default function TimesLoading() {
               {loadingNumbers?.map((load) => (
                 <tr key={load}>
                   <td className="animate-pulse px-4 py-2 text-slate-400 opacity-20 blur-sm">
-                    Track
+                    Autodromo Nazionale
                   </td>
                   <td className="animate-pulse px-4 py-2 text-slate-400 opacity-20 blur-sm">
-                    Country
+                    Italy
                   </td>
                   <td className="animate-pulse px-4 py-2 text-slate-400 opacity-20 blur-sm">
                     1:00.000
