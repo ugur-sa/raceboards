@@ -40,6 +40,7 @@ export default async function handler(
       where: {
         user_id: user_id,
         track_id: track_id,
+        valid_until: null,
       },
     });
 
@@ -77,18 +78,19 @@ export default async function handler(
       });
       res.status(201).json({ newTime, updatedTime });
       return;
-    }
-    // Create new time
-    const newTime = await prisma.times.create({
-      data: {
-        time: time,
-        user_id: user_id == undefined ? 0 : user_id,
-        track_id: track_id == undefined ? 0 : track_id,
-        time_in_ms: timeInMilliseconds,
-      },
-    });
+    } else if (timeFromDB == null) {
+      // Create new time
+      const newTime = await prisma.times.create({
+        data: {
+          time: time,
+          user_id: user_id == undefined ? 0 : user_id,
+          track_id: track_id == undefined ? 0 : track_id,
+          time_in_ms: timeInMilliseconds,
+        },
+      });
 
-    res.status(201).json(newTime);
+      res.status(201).json(newTime);
+    }
   } else if (req.method === 'DELETE') {
     const { id, track_id, user_id } = req.body;
 
