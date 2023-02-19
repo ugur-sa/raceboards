@@ -48,7 +48,7 @@ export default function Page() {
               src={`/flags/${trackData.country.toLowerCase()}.png`}
               width={50}
               height={50}
-              className="w-auto rounded-full"
+              className="w-auto rounded-full shadow-xl"
             />
             <h1 className="text-3xl font-bold text-white">
               {trackData.country}
@@ -58,8 +58,8 @@ export default function Page() {
             </p>
           </div>
           <div className="flex h-screen w-screen justify-center gap-10">
-            <div className="h-1/2 w-1/2 rounded-lg bg-slate-700 shadow-xl"></div>
-            <div className="flex h-3/4 w-1/4 flex-col gap-5 rounded-lg bg-slate-700 pt-5 pl-5 shadow-xl">
+            <div className="h-1/2 w-1/2 rounded-lg bg-slate-700 shadow-2xl"></div>
+            <div className="flex h-3/4 w-1/4 flex-col gap-5 rounded-lg bg-slate-700 pt-5 pl-5 shadow-2xl">
               <h2 className="text-xl text-white">Track Details</h2>
               <div>
                 <h3>Grand Prix Name</h3>
