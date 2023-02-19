@@ -44,3 +44,17 @@ export type FastestTime = {
   time: Time;
   user: User;
 };
+
+export type LeaderboardTime = {
+  id: number;
+  time: string;
+  track_id: number;
+  user_name: string;
+  user_id: string;
+  time_in_ms: number;
+  created_at: Date;
+  updated_at: Date;
+  valid_until: Date | null;
+  username: string;
+  delta: number;
+};
