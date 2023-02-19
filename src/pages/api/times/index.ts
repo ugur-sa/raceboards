@@ -18,7 +18,9 @@ export default async function handler(
         valid_until: null,
       },
       orderBy: {
-        time: 'asc',
+        Tracks: {
+          season_order: 'asc',
+        },
       },
     });
     res.status(200).json(times);
