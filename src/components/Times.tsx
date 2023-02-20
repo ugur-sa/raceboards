@@ -20,14 +20,14 @@ export default function Times({
   //show the times for the user in a table with the track name and country as columns and the time as the row
   return (
     <>
-      <div className="flex flex-col items-center justify-center py-2">
-        <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
+      <div className="flex w-full flex-col items-center justify-center py-2">
+        <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center text-[10px] md:text-sm xl:text-xl">
           <table className="table">
             <thead>
               <tr>
                 <th className="z-0 px-4 py-2">Track</th>
-                <th className="px-4 py-2">Country</th>
-                <th className="px-4 py-2">Date</th>
+                <th className="hidden px-4 py-2 lg:table-cell">Country</th>
+                <th className="hidden px-4 py-2 lg:table-cell">Date</th>
                 <th className="px-4 py-2">Time</th>
                 <th className="px-4 py-2">Delete</th>
               </tr>
@@ -42,14 +42,14 @@ export default function Times({
                       </div>
                     ))}
                   </td>
-                  <td className="px-4 py-2">
+                  <td className="hidden px-4 py-2 lg:table-cell">
                     {tracks?.map((track) => (
                       <div key={track.id}>
                         {track.id == time.track_id ? track.country : ''}
                       </div>
                     ))}
                   </td>
-                  <td className="px-4 py-2">
+                  <td className="hidden px-4 py-2 lg:table-cell">
                     {new Date(time.created_at.toString()).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-2">{time.time}</td>

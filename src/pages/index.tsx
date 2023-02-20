@@ -23,7 +23,7 @@ export default function Home() {
         <Login />
       ) : (
         <>
-          <div className="flex h-full flex-col bg-gray-800 font-roboto">
+          <div className="flex h-full flex-col bg-gray-800">
             <Navbar />
             <main className="flex min-h-0 flex-grow flex-col items-center gap-10 p-10">
               <h1 className="place-self-center text-6xl font-bold text-white ">

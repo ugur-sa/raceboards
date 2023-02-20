@@ -114,7 +114,7 @@ export default function TimesPage() {
                 mutate={mutate}
               />
             )}
-            <div className="card w-1/2 bg-base-100 shadow-xl">
+            <div className="card w-96 bg-base-100 shadow-xl md:w-1/2">
               <form
                 className="card-body"
                 onSubmit={(e) =>
@@ -123,13 +123,13 @@ export default function TimesPage() {
               >
                 <div>
                   <label
-                    className="mb-2 block text-sm font-medium text-white"
+                    className="mb-2 block text-[14px] font-medium text-white sm:text-sm"
                     htmlFor="track"
                   >
                     Select a Track
                   </label>
                   <select
-                    className="select-bordered select w-full"
+                    className="select-bordered select w-full text-[10px] sm:text-sm"
                     name="track"
                     id="track"
                   >
@@ -143,14 +143,14 @@ export default function TimesPage() {
 
                 <div>
                   <label
-                    className="mb-2 block text-sm font-medium text-white"
+                    className="mb-2 block text-sm text-[14px] font-medium text-white sm:text-sm"
                     htmlFor="time"
                   >
                     Your Time
                   </label>
                   <div className="flex">
                     <input
-                      className="input-bordered input w-full"
+                      className="input-bordered input w-full text-[14px] sm:text-sm"
                       type="text"
                       name="minutes"
                       id="time"
@@ -159,9 +159,11 @@ export default function TimesPage() {
                       minLength={1}
                       required
                     />
-                    <p className="place-self-center text-xl text-white">:</p>
+                    <p className="place-self-center text-xl text-[14px] text-white sm:text-sm">
+                      :
+                    </p>
                     <input
-                      className="input-bordered input w-full"
+                      className="input-bordered input w-full text-[14px] sm:text-sm"
                       type="text"
                       name="seconds"
                       id="time"
@@ -170,9 +172,11 @@ export default function TimesPage() {
                       minLength={2}
                       required
                     />
-                    <p className="place-self-center text-xl text-white">.</p>
+                    <p className="place-self-center text-xl text-[14px] text-white sm:text-sm">
+                      .
+                    </p>
                     <input
-                      className="input-bordered input w-full"
+                      className="input-bordered input w-full text-[14px] sm:text-sm"
                       type="text"
                       name="milliseconds"
                       id="time"
@@ -186,7 +190,7 @@ export default function TimesPage() {
 
                 <div>
                   <button
-                    className={`btn-xs btn bg-slate-700 text-white sm:btn-sm md:btn-md lg:btn-lg ${
+                    className={`btn-sm btn bg-slate-700 text-white md:btn-md lg:btn-lg ${
                       loading ? 'loading' : ''
                     }}`}
                     type="submit"
