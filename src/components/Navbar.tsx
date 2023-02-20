@@ -92,7 +92,7 @@ export default function Navbar() {
             </p>
             <Image
               className="h-8 w-auto rounded-full lg:h-12"
-              src={session?.user.user_metadata.avatar_url}
+              src={session?.user.user_metadata.avatar_url ?? ''}
               alt="avatar"
               width={50}
               height={50}
@@ -133,7 +133,7 @@ export default function Navbar() {
                 </p>
                 <Image
                   className="h-8 w-auto rounded-full lg:h-12"
-                  src={session?.user.user_metadata.avatar_url}
+                  src={session?.user.user_metadata.avatar_url ?? ''}
                   alt="avatar"
                   width={70}
                   height={70}

@@ -1,3 +1,4 @@
+import LeaderboardsLoading from '@/components/LeaderboardsLoading';
 import Navbar from '@/components/Navbar';
 import { useSession } from '@supabase/auth-helpers-react';
 import Head from 'next/head';
@@ -23,7 +24,6 @@ export default function Leaderboards() {
   >('/api/times/getAllUsersMedals', fetcher);
 
   if (usersWithMedalsError) return <div>failed to load</div>;
-  if (!usersWithMedals) return <div>loading...</div>;
 
   return (
     <>
@@ -35,32 +35,35 @@ export default function Leaderboards() {
         <main className="flex min-h-0 flex-grow flex-col items-center gap-10">
           <h1 className="text-6xl font-bold">Leaderboards</h1>
           <div className="h-1/2 w-1/2 rounded-lg bg-slate-700 p-5 shadow-xl xl:h-auto xl:w-[600px]">
-            {/* create a table with #, user, gold, silver, bronze and display userWithMedals data there */}
-            <table className="w-full text-center">
-              <thead className="bg-gray-800 text-xs uppercase xl:text-sm">
-                <tr>
-                  <th className="">#</th>
-                  <th className="">User</th>
-                  <th className="">🥇</th>
-                  <th className="">🥈</th>
-                  <th className="">🥉</th>
-                </tr>
-              </thead>
-              <tbody>
-                {usersWithMedals.map((user, index) => (
-                  <tr
-                    key={user.id}
-                    className="border-b border-slate-500 text-sm xl:text-lg"
-                  >
-                    <td>{index + 1}</td>
-                    <td>{user.name}</td>
-                    <td>{user.goldMedals}</td>
-                    <td>{user.silverMedals}</td>
-                    <td>{user.bronzeMedals}</td>
+            {usersWithMedals ? (
+              <table className="w-full text-center">
+                <thead className="bg-gray-800 text-xs uppercase xl:text-sm">
+                  <tr>
+                    <th className="">#</th>
+                    <th className="">User</th>
+                    <th className="">🥇</th>
+                    <th className="">🥈</th>
+                    <th className="">🥉</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {usersWithMedals.map((user, index) => (
+                    <tr
+                      key={user.id}
+                      className="border-b border-slate-500 text-sm xl:text-lg"
+                    >
+                      <td>{index + 1}</td>
+                      <td>{user.name}</td>
+                      <td>{user.goldMedals}</td>
+                      <td>{user.silverMedals}</td>
+                      <td>{user.bronzeMedals}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <LeaderboardsLoading />
+            )}
           </div>
         </main>
       </div>
