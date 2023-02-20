@@ -117,11 +117,17 @@ export default function Page() {
               <div>
                 <h3 className="text-sm">Download</h3>
                 <Link
-                  href={trackData.download_link}
+                  href={
+                    trackData.download_link === ''
+                      ? '#'
+                      : trackData.download_link
+                  }
                   className="link text-slate-200"
                   target="_blank"
                 >
-                  Download this track
+                  {trackData.download_link === ''
+                    ? 'No Link'
+                    : 'Download this track'}
                 </Link>
               </div>
               <div>
