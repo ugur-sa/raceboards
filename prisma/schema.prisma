@@ -28,6 +28,7 @@ model Tracks {
   season_order    Int?    @db.SmallInt
   query_name      String? @default("")
   grand_prix_name String? @default("")
+  download_link   String? @default("")
   Times           Times[]
 }
 
