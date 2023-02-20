@@ -7,6 +7,7 @@ export type Track = {
   season_order: number;
   query_name: string;
   grand_prix_name: string;
+  download_link: string;
 };
 
 export type Time = {
