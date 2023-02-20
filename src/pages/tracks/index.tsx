@@ -1,10 +1,8 @@
 import { useSession } from '@supabase/auth-helpers-react';
 import { Time, Track } from 'types';
 import useSWR from 'swr';
-import Tracks from '@/components/Tracks';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
-import TracksLoading from '@/components/TracksLoading';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -38,9 +36,7 @@ export default function TracksPage() {
         <title>Tracks</title>
       </Head>
       <Navbar />
-      <div className="min-h-screen bg-gray-800 pb-10 text-white">
-        {!userTimes || !tracks ? <TracksLoading /> : <Tracks tracks={tracks} />}
-      </div>
+      <div className="min-h-screen bg-gray-800 pb-10 text-white"></div>
     </>
   );
 }
