@@ -1,42 +1,47 @@
 export default function TracksLoading() {
-  //array with numbers from 1 to 22
-  const loadingNumbers = Array.from(Array(22).keys());
   return (
-    <div className="flex flex-col items-center justify-center py-2">
-      <main className="flex w-full flex-1 flex-col items-center justify-center gap-10 px-20 text-center">
-        <h1 className="font-bold sm:text-xl md:text-3xl lg:text-6xl">Tracks</h1>
-        <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center sm:text-xl md:text-xs lg:text-lg">
-          <table className="table md:text-[8px] lg:w-3/4 lg:text-lg">
-            <thead>
-              <tr>
-                <th className="px-4 py-2 ">Order</th>
-                <th className="px-4 py-2">Name</th>
-                <th className="px-4 py-2">Length</th>
-                <th className="px-4 py-2">Country</th>
-              </tr>
-            </thead>
-            <tbody>
-              {loadingNumbers.map((load) => (
-                <tr key={load}>
-                  <td className="animate-pulse px-4 py-2 text-slate-400 opacity-20 blur-sm">
-                    {load + 1}
-                  </td>
-                  <td className="animate-pulse px-4 py-2 text-slate-400 opacity-20 blur-sm ">
-                    Track
-                  </td>
-                  <td className="animate-pulse px-4 py-2 text-slate-400 opacity-20 blur-sm">
-                    1000m
-                  </td>
-                  <td className="flex animate-pulse justify-between px-4 py-2 text-slate-400 opacity-20 blur-sm">
-                    Country
-                    <div className="h-8 w-8 animate-pulse rounded-full bg-slate-400 opacity-20 blur-sm"></div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <main className="flex min-h-0 flex-grow flex-col items-center">
+      <div className="w-50 flex h-44 animate-pulse flex-col items-center justify-center gap-2 opacity-100">
+        <div className="h-10 w-10 rounded-full bg-slate-600"></div>
+        <div className="h-6 w-24 bg-slate-600"></div>
+        <div className="h-6 w-56 bg-slate-600"></div>
+      </div>
+      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-10 xl:flex-row xl:items-start">
+        <div className="flex h-full w-5/6 flex-col rounded-lg bg-slate-700 pb-10 shadow-2xl xl:h-[600px] xl:w-[800px]">
+          <div className="ml-5 mt-5 h-8 w-56 animate-pulse bg-slate-600 opacity-100"></div>
+          <div className="relative animate-pulse overflow-x-auto opacity-100">
+            <div className="mt-5 h-96 w-full bg-slate-600"></div>
+          </div>
         </div>
-      </main>
-    </div>
+        <div className="flex flex-col gap-5 rounded-lg bg-slate-700 pt-5 pl-5 shadow-2xl xl:h-[800px] xl:w-[400px]">
+          <div className="min-h-6 inline-block w-56 bg-slate-600"></div>
+          <div>
+            <div className="min-h-6 inline-block w-56 bg-slate-600"></div>
+            <div className="min-h-6 inline-block w-52 bg-slate-600"></div>
+          </div>
+          <div>
+            <div className="min-h-6 inline-block w-56 bg-slate-600"></div>
+            <div className="min-h-6 inline-block w-52 bg-slate-600"></div>
+          </div>
+          <div>
+            <div className="min-h-6 inline-block w-56 bg-slate-600"></div>
+            <div className="min-h-6 inline-block w-52 bg-slate-600"></div>
+          </div>
+
+          <div>
+            <div className="min-h-6 inline-block w-56 bg-slate-600"></div>
+            <div className="min-h-6 inline-block w-52 bg-slate-600"></div>
+          </div>
+          <div>
+            <div className="min-h-6 inline-block w-56 bg-slate-600"></div>
+            <div className="min-h-6 inline-block w-52 bg-slate-600"></div>
+          </div>
+          <div className="flex animate-pulse flex-col opacity-100">
+            <div className="min-h-6 inline-block w-56 bg-slate-600"></div>
+            <div className="mt-3 h-64 w-[22.5rem] bg-slate-600"></div>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
