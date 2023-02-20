@@ -30,7 +30,7 @@ export default async function handler(
     });
 
     if (fastestTime === null) {
-      res.status(400).json({ time: null, user: null });
+      res.status(200).json({ time: null, user: null });
       return;
     }
 
