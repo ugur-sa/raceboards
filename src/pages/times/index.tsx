@@ -114,7 +114,7 @@ export default function TimesPage() {
                 mutate={mutate}
               />
             )}
-            <div className="card w-96 bg-base-100 shadow-xl md:w-1/2">
+            <div className="card mb-5 w-96 bg-base-100 shadow-xl md:w-1/2">
               <form
                 className="card-body"
                 onSubmit={(e) =>
