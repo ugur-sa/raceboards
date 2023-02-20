@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import { FastestTime, LeaderboardTime, Time, Track } from 'types';
 import Image from 'next/image';
 import { useEffect } from 'react';
+import LapTimesTable from '@/components/LapTimes';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -43,7 +44,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Tracks</title>
+        <title>{trackData.name}</title>
       </Head>
       <div className="flex min-h-screen flex-col bg-gray-800 pb-10 xl:h-full">
         <Navbar />
@@ -65,40 +66,10 @@ export default function Page() {
           </div>
           <div className="flex min-h-screen w-full flex-col items-center justify-center gap-10 xl:flex-row xl:items-start">
             <div className="flex h-full w-5/6 flex-col rounded-lg bg-slate-700 pb-10 shadow-2xl xl:h-[600px] xl:w-[800px]">
-              <h2 className="pt-5 pl-5 text-xl text-white">Leaderboard</h2>
-              <table className="mt-4 table w-5/6 place-self-center text-center">
-                <thead>
-                  <tr>
-                    <th className="text-slate-200">#</th>
-                    <th className="text-slate-200">Date</th>
-                    <th className="text-slate-200">Time</th>
-                    <th className="text-slate-200">User</th>
-                    <th className="text-slate-200">Delta</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {times.map((time, index) => (
-                    <tr
-                      key={time.id}
-                      className={`${
-                        time.id === fastestTime.time.id
-                          ? 'bg-slate-600'
-                          : 'bg-slate-700'
-                      }`}
-                    >
-                      <td className="text-slate-200">{index + 1}</td>
-                      <td className="text-slate-200">
-                        {new Date(time.created_at).toLocaleDateString()}
-                      </td>
-                      <td className="text-slate-200">{time.time}</td>
-                      <td className="text-slate-200">{time.username}</td>
-                      <td className="text-slate-200">
-                        {time.delta !== 0 ? -time.delta / 1000 : ''}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <h2 className="pt-5 pl-5 text-xl text-white">Lap Times</h2>
+              <div className="relative overflow-x-auto">
+                <LapTimesTable times={times} fastestTime={fastestTime} />
+              </div>
             </div>
             <div className="flex flex-col gap-5 rounded-lg bg-slate-700 pt-5 pl-5 shadow-2xl xl:h-[800px] xl:w-[400px]">
               <h2 className="text-xl text-white">Track Details</h2>
