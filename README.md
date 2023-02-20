@@ -1,38 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Raceboards
+
+Raceboards is a web application where users can input their lap times and see leaderboards of all users to see who is the best or fastest. It is built with Next.js and Supabase, two popular technologies in the web development community.
+
+## Features
+
+- User can create an account and log in to the application.
+- User can input lap times and associate them with a particular race and track.
+- User can view their lap times as well as the lap times of other users for a particular race and track.
+- User can view leaderboards of the fastest lap times for a particular race and track.
+- User can filter leaderboards by race and track to see who the best performers are.
+
+## Technologies Used
+
+- Next.js
+- Supabase
+- React
+- Tailwind CSS
+- PostgreSQL
 
 ## Getting Started
 
-First, run the development server:
+To get started with the Raceboards application, follow the instructions below:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. Clone the repository: `git clone https://github.com/ugur-sa/raceboards.git`
+2. Navigate to the project directory: `cd raceboards`
+3. Install dependencies: `npm install`
+4. Create a Supabase account and set up a new project.
+5. Set up your environment variables: Create a `.env.local` file in the project root directory and add the following variables:
+   NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-url.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Run the application: `npm run dev`
+7. Navigate to `http://localhost:3000` to view the application.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Contributing
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+If you are interested in contributing to Raceboards, feel free to open a pull request or submit an issue. Contributions are always welcome!
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## License
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Raceboards is licensed under the MIT license. See the `LICENSE` file for more information.
