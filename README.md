@@ -27,6 +27,7 @@ To get started with the Raceboards application, follow the instructions below:
 3. Install dependencies: `npm install`
 4. Create a Supabase account and set up a new project.
 5. Set up your environment variables: Create a `.env.local` file in the project root directory and add the following variables:
+
    NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-url.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 
