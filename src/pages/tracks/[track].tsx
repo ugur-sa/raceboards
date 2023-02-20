@@ -114,7 +114,20 @@ export default function Page() {
                 <h3 className="text-sm">Length</h3>
                 <p className="text-slate-200">{trackData.length / 1000} km</p>
               </div>
-
+              {trackData.download_link !== '' ? (
+                <div>
+                  <h3 className="text-sm">Download</h3>
+                  <Link
+                    href={trackData.download_link}
+                    className="link text-slate-200"
+                    target="_blank"
+                  >
+                    Download this track
+                  </Link>
+                </div>
+              ) : (
+                ''
+              )}
               <div>
                 <h3 className="text-sm">Fastest Time</h3>
                 <p className="text-slate-200">
