@@ -34,7 +34,7 @@ export default function Leaderboards() {
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col items-center gap-10">
           <h1 className="text-6xl font-bold">Leaderboards</h1>
-          <div className="h-1/2 w-1/2 rounded-lg bg-slate-700 p-5 shadow-xl xl:h-[300px] xl:w-[600px]">
+          <div className="h-1/2 w-1/2 rounded-lg bg-slate-700 p-5 shadow-xl xl:h-auto xl:w-[600px]">
             {/* create a table with #, user, gold, silver, bronze and display userWithMedals data there */}
             <table className="w-full text-center">
               <thead className="bg-gray-800 text-xs uppercase xl:text-sm">
