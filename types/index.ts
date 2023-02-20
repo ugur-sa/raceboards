@@ -59,3 +59,13 @@ export type LeaderboardTime = {
   username: string;
   delta: number;
 };
+
+export type UserWithMedals = {
+  id: string;
+  email: string;
+  name: string;
+  avatar_url: string;
+  goldMedals: number;
+  silverMedals: number;
+  bronzeMedals: number;
+};
