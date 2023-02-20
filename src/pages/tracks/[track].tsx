@@ -142,7 +142,7 @@ export default function Page() {
               </div>
               <div>
                 <h3 className="text-sm">Track Image</h3>
-                <div className="my-5 flex aspect-square justify-center">
+                <div className="my-5 flex aspect-square justify-center pb-5">
                   <Image
                     src={trackData.track_image}
                     width={500}
