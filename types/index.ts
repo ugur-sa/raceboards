@@ -69,3 +69,8 @@ export type UserWithMedals = {
   silverMedals: number;
   bronzeMedals: number;
 };
+
+export type TimeToDelete = {
+  time: Time;
+  track: Track;
+};

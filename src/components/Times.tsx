@@ -1,52 +1,6 @@
+import { useRef, useState } from 'react';
 import { Time, Track } from 'types';
-
-function deleteTime(
-  id: number,
-  mutate: any,
-  setShowToast: any,
-  track_id: number,
-  user_id: string
-) {
-  //delete the time from the database
-  fetch('/api/times/', {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id: id, track_id: track_id, user_id: user_id }),
-  }).then((res) => {
-    if (res.status === 200) {
-      mutate();
-      setShowToast({
-        success: true,
-        error: false,
-        message: 'Time deleted successfully',
-      });
-      //wait 3 seconds and then hide the toast
-      setTimeout(() => {
-        setShowToast({
-          success: false,
-          error: false,
-          message: '',
-        });
-      }, 3000);
-    } else {
-      setShowToast({
-        success: false,
-        error: true,
-        message: 'Error deleting time',
-      });
-      //wait 3 seconds and then hide the toast
-      setTimeout(() => {
-        setShowToast({
-          success: false,
-          error: false,
-          message: '',
-        });
-      }, 3000);
-    }
-  });
-}
+import Modal from './Modal';
 
 export default function Times({
   times,
@@ -59,6 +13,10 @@ export default function Times({
   setShowToast: any;
   mutate: any;
 }) {
+  const [open, setOpen] = useState(false);
+  const [timeToDelete, setTimeToDelete] = useState<Time | null>(null);
+  const cancelButtonRef = useRef(null);
+
   //show the times for the user in a table with the track name and country as columns and the time as the row
   return (
     <>
@@ -67,8 +25,9 @@ export default function Times({
           <table className="table">
             <thead>
               <tr>
-                <th className="px-4 py-2">Track</th>
+                <th className="z-0 px-4 py-2">Track</th>
                 <th className="px-4 py-2">Country</th>
+                <th className="px-4 py-2">Date</th>
                 <th className="px-4 py-2">Time</th>
                 <th className="px-4 py-2">Delete</th>
               </tr>
@@ -90,18 +49,16 @@ export default function Times({
                       </div>
                     ))}
                   </td>
+                  <td className="px-4 py-2">
+                    {new Date(time.created_at.toString()).toLocaleDateString()}
+                  </td>
                   <td className="px-4 py-2">{time.time}</td>
                   <td className="px-4 py-2">
                     <button
                       className="rounded bg-red-500 py-2 px-4 font-bold text-white hover:bg-red-700"
                       onClick={() => {
-                        deleteTime(
-                          time.id,
-                          mutate,
-                          setShowToast,
-                          time.track_id,
-                          time.user_id
-                        );
+                        setOpen(true);
+                        setTimeToDelete(time);
                       }}
                     >
                       Delete
@@ -113,6 +70,14 @@ export default function Times({
           </table>
         </div>
       </div>
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        cancelButtonRef={cancelButtonRef}
+        mutate={mutate}
+        setShowToast={setShowToast}
+        timeToDelete={timeToDelete}
+      />
     </>
   );
 }
