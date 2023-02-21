@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  important: true,
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -13,7 +12,14 @@ module.exports = {
     fontFamily: {
       sans: ['Roboto', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      zIndex: {
+        0: '0 !important',
+      },
+    },
   },
   plugins: [require('daisyui')],
+  variants: {
+    zIndex: ['responsive'],
+  },
 };
