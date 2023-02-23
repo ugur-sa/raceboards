@@ -74,3 +74,65 @@ export type TimeToDelete = {
   time: Time;
   track: Track;
 };
+
+export type Lap = {
+  DriverName: string;
+  DriverGuid: string;
+  CarId: number;
+  CarModel: string;
+  Timestamp: number;
+  LapTime: number;
+  Sectors: [number, number, number];
+  Cuts: number;
+  Tyre: string;
+};
+
+export type Result = {
+  DriverName: string;
+  DriverGuid: string;
+  CarId: number;
+  CarModel: string;
+  BestLap: number;
+  TotalTime: number;
+};
+
+export type Car = {
+  CarId: number;
+  Driver: Driver;
+  Model: string;
+  Skin: string;
+};
+
+export type Driver = {
+  Name: string;
+  Guid: string;
+};
+
+export type Event = {
+  Type: string;
+  CarId: number;
+  Driver: Driver;
+  OtherCarId: number;
+  OtherDriver: Driver;
+  ImpactSpeed: number;
+  WorldPosition: WorldPosition;
+  RelPosition: RelPosition;
+};
+
+export type RelPosition = {
+  X: number;
+  Y: number;
+  Z: number;
+};
+
+export type WorldPosition = {
+  X: number;
+  Y: number;
+  Z: number;
+};
+
+export enum RaceType {
+  RACE = 'RACE',
+  QUALIFYING = 'QUALIFYING',
+  PRACTICE = 'PRACTICE',
+}
