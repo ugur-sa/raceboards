@@ -32,7 +32,7 @@ export default function Leaderboards() {
       </Head>
       <div className="flex h-screen flex-col bg-gray-800">
         <Navbar />
-        <main className="flex min-h-0 flex-grow flex-col items-center gap-10">
+        <main className="flex min-h-0 flex-grow flex-col items-center gap-10 text-white">
           <h1 className="text-6xl font-bold">Leaderboards</h1>
           <div className="h-1/2 w-1/2 rounded-lg bg-slate-700 p-5 shadow-xl xl:h-auto xl:w-[600px]">
             {usersWithMedals ? (
