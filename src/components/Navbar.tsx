@@ -154,14 +154,14 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href="/tracks"
+                href="/leaderboards"
                 className={`mt-4 mr-4 block hover:text-white lg:mt-0 lg:inline-block ${
-                  router.pathname === '/tracks'
+                  router.pathname === '/leaderboards'
                     ? 'text-blue-500 hover:text-blue-400'
                     : 'text-gray-200 hover:text-white'
                 }`}
               >
-                Tracks
+                Leaderboards
               </Link>
             </li>
             <li>
