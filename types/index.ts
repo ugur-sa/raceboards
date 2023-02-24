@@ -75,64 +75,85 @@ export type TimeToDelete = {
   track: Track;
 };
 
-export type Lap = {
-  DriverName: string;
-  DriverGuid: string;
-  CarId: number;
-  CarModel: string;
-  Timestamp: number;
-  LapTime: number;
-  Sectors: [number, number, number];
-  Cuts: number;
-  Tyre: string;
+export type ResultFromDB = {
+  id: number;
+  created_at: Date;
+  type: string;
+  result: ResultInformation;
+  qualifying_id: number | null;
+  practice_id: number | null;
+  track_name: string;
+};
+
+export type ResultInformation = {
+  TrackName: string;
+  Type: string;
+  RaceLaps: number;
+  Cars: Car[];
+  Laps: Lap[];
+  Result: Result[];
+  Events: Event[];
 };
 
 export type Result = {
-  DriverName: string;
-  DriverGuid: string;
   CarId: number;
   CarModel: string;
-  BestLap: number;
+  DriverGuid: string;
+  DriverName: string;
   TotalTime: number;
+  BestLap: number;
 };
 
 export type Car = {
   CarId: number;
-  Driver: Driver;
   Model: string;
   Skin: string;
+  Driver: Driver;
 };
 
 export type Driver = {
-  Name: string;
   Guid: string;
+  Name: string;
+};
+
+export type Lap = {
+  CarId: number;
+  CarModel: string;
+  Cuts: number;
+  DriverGuid: string;
+  DriverName: string;
+  LapTime: number;
+  Sectors: number[];
+  Timestamp: number;
+  Tyre: string;
 };
 
 export type Event = {
-  Type: string;
   CarId: number;
   Driver: Driver;
+  ImpactSpeed: number;
   OtherCarId: number;
   OtherDriver: Driver;
-  ImpactSpeed: number;
-  WorldPosition: WorldPosition;
-  RelPosition: RelPosition;
+  Type: string;
 };
 
-export type RelPosition = {
-  X: number;
-  Y: number;
-  Z: number;
+export type DriverData = {
+  driver: string;
+  vehicle: string;
+  laps: number;
+  timestamp: [time: number, delta: number];
+  bestLap: number;
+  consistency: string;
+  led: number;
+  retired: boolean;
 };
 
-export type WorldPosition = {
-  X: number;
-  Y: number;
-  Z: number;
+export type RaceResults = {
+  type: string;
+  track_name: string;
+  driverData: DriverData[];
+  winner: string;
+  laps: number;
+  best_lap: { driver: string; lapTime: number };
+  led_most_laps: string;
 };
-
-export enum RaceType {
-  RACE = 'RACE',
-  QUALIFYING = 'QUALIFYING',
-  PRACTICE = 'PRACTICE',
-}
