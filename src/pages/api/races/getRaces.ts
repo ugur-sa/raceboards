@@ -8,6 +8,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
-    res.status(200).json({ message: 'Nothing to see here' });
+    const results = await prisma.results.findMany({});
+
+    res.status(200).json(results);
   }
 }
