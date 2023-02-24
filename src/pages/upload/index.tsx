@@ -31,11 +31,11 @@ const UploadRacesPage = () => {
         'Content-Type': 'application/json',
       },
       body: selectedFile,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+    });
+    if (response.ok) {
+      console.log('success');
+      setSelectedFile(null);
+    }
   };
 
   //page where user can upload a json file
@@ -55,7 +55,7 @@ const UploadRacesPage = () => {
             </label>
             <button
               type="submit"
-              className="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-400"
+              className="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-400 disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-50"
               disabled={!selectedFile}
             >
               Upload
