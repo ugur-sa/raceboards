@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
-import { Car, Lap, RaceType, Result, Event } from 'types';
-
 const prisma = new PrismaClient();
 
 export default async function handler(
@@ -16,15 +14,22 @@ export default async function handler(
       res.status(400).json({ message: 'No file provided' });
       return;
     }
-    const trackName: string = file['TrackName'];
-    const type: RaceType = file['Type'];
-    const raceLaps: number = file['RaceLaps'];
-    const cars: Car[] = file['Cars'];
-    const laps: Lap[] = file['Laps'];
-    const results: Result[] = file['Result'];
-    const events: Event[] = file['Events'];
 
-    res.status(200).json({});
+    const type = file['Type'];
+    const track_name = file['TrackName'];
+
+    if (type === 'RACE') {
+      const newResult = await prisma.results.create({
+        data: {
+          type: type,
+          track_name: track_name,
+          result: file,
+        },
+      });
+      res.status(200).json({ message: 'File uploaded' });
+    } else {
+      res.status(400).json({ message: 'Not a race' });
+    }
   } else {
     // only post allowed
     res.setHeader('Allow', ['POST']);
