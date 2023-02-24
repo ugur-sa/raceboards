@@ -39,3 +39,13 @@ model Users {
   avatar_url String  @default("")
   Times      Times[]
 }
+
+model Results {
+  id            Int       @id @default(autoincrement())
+  created_at    DateTime? @default(now()) @db.Timestamptz(6)
+  type          String?   @default("")
+  result        Json      @default("{}")
+  qualifying_id Int?
+  practice_id   Int?
+  track_name    String?
+}
