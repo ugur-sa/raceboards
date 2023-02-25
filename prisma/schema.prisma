@@ -15,6 +15,8 @@ model Times {
   time_in_ms  Int
   created_at  DateTime  @default(now()) @db.Timestamptz(6)
   valid_until DateTime? @db.Timestamptz(6)
+  car         Int?
+  Cars        Cars?     @relation(fields: [car], references: [id], onDelete: NoAction, onUpdate: NoAction)
   Tracks      Tracks    @relation(fields: [track_id], references: [id])
   Users       Users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
@@ -48,4 +50,11 @@ model Results {
   qualifying_id Int?
   practice_id   Int?
   track_name    String?
+}
+
+model Cars {
+  id         Int       @id @default(autoincrement())
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  model      String?
+  Times      Times[]
 }

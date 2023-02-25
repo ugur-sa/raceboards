@@ -33,6 +33,12 @@ export default async function handler(
       },
     });
 
+    const car = await prisma.cars.findFirst({
+      where: {
+        id: 1,
+      },
+    });
+
     const track_id = trackFromDB?.id;
 
     //check if time already exists
@@ -74,6 +80,7 @@ export default async function handler(
           user_id: user_id == undefined ? 0 : user_id,
           track_id: track_id == undefined ? 0 : track_id,
           time_in_ms: timeInMilliseconds,
+          car: car?.id,
         },
       });
       res.status(201).json({ newTime, updatedTime });
@@ -86,6 +93,7 @@ export default async function handler(
           user_id: user_id == undefined ? 0 : user_id,
           track_id: track_id == undefined ? 0 : track_id,
           time_in_ms: timeInMilliseconds,
+          car: car?.id,
         },
       });
 
