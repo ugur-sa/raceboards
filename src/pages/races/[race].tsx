@@ -18,8 +18,6 @@ export default function Page() {
 
   const [selection, setSelection] = useState(0);
 
-  console.log(selection);
-
   useEffect(() => {
     if (session && session?.user && session?.user.aud !== 'authenticated') {
       router.push('/404');
