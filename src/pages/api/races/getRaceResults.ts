@@ -2,6 +2,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
 import { DriverData, Lap, ResultInformation } from 'types';
 
+interface LapData {
+  driver: string;
+  lapTime: number;
+}
+
 const prisma = new PrismaClient();
 
 export default async function handler(
@@ -10,6 +15,11 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     const { id } = req.query;
+
+    if (id === undefined) {
+      res.status(400).json({ message: 'No id provided' });
+      return;
+    }
 
     const results = await prisma.results.findFirst({
       where: {
@@ -24,18 +34,43 @@ export default async function handler(
 
     const result = results.result as ResultInformation;
 
+    //remove all laps where DriverName is undefined
+    for (let i = 0; i < result.Laps.length; i++) {
+      if (result.Laps[i].DriverName === '') {
+        result.Laps.splice(i, 1);
+        i--;
+      }
+    }
+
+    //remove all cars where DriverName is undefined
+    for (let i = 0; i < result.Cars.length; i++) {
+      if (result.Cars[i].Driver.Name === '') {
+        result.Cars.splice(i, 1);
+        i--;
+      }
+    }
+
+    //remove all results where DriverName is undefined
+    for (let i = 0; i < result.Result.length; i++) {
+      if (result.Result[i].DriverName === '') {
+        result.Result.splice(i, 1);
+        i--;
+      }
+    }
+
     const type = result.Type;
     const track_name = result.TrackName;
 
     //amount of drivers
     const drivers = result.Result.length;
 
+    //amount of laps
     const lapAmount = result.RaceLaps;
 
     //get the winner
     const winner = result.Result[0].DriverName;
 
-    const laps = result.Laps.map((lap) => {
+    const laps: LapData[] = result.Laps.map((lap) => {
       return {
         driver: lap.DriverName,
         lapTime: lap.LapTime,
@@ -104,7 +139,7 @@ export default async function handler(
     for (let j = 0; j < result.Result.length; j++) {
       ledMostLapsDriver[result.Laps[j].DriverName] = 0;
     }
-    for (let i = 0; i < result.Laps.length; i += 3) {
+    for (let i = 0; i < result.Laps.length; i += drivers) {
       ledMostLapsDriver[result.Laps[i].DriverName] += 1;
     }
 
@@ -158,7 +193,11 @@ export default async function handler(
     }
     for (let i = 1; i < result.Laps.length; i++) {
       //get the average of the times
-      driverLapTimes[result.Laps[i].DriverName].push(result.Laps[i].LapTime);
+      if (driverLapTimes[result.Laps[i].DriverName] === undefined) {
+        return;
+      } else {
+        driverLapTimes[result.Laps[i].DriverName].push(result.Laps[i].LapTime);
+      }
     }
 
     //calculate the consistency of each driver in percentage so you have like billy: 90.50%
@@ -229,6 +268,10 @@ export default async function handler(
 }
 
 const standardDeviation = (values: number[]) => {
+  if (values.length <= 1) return 0;
+  //remove the first value
+  values.shift();
+
   const avg = average(values);
 
   const squareDiffs = values.map((value) => {
@@ -244,22 +287,3 @@ const standardDeviation = (values: number[]) => {
 const average = (values: number[]) => {
   return values.reduce((a, b) => a + b, 0) / values.length;
 };
-
-/* 
-  type
-  track_name
-  winner
-  led most laps
-  best lap (driver, time)
-
-  laps
-
-  position
-  driver
-  vehicle
-  laps
-  time/retired
-  best lap
-  consistency
-  led laps
-*/
