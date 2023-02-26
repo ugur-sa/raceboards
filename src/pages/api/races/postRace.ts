@@ -18,17 +18,16 @@ export default async function handler(
     const type = file['Type'];
     const track_name = file['TrackName'];
 
-    if (type === 'RACE') {
+    try {
       const newResult = await prisma.results.create({
         data: {
-          type: type,
           track_name: track_name,
           result: file,
         },
       });
       res.status(200).json({ message: 'File uploaded' });
-    } else {
-      res.status(400).json({ message: 'Not a race' });
+    } catch (error) {
+      res.status(400).json({ message: error });
     }
   } else {
     // only post allowed

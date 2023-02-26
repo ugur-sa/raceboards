@@ -46,7 +46,7 @@ const RacesPage = () => {
                   <tr>
                     <th>#</th>
                     <th>Track</th>
-                    <th>Type</th>
+                    <th>Created At</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -60,7 +60,11 @@ const RacesPage = () => {
                     >
                       <td>{index + 1}</td>
                       <td>{result.track_name}</td>
-                      <td>{result.type}</td>
+                      <td>
+                        {new Date(
+                          result.created_at.toString()
+                        ).toLocaleDateString()}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
