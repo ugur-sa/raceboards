@@ -78,10 +78,7 @@ export type TimeToDelete = {
 export type ResultFromDB = {
   id: number;
   created_at: Date;
-  type: string;
   result: ResultInformation;
-  qualifying_id: number | null;
-  practice_id: number | null;
   track_name: string;
 };
 
