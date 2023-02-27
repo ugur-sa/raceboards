@@ -75,82 +75,42 @@ export type TimeToDelete = {
   track: Track;
 };
 
-export type ResultFromDB = {
-  id: number;
-  created_at: Date;
-  result: ResultInformation;
-  track_name: string;
-};
-
-export type ResultInformation = {
-  TrackName: string;
-  Type: string;
-  RaceLaps: number;
-  Cars: Car[];
-  Laps: Lap[];
-  Result: Result[];
-  Events: Event[];
-};
-
 export type Result = {
-  CarId: number;
-  CarModel: string;
-  DriverGuid: string;
-  DriverName: string;
-  TotalTime: number;
-  BestLap: number;
+  track: string;
+  number_of_sessions: number;
+  players: Player[];
+  sessions: Session[];
 };
 
-export type Car = {
-  CarId: number;
-  Model: string;
-  Skin: string;
-  Driver: Driver;
+export type Player = {
+  name: string;
+  car: string;
+  skin: string;
 };
 
-export type Driver = {
-  Guid: string;
-  Name: string;
+export type Session = {
+  event: number;
+  name: string;
+  type: number;
+  lapsCount: number;
+  duration: number;
+  laps: Lap[];
+  lapstotal: number[];
+  bestLaps: BestLap[];
+  raceResult: number[];
+};
+
+export type BestLap = {
+  car: number;
+  time: number;
+  lap: number;
 };
 
 export type Lap = {
-  CarId: number;
-  CarModel: string;
-  Cuts: number;
-  DriverGuid: string;
-  DriverName: string;
-  LapTime: number;
-  Sectors: number[];
-  Timestamp: number;
-  Tyre: string;
-};
-
-export type Event = {
-  CarId: number;
-  Driver: Driver;
-  ImpactSpeed: number;
-  OtherCarId: number;
-  OtherDriver: Driver;
-  Type: string;
-};
-
-export type DriverData = {
-  driver: string;
-  vehicle: string;
-  laps: number;
-  timestamp: [time: number, delta: number];
-  bestLap: number;
-  consistency: string;
-  led: number;
-  retired: boolean;
-};
-
-export type RaceResults = {
-  type: string;
-  track_name: string;
-  driverData: DriverData[];
-  winner: string;
-  laps: number;
-  best_lap: { driver: string; lapTime: number };
-  led_most_laps: string;
+  lap: number;
+  car: number;
+  sectors: [number, number, number];
+  time: number;
+  cuts: number;
+  tyre: string;
 };
