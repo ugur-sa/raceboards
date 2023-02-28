@@ -55,11 +55,21 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                       <tr
                         className={`
                         ${
-                          lap.personal_best ? 'bg-[rgba(210,255,196,0.5)]' : ''
+                          lap.personal_best
+                            ? 'bg-[rgba(210,255,196,0.5)] hover:bg-[rgba(210,255,196,0.7)]'
+                            : ''
                         } 
-                        ${lap.best_lap ? 'bg-[rgba(255,206,206,0.7)]' : ''} 
-                        ${lap.bad_lap ? 'bg-[rgba(238,207,161,0.7)]' : ''}
-                        cursor-pointer border-b border-slate-500 text-sm hover:bg-slate-600 xl:text-xl`}
+                        ${
+                          lap.best_lap
+                            ? 'bg-[rgba(255,206,206,0.7)] hover:bg-[rgba(255,206,206,0.9)]'
+                            : ''
+                        } 
+                        ${
+                          lap.bad_lap
+                            ? 'bg-[rgba(238,207,161,0.7)] hover:bg-[rgba(238,207,161,0.9)]'
+                            : ''
+                        }
+                        border-b border-slate-500 text-sm hover:bg-slate-600 xl:text-xl`}
                         key={index}
                       >
                         <td>{lap.lap + 1}</td>
