@@ -66,7 +66,7 @@ export default function Page() {
                   />
                 ))}
               </div>
-              <Legend />
+              {selection === 'Race1' && <Legend />}
             </div>
             {selection === 'Race0' && (
               <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
