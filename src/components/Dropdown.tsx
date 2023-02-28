@@ -9,9 +9,11 @@ function classNames(...classes: any) {
 const Dropdown = ({
   title,
   setSelection,
+  dropdownSections,
 }: {
   title: string;
   setSelection: any;
+  dropdownSections: string[];
 }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -33,81 +35,23 @@ const Dropdown = ({
       >
         <Menu.Items className="right-100 absolute z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  onClick={() => {
-                    setSelection(0);
-                  }}
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Race result
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  onClick={() => {
-                    setSelection(1);
-                  }}
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Race laps
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  onClick={() => {
-                    setSelection(2);
-                  }}
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Race best laps
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  onClick={() => {
-                    setSelection(3);
-                  }}
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Race consistency
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  onClick={() => {
-                    setSelection(4);
-                  }}
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Race sectors
-                </a>
-              )}
-            </Menu.Item>
+            {dropdownSections.map((section, index) => (
+              <Menu.Item key={index}>
+                {({ active }) => (
+                  <a
+                    onClick={() => {
+                      setSelection(`${title}${index}`);
+                    }}
+                    className={classNames(
+                      active ? 'bg-gray-100 text-blue-500' : 'text-gray-700',
+                      'block px-4 py-2 text-sm'
+                    )}
+                  >
+                    {section}
+                  </a>
+                )}
+              </Menu.Item>
+            ))}
           </div>
         </Menu.Items>
       </Transition>

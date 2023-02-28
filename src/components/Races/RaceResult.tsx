@@ -1,17 +1,17 @@
 import useSWR from 'swr';
-import { RaceResults } from 'types';
+import { ResultResponse } from 'types';
 import convertTime from 'utils/convertTime';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const RaceResult = ({ race }: { race: string }) => {
-  const { data: raceResults, error: raceResultsError } = useSWR<RaceResults>(
-    `/api/races/getRaceResults?id=${race}`,
+  const { data: results, error: raceResultsError } = useSWR<ResultResponse>(
+    `/api/races/getResults?id=${race}`,
     fetcher
   );
 
   if (raceResultsError) return <div>failed to load</div>;
-  if (!raceResults) return <div>loading...</div>;
+  if (!results) return <div>loading...</div>;
 
   return (
     <>
@@ -20,25 +20,28 @@ const RaceResult = ({ race }: { race: string }) => {
           <tbody>
             <tr className="border border-slate-500">
               <th className="border border-slate-500">Session</th>
-              <td className="pl-1">{raceResults.type}</td>
+              <td className="pl-1">{results.result[2].session}</td>
             </tr>
             <tr className="border border-slate-500">
               <th className="border border-slate-500">Track</th>
-              <td className="pl-1">{raceResults.track_name}</td>
+              <td className="pl-1">{results.track_name}</td>
             </tr>
             <tr className="border border-slate-500">
               <th className="border border-slate-500">Winner</th>
-              <td className="pl-1">{raceResults.winner}</td>
+              <td className="pl-1">{results.result[2].winner}</td>
             </tr>
-            {/* <tr className="border border-slate-500">
+            <tr className="border border-slate-500">
               <th className="border border-slate-500">Led most laps</th>
-              <td className="pl-1">{raceResults.led_most_laps}</td>
-            </tr> */}
+              <td className="pl-1">{results.result[2].most_laps_led}</td>
+            </tr>
             <tr className="border border-slate-500">
               <th className="border border-slate-500">Best Lap</th>
               <td className="pl-1">
-                {raceResults.best_lap.driver} (
-                {convertTime(raceResults.best_lap.lapTime)})
+                {results.result[2].best_lap?.player} (
+                {results.result[2].best_lap
+                  ? convertTime(results.result[2].best_lap.time)
+                  : 'N/A'}
+                )
               </td>
             </tr>
           </tbody>
@@ -49,11 +52,11 @@ const RaceResult = ({ race }: { race: string }) => {
           <tbody>
             <tr className="border border-slate-500">
               <th className="border border-slate-500">Max laps</th>
-              <td className="pl-1">{raceResults.laps}</td>
+              <td className="pl-1">{results.result[2].max_laps}</td>
             </tr>
             <tr className="border border-slate-500">
               <th className="border border-slate-500">Lasted Laps</th>
-              <td className="pl-1">{raceResults.laps}</td>
+              <td className="pl-1">{results.result[2].lasted_laps}</td>
             </tr>
           </tbody>
         </table>
@@ -68,33 +71,31 @@ const RaceResult = ({ race }: { race: string }) => {
               <th className="border border-slate-500">Laps</th>
               <th className="border border-slate-500">Time/Retired</th>
               <th className="border border-slate-500">Best Lap</th>
-              <th className="border border-slate-500">Consistency</th>
-              {/* <th className="border border-slate-500">Led</th> */}
+              {/* <th className="border border-slate-500">Consistency</th> */}
+              <th className="border border-slate-500">Led</th>
             </tr>
           </thead>
           <tbody>
-            {raceResults.driverData.map((driver, index) => (
+            {results.result[2].results?.map((driver, index) => (
               <tr className="border border-slate-500" key={index}>
                 <td className="border border-slate-500">{index + 1}</td>
-                <td className="border border-slate-500">{driver.driver}</td>
+                <td className="border border-slate-500">{driver.player}</td>
                 <td className="border border-slate-500">{driver.vehicle}</td>
                 <td className="border border-slate-500">{driver.laps}</td>
                 <td className="border border-slate-500">
-                  {index === 0
-                    ? convertTime(driver.timestamp[0])
-                    : driver.retired
-                    ? `+${raceResults.laps - driver.laps} ${
-                        raceResults.laps - driver.laps === 1 ? 'lap' : 'laps'
-                      }`
-                    : convertTimeFull(driver.timestamp[1])}
+                  {driver.time.retired! > 0
+                    ? driver.time.retired === 1
+                      ? `+${driver.time.retired} lap`
+                      : `+${driver.time.retired} laps`
+                    : convertTime(driver.time.time)}
                 </td>
                 <td className="border border-slate-500">
-                  {convertTime(driver.bestLap)}
+                  {convertTime(driver.best_lap)}
                 </td>
-                <td className="border border-slate-500">
+                {/* <td className="border border-slate-500">
                   {driver.consistency}%
-                </td>
-                {/* <td className="border border-slate-500">{driver.led}</td> */}
+                </td> */}
+                <td className="border border-slate-500">{driver.led}</td>
               </tr>
             ))}
           </tbody>
