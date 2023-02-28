@@ -119,6 +119,12 @@ export type Lap = {
   time: number;
   cuts: number;
   tyre: string;
+  personal_best?: boolean;
+  best_lap?: boolean;
+  best_sector_1?: boolean;
+  best_sector_2?: boolean;
+  best_sector_3?: boolean;
+  bad_lap?: boolean;
 };
 
 export type ResultResponse = {
