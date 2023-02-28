@@ -15,8 +15,8 @@ export default async function handler(
       return;
     }
 
-    const type = file['Type'];
-    const track_name = file['TrackName'];
+    // const type = file['Type'];
+    const track_name = file['track'];
 
     try {
       const newResult = await prisma.results.create({

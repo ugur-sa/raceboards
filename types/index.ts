@@ -75,85 +75,82 @@ export type TimeToDelete = {
   track: Track;
 };
 
-export type ResultFromDB = {
-  id: number;
-  created_at: Date;
-  type: string;
-  result: ResultInformation;
-  qualifying_id: number | null;
-  practice_id: number | null;
-  track_name: string;
-};
-
-export type ResultInformation = {
-  TrackName: string;
-  Type: string;
-  RaceLaps: number;
-  Cars: Car[];
-  Laps: Lap[];
-  Result: Result[];
-  Events: Event[];
-};
-
 export type Result = {
-  CarId: number;
-  CarModel: string;
-  DriverGuid: string;
-  DriverName: string;
-  TotalTime: number;
-  BestLap: number;
+  track: string;
+  number_of_sessions: number;
+  players: Player[];
+  sessions: Session[];
 };
 
-export type Car = {
-  CarId: number;
-  Model: string;
-  Skin: string;
-  Driver: Driver;
+export type Player = {
+  name: string;
+  car: string;
+  skin: string;
 };
 
-export type Driver = {
-  Guid: string;
-  Name: string;
+export type Session = {
+  event: number;
+  name: string;
+  type: number;
+  lapsCount: number;
+  duration: number;
+  laps: Lap[];
+  lapstotal: number[];
+  bestLaps: BestLap[];
+  raceResult: number[];
+};
+
+export type BestLap = {
+  car: number;
+  time: number;
+  lap: number;
+};
+
+export type LapResponse = {
+  Practice: [{ player: string; laps: Lap[] }];
+  Qualification: [{ player: string; laps: Lap[] }];
+  Race: [{ player: string; laps: Lap[] }];
 };
 
 export type Lap = {
-  CarId: number;
-  CarModel: string;
-  Cuts: number;
-  DriverGuid: string;
-  DriverName: string;
-  LapTime: number;
-  Sectors: number[];
-  Timestamp: number;
-  Tyre: string;
+  lap: number;
+  car: number;
+  sectors: [number, number, number];
+  time: number;
+  cuts: number;
+  tyre: string;
+  personal_best?: boolean;
+  best_lap?: boolean;
+  best_sector_1?: boolean;
+  best_sector_2?: boolean;
+  best_sector_3?: boolean;
+  bad_lap?: boolean;
 };
 
-export type Event = {
-  CarId: number;
-  Driver: Driver;
-  ImpactSpeed: number;
-  OtherCarId: number;
-  OtherDriver: Driver;
-  Type: string;
-};
-
-export type DriverData = {
-  driver: string;
-  vehicle: string;
-  laps: number;
-  timestamp: [time: number, delta: number];
-  bestLap: number;
-  consistency: string;
-  led: number;
-  retired: boolean;
-};
-
-export type RaceResults = {
-  type: string;
+export type ResultResponse = {
   track_name: string;
-  driverData: DriverData[];
-  winner: string;
-  laps: number;
-  best_lap: { driver: string; lapTime: number };
-  led_most_laps: string;
+  result: [{}, {}, Race];
+};
+
+export type Race = {
+  session?: string;
+  winner?: string;
+  most_laps_led?: string;
+  best_lap?: {
+    player: string;
+    time: number;
+  };
+  max_laps?: number;
+  lasted_laps?: number;
+  results?: {
+    player: string;
+    vehicle: string;
+    laps: number;
+    time: {
+      time: number;
+      retired?: number;
+    };
+    best_lap: number;
+    led: number;
+  }[];
 };
