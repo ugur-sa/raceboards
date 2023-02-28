@@ -8,6 +8,7 @@ import RaceResult from '@/components/Races/RaceResult';
 import Dropdown from '@/components/Dropdown';
 import useSWR from 'swr';
 import { Session } from 'types';
+import Legend from '@/components/Races/Legend';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -54,15 +55,18 @@ export default function Page() {
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col p-10 text-white">
           <div className="rounded-lg bg-slate-700 p-10 shadow-xl">
-            <div className="flex gap-5">
-              {sessions.map((session, index) => (
-                <Dropdown
-                  key={index}
-                  title={session}
-                  setSelection={setSelection}
-                  dropdownSections={dropdownSections[index]}
-                />
-              ))}
+            <div className="flex justify-between">
+              <div className="flex gap-5">
+                {sessions.map((session, index) => (
+                  <Dropdown
+                    key={index}
+                    title={session}
+                    setSelection={setSelection}
+                    dropdownSections={dropdownSections[index]}
+                  />
+                ))}
+              </div>
+              <Legend />
             </div>
             {selection === 'Race0' && (
               <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
