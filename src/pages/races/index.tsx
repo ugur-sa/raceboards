@@ -5,8 +5,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR from 'swr';
-import { ResultFromDB } from 'types';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+interface ResultFromDB {
+  id: number;
+  created_at: Date;
+  track_name: string;
+}
 
 const RacesPage = () => {
   const session = useSession();
@@ -29,6 +34,8 @@ const RacesPage = () => {
   } = useSWR<ResultFromDB[]>(`/api/races/getRaces`, fetcher);
 
   if (resultsError) return <div>failed to load</div>;
+
+  console.log(results);
 
   return (
     <>
