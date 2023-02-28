@@ -106,6 +106,12 @@ export type BestLap = {
   lap: number;
 };
 
+export type LapResponse = {
+  Practice: [{ player: string; laps: Lap[] }];
+  Qualification: [{ player: string; laps: Lap[] }];
+  Race: [{ player: string; laps: Lap[] }];
+};
+
 export type Lap = {
   lap: number;
   car: number;
@@ -113,4 +119,32 @@ export type Lap = {
   time: number;
   cuts: number;
   tyre: string;
+};
+
+export type ResultResponse = {
+  track_name: string;
+  result: [{}, {}, Race];
+};
+
+export type Race = {
+  session?: string;
+  winner?: string;
+  most_laps_led?: string;
+  best_lap?: {
+    player: string;
+    time: number;
+  };
+  max_laps?: number;
+  lasted_laps?: number;
+  results?: {
+    player: string;
+    vehicle: string;
+    laps: number;
+    time: {
+      time: number;
+      retired?: number;
+    };
+    best_lap: number;
+    led: number;
+  }[];
 };
