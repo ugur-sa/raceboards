@@ -86,6 +86,7 @@ export default async function handler(
         lapsObject.laps.forEach((lap) => {
           if (lap === best_lap) {
             lap.best_lap = true;
+            lap.personal_best = false;
           }
         });
       });
