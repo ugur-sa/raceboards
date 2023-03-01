@@ -54,6 +54,7 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                     <>
                       <tr
                         className={`
+                        border-b border-slate-500 text-sm hover:bg-slate-600 xl:text-xl
                         ${
                           lap.best_lap === true
                             ? 'bg-red-400 hover:bg-red-300'
@@ -69,7 +70,7 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                             ? 'bg-orange-300 hover:bg-orange-200'
                             : ''
                         }
-                        border-b border-slate-500 text-sm hover:bg-slate-600 xl:text-xl`}
+                        `}
                         key={index}
                       >
                         <td>{lap.lap + 1}</td>
