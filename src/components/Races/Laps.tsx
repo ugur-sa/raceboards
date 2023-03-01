@@ -54,20 +54,27 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                     <>
                       <tr
                         className={`
-                        border-b border-slate-500 text-sm hover:bg-slate-600 xl:text-xl
+                        border-b border-slate-500 text-sm xl:text-xl
                         ${
                           lap.best_lap === true
-                            ? 'bg-red-400 hover:bg-red-300'
+                            ? 'bg-red-400 hover:bg-red-300 hover:text-black'
                             : ''
                         } 
                         ${
                           lap.personal_best === true
-                            ? 'bg-green-400 hover:bg-green-300'
+                            ? 'bg-green-400 hover:bg-green-300 hover:text-black'
                             : ''
                         } 
                         ${
                           lap.bad_lap === true
-                            ? 'bg-orange-300 hover:bg-orange-200'
+                            ? 'bg-orange-300 hover:bg-orange-200 hover:text-black'
+                            : ''
+                        }
+                        ${
+                          lap.bad_lap === false &&
+                          lap.best_lap === false &&
+                          lap.personal_best === false
+                            ? 'hover:bg-slate-600'
                             : ''
                         }
                         `}
