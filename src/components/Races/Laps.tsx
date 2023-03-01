@@ -70,11 +70,6 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                             ? 'bg-orange-300 hover:bg-orange-200 hover:text-black'
                             : ''
                         }
-                        ${
-                          lap.bad_lap && lap.best_lap && lap.personal_best
-                            ? ''
-                            : 'hover:bg-slate-600'
-                        }
                         `}
                         key={index}
                       >
