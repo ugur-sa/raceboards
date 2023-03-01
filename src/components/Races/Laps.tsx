@@ -71,11 +71,9 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                             : ''
                         }
                         ${
-                          lap.bad_lap === false &&
-                          lap.best_lap === false &&
-                          lap.personal_best === false
-                            ? 'hover:bg-slate-600'
-                            : ''
+                          lap.bad_lap && lap.best_lap && lap.personal_best
+                            ? ''
+                            : 'hover:bg-slate-600'
                         }
                         `}
                         key={index}
