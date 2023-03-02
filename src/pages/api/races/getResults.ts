@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
-import { Lap, Player, Race, Result, Session } from 'types';
+import { Lap, Player, Qualification, Race, Result, Session } from 'types';
 
 const prisma = new PrismaClient();
 
@@ -27,12 +27,40 @@ export default async function handler(
     const result: Result = results.result as Result;
 
     const practice: any = {};
-    const qualification: any = {};
+    const qualification: Qualification = {};
     const race: Race = {};
 
     result.sessions.forEach((session: Session) => {
       if (session.name === 'Practice') {
       } else if (session.name === 'Qualification') {
+        qualification.session = session.name;
+        qualification.pole = {
+          player:
+            result.players[
+              session.bestLaps.reduce((prev, curr) =>
+                prev.time < curr.time ? prev : curr
+              ).car
+            ].name,
+          time: session.bestLaps.reduce((prev, curr) =>
+            prev.time < curr.time ? prev : curr
+          ).time,
+        };
+        qualification.max_minutes = session.duration;
+        qualification.lasted_laps = Math.max(...session.lapstotal);
+        qualification.results = [];
+
+        session.bestLaps.forEach((bestLap, index) => {
+          qualification.results?.push({
+            player: result.players[bestLap.car].name,
+            vehicle: result.players[bestLap.car].car,
+            laps: session.laps.filter((lap) => lap.car === index).length,
+            best_lap: bestLap.time,
+            gap: bestLap.time - qualification.pole?.time!,
+          });
+        });
+
+        //sort qualification results by best lap
+        qualification.results.sort((a, b) => a.best_lap - b.best_lap);
       } else if (session.name === 'Race') {
         const unfixedLaps = session.laps;
         if (session.laps.length !== session.lapsCount * result.players.length) {
