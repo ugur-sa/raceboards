@@ -78,7 +78,7 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                         `}
                         key={index}
                       >
-                        <td>
+                        <td className="w-16">
                           {lap.cuts !== 0 ? (
                             <div className="flex items-center gap-1">
                               <p>{lap.lap + 1}</p>
