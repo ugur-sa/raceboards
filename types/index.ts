@@ -129,7 +129,7 @@ export type Lap = {
 
 export type ResultResponse = {
   track_name: string;
-  result: [{}, {}, Race];
+  result: [{}, Qualification, Race];
 };
 
 export type Race = {
@@ -152,5 +152,22 @@ export type Race = {
     };
     best_lap: number;
     led: number;
+  }[];
+};
+
+export type Qualification = {
+  session?: string;
+  pole?: {
+    player: string;
+    time: number;
+  };
+  max_minutes?: number;
+  lasted_laps?: number;
+  results?: {
+    player: string;
+    vehicle: string;
+    laps: number;
+    best_lap: number;
+    gap: number;
   }[];
 };
