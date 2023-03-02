@@ -16,7 +16,7 @@ const RaceResult = ({ race }: { race: string }) => {
   return (
     <>
       <div className="col-span-1 row-span-1">
-        <table className="w-full text-left text-sm lg:text-lg">
+        <table className="w-full text-left text-[8px] lg:text-lg">
           <tbody>
             <tr className="border border-slate-500">
               <th className="border border-slate-500">Session</th>
@@ -48,7 +48,7 @@ const RaceResult = ({ race }: { race: string }) => {
         </table>
       </div>
       <div className="col-span-1 row-span-1 row-start-2 xl:col-start-2 xl:row-start-1">
-        <table className="w-full text-left text-sm lg:text-lg">
+        <table className="w-full text-left text-[8px] lg:text-lg">
           <tbody>
             <tr className="border border-slate-500">
               <th className="border border-slate-500">Max laps</th>
@@ -62,7 +62,7 @@ const RaceResult = ({ race }: { race: string }) => {
         </table>
       </div>
       <div className="col-span-2 row-span-1">
-        <table className="w-full border border-slate-500 text-left text-sm lg:text-lg">
+        <table className="w-full border border-slate-500 text-left text-[6px] lg:text-lg">
           <thead>
             <tr className="border border-slate-500">
               <th className="border border-slate-500">Pos</th>

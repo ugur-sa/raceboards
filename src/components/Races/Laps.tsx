@@ -33,12 +33,12 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
   return (
     <>
       {lapsResponse.Race ? (
-        <div className="p-5">
+        <div className="mt-3 lg:p-5">
           {response.map((lapsObject, index) => (
-            <div key={index} className="flex w-full flex-col gap-5 text-xl">
-              <h2 className="text-3xl">{lapsObject.player}</h2>
+            <div key={index} className="flex w-full flex-col gap-5">
+              <h2 className="text-md lg:text-3xl">{lapsObject.player}</h2>
               <table className="mb-5 w-full rounded-lg text-center">
-                <thead className="bg-gray-800 text-xs uppercase xl:text-xl">
+                <thead className="bg-gray-800 text-[5px] uppercase xl:text-xl">
                   <tr>
                     <th className="text-left">Lap</th>
                     <th>Time</th>
@@ -54,7 +54,7 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                     <>
                       <tr
                         className={`
-                        border-b border-slate-500 text-sm xl:text-xl
+                        border-b border-slate-500 text-[5px] xl:text-xl
                         ${
                           lap.best_lap === true
                             ? 'bg-red-400 hover:bg-red-300 hover:text-black'
@@ -82,7 +82,7 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                           {lap.cuts !== 0 ? (
                             <div className="flex items-center gap-1">
                               <p>{lap.lap + 1}</p>
-                              <p className="text-xs">(INVALID)</p>
+                              <p className="text-[3px] lg:text-xs">(INVALID)</p>
                             </div>
                           ) : (
                             <div className="flex items-center gap-1">
@@ -94,21 +94,21 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                         <td>{lap.cuts > 0 ? '-' : convertTime(lap.time)}</td>
                         <td
                           className={`${
-                            lap.best_sector_1 ? 'text-red-600' : ''
+                            lap.best_sector_1 ? 'text-purple-700' : ''
                           }`}
                         >
                           {lap.cuts > 0 ? '-' : convertTime(lap.sectors[0])}
                         </td>
                         <td
                           className={`${
-                            lap.best_sector_2 ? 'text-red-600' : ''
+                            lap.best_sector_2 ? 'text-purple-700' : ''
                           }`}
                         >
                           {lap.cuts > 0 ? '-' : convertTime(lap.sectors[1])}
                         </td>
                         <td
                           className={`${
-                            lap.best_sector_3 ? 'text-red-600' : ''
+                            lap.best_sector_3 ? 'text-purple-700' : ''
                           }`}
                         >
                           {lap.cuts > 0 ? '-' : convertTime(lap.sectors[2])}

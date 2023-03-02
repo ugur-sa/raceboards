@@ -18,7 +18,7 @@ const Dropdown = ({
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex w-20 justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-[10px] font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 lg:w-32 lg:text-sm">
+        <Menu.Button className="inline-flex w-14 justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-[8px] font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 lg:w-32 lg:text-sm">
           {title}
           <ChevronDownIcon
             className="-mr-1 ml-2 hidden lg:block lg:h-5 lg:w-5"
@@ -36,7 +36,7 @@ const Dropdown = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="right-100 absolute z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="right-100 absolute z-10 mt-2 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none lg:w-56">
           <div className="py-1">
             {dropdownSections.map((section, index) => (
               <Menu.Item key={index}>
@@ -47,7 +47,7 @@ const Dropdown = ({
                     }}
                     className={classNames(
                       active ? 'bg-gray-100 text-blue-500' : 'text-gray-700',
-                      'block px-4 py-2 text-sm'
+                      'block px-4 py-2 text-[8px] lg:text-sm'
                     )}
                   >
                     {section}
