@@ -18,6 +18,10 @@ export default async function handler(
           where: {
             user_id: user.id,
           },
+          select: {
+            id: true,
+            track_id: true,
+          },
         });
 
         const medals = await Promise.all(
@@ -57,6 +61,12 @@ export default async function handler(
         };
       })
     );
+
+    //if users have the same amount of silver medals, order them by the amount of bronze medals
+    usersWithMedals.sort((a, b) => b.bronzeMedals - a.bronzeMedals);
+
+    //if users have the same amount of gold medals, order them by the amount of silver medals
+    usersWithMedals.sort((a, b) => b.silverMedals - a.silverMedals);
 
     //also order them by the amount of gold medals
     usersWithMedals.sort((a, b) => b.goldMedals - a.goldMedals);
