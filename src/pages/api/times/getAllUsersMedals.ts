@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
 
+import { UserWithMedals } from 'types';
+
 const prisma = new PrismaClient();
 
 export default async function handler(
@@ -71,7 +73,17 @@ export default async function handler(
     //also order them by the amount of gold medals
     usersWithMedals.sort((a, b) => b.goldMedals - a.goldMedals);
 
-    res.status(200).json(usersWithMedals);
+    const response = usersWithMedals.map((user) => {
+      return {
+        id: user.id,
+        name: user.name,
+        goldMedals: user.goldMedals,
+        silverMedals: user.silverMedals,
+        bronzeMedals: user.bronzeMedals,
+      };
+    });
+
+    res.status(200).json(response);
   } else {
     res.setHeader('Allow', ['GET']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
