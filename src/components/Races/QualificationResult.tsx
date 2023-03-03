@@ -31,7 +31,7 @@ const QualificationResult: React.FC<{ race: string }> = ({ race }) => {
               <th className="border border-slate-500">Pole</th>
               <td className="pl-1">
                 {results.result[1].pole?.player} (
-                {results.result[2].best_lap
+                {results.result[1].pole
                   ? convertTime(results.result[1].pole?.time!)
                   : 'N/A'}
                 )
@@ -74,10 +74,14 @@ const QualificationResult: React.FC<{ race: string }> = ({ race }) => {
                 <td className="border border-slate-500">{driver.vehicle}</td>
                 <td className="border border-slate-500">{driver.laps}</td>
                 <td className="border border-slate-500">
-                  {convertTime(driver.best_lap)}
+                  {driver.best_lap !== null
+                    ? convertTime(driver.best_lap)
+                    : '-'}
                 </td>
                 <td className="border border-slate-500">
-                  {index !== 0 ? convertTimeFull(driver.gap) : '-'}
+                  {index !== 0 && driver.gap !== null
+                    ? convertTimeFull(driver.gap)
+                    : '-'}
                 </td>
               </tr>
             ))}
