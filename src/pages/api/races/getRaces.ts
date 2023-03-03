@@ -8,7 +8,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
-    const results = await prisma.results.findMany({});
+    const results = await prisma.results.findMany({
+      orderBy: {
+        created_at: 'asc',
+      },
+    });
 
     res.status(200).json(results);
   }
