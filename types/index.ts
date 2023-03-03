@@ -62,7 +62,6 @@ export type LeaderboardTime = {
 
 export type UserWithMedals = {
   id: string;
-  email: string;
   name: string;
   avatar_url: string;
   goldMedals: number;
@@ -129,7 +128,7 @@ export type Lap = {
 
 export type ResultResponse = {
   track_name: string;
-  result: [{}, Qualification, Race];
+  result: [Practice, Qualification, Race];
 };
 
 export type Race = {
@@ -158,6 +157,23 @@ export type Race = {
 export type Qualification = {
   session?: string;
   pole?: {
+    player: string;
+    time: number;
+  };
+  max_minutes?: number;
+  lasted_laps?: number;
+  results?: {
+    player: string;
+    vehicle: string;
+    laps: number;
+    best_lap: number;
+    gap: number;
+  }[];
+};
+
+export type Practice = {
+  session?: string;
+  best_lap?: {
     player: string;
     time: number;
   };
