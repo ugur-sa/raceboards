@@ -1,6 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
-import { Lap, Player, Qualification, Race, Result, Session } from 'types';
+import {
+  Lap,
+  Player,
+  Practice,
+  Qualification,
+  Race,
+  Result,
+  Session,
+} from 'types';
 
 const prisma = new PrismaClient();
 
@@ -26,12 +34,59 @@ export default async function handler(
     const track_name: string = results.track_name!;
     const result: Result = results.result as Result;
 
-    const practice: any = {};
+    const practice: Practice = {};
     const qualification: Qualification = {};
     const race: Race = {};
 
     result.sessions.forEach((session: Session) => {
       if (session.name === 'Practice') {
+        practice.session = session.name;
+        practice.best_lap = {
+          player:
+            result.players[
+              session.bestLaps.reduce((prev, curr) =>
+                prev.time < curr.time ? prev : curr
+              ).car
+            ].name,
+          time: session.bestLaps.reduce((prev, curr) =>
+            prev.time < curr.time ? prev : curr
+          ).time,
+        };
+        practice.max_minutes = session.duration;
+
+        const lastedLaps = Math.max(
+          ...session.bestLaps.map((bestLap, index) => {
+            return session.laps.filter((lap) => lap.car === index).length;
+          })
+        );
+
+        practice.lasted_laps = lastedLaps;
+        practice.results = [];
+
+        if (session.bestLaps.length < result.players.length) {
+          result.players.forEach((player: Player, index: number) => {
+            if (!session.bestLaps.find((bestLap) => bestLap.car === index)) {
+              session.bestLaps.push({
+                car: index,
+                time: Infinity,
+                lap: Infinity,
+              });
+            }
+          });
+        }
+
+        session.bestLaps.forEach((bestLap, index) => {
+          practice.results?.push({
+            player: result.players[bestLap.car].name,
+            vehicle: result.players[bestLap.car].car,
+            laps: session.laps.filter((lap) => lap.car === index).length,
+            best_lap: bestLap.time,
+            gap: bestLap.time - practice.best_lap?.time!,
+          });
+        });
+
+        //sort qualification results by best lap
+        practice.results.sort((a, b) => a.best_lap - b.best_lap);
       } else if (session.name === 'Qualification') {
         qualification.session = session.name;
         qualification.pole = {
@@ -46,8 +101,27 @@ export default async function handler(
           ).time,
         };
         qualification.max_minutes = session.duration;
-        qualification.lasted_laps = Math.max(...session.lapstotal);
+
+        const lastedLaps = Math.max(
+          ...session.bestLaps.map((bestLap, index) => {
+            return session.laps.filter((lap) => lap.car === index).length;
+          })
+        );
+
+        qualification.lasted_laps = lastedLaps;
         qualification.results = [];
+
+        if (session.bestLaps.length < result.players.length) {
+          result.players.forEach((player: Player, index: number) => {
+            if (!session.bestLaps.find((bestLap) => bestLap.car === index)) {
+              session.bestLaps.push({
+                car: index,
+                time: Infinity,
+                lap: Infinity,
+              });
+            }
+          });
+        }
 
         session.bestLaps.forEach((bestLap, index) => {
           qualification.results?.push({
@@ -86,6 +160,19 @@ export default async function handler(
         race.max_laps = session.lapsCount;
         race.lasted_laps = Math.max(...session.lapstotal);
         race.results = [];
+
+        if (session.bestLaps.length < result.players.length) {
+          result.players.forEach((player: Player, index: number) => {
+            if (!session.bestLaps.find((bestLap) => bestLap.car === index)) {
+              session.bestLaps.push({
+                car: index,
+                time: Infinity,
+                lap: Infinity,
+              });
+            }
+          });
+        }
+
         session.raceResult.forEach((index) => {
           race.results?.push({
             player: result.players[index].name,
