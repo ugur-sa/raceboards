@@ -55,9 +55,114 @@ export default async function handler(
     });
 
     if (!(practiceLaps.length === 0)) {
+      practiceLaps.forEach((lapsObject: { player: string; laps: Lap[] }) => {
+        if (lapsObject.laps.filter((lap) => lap.cuts === 0).length === 0)
+          return;
+        lapsObject.laps
+          .filter((lap) => lap.cuts === 0)
+          .reduce((prev, curr) => {
+            if (prev.time < curr.time) {
+              return prev;
+            } else {
+              return curr;
+            }
+          }).personal_best = true;
+      });
+
+      const allLaps: Lap[] = [];
+      practiceLaps.forEach((lapsObject: { player: string; laps: Lap[] }) => {
+        allLaps.push(...lapsObject.laps);
+      });
+
+      const best_lap: Lap = allLaps
+        .filter((lap) => lap.cuts === 0)
+        .reduce((prev, curr) => {
+          if (prev.time < curr.time) {
+            return prev;
+          } else {
+            return curr;
+          }
+        });
+
+      practiceLaps.forEach((lapsObject: { player: string; laps: Lap[] }) => {
+        lapsObject.laps.forEach((lap) => {
+          if (lap === best_lap) {
+            lap.best_lap = true;
+            lap.personal_best = false;
+          }
+        });
+      });
+      //TODO add bad lap indicator
+      practiceLaps.forEach((lapsObject: { player: string; laps: Lap[] }) => {
+        lapsObject.laps.forEach((lap, index) => {
+          // amount of laps with cuts > 0
+          const amountOfCuts = lapsObject.laps.filter(
+            (lap) => lap.cuts > 0
+          ).length;
+
+          // get the average time for a lap excluding the first one
+          const averageTime =
+            lapsObject.laps
+              .filter((lap) => lap.cuts === 0)
+              .reduce((prev, curr) => prev + curr.time, 0) /
+            (lapsObject.laps.length - amountOfCuts);
+
+          lapsObject.laps
+            .filter((lap) => lap.cuts === 0)
+            .forEach((lap) => {
+              if (lap.time > averageTime * 1.07) {
+                lap.bad_lap = true;
+              }
+            });
+        });
+      });
+
+      const allSectors = allLaps
+        .filter((lap) => lap.cuts === 0)
+        .map((lap) => lap.sectors);
+
+      const bestSector1 = allSectors.reduce((prev, curr) => {
+        if (prev[0] < curr[0]) {
+          return prev;
+        } else {
+          return curr;
+        }
+      })[0];
+      const bestSector2 = allSectors.reduce((prev, curr) => {
+        if (prev[1] < curr[1]) {
+          return prev;
+        } else {
+          return curr;
+        }
+      })[1];
+      const bestSector3 = allSectors.reduce((prev, curr) => {
+        if (prev[2] < curr[2]) {
+          return prev;
+        } else {
+          return curr;
+        }
+      })[2];
+
+      const bestSectors = [bestSector1, bestSector2, bestSector3];
+
+      bestSectors.forEach((sector, index) => {
+        allLaps.forEach((lap) => {
+          if (lap.sectors[index] === sector) {
+            if (index === 0) {
+              lap.best_sector_1 = true;
+            } else if (index === 1) {
+              lap.best_sector_2 = true;
+            } else if (index === 2) {
+              lap.best_sector_3 = true;
+            }
+          }
+        });
+      });
     }
     if (!(qualifyLaps.length === 0)) {
       qualifyLaps.forEach((lapsObject: { player: string; laps: Lap[] }) => {
+        if (lapsObject.laps.filter((lap) => lap.cuts === 0).length === 0)
+          return;
         lapsObject.laps
           .filter((lap) => lap.cuts === 0)
           .reduce((prev, curr) => {
@@ -161,6 +266,8 @@ export default async function handler(
     }
     if (!(raceLaps.length === 0)) {
       raceLaps.forEach((lapsObject: { player: string; laps: Lap[] }) => {
+        if (lapsObject.laps.filter((lap) => lap.cuts === 0).length === 0)
+          return;
         lapsObject.laps.reduce((prev, curr) => {
           if (prev.time < curr.time) {
             return prev;
