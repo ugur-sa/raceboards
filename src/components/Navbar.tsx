@@ -77,6 +77,16 @@ export default function Navbar() {
               Races
             </Link>
             <Link
+              href={`/season/${new Date().getFullYear()}`}
+              className={`mt-4 mr-4 block lg:mt-0 lg:inline-block ${
+                router.pathname === '/races'
+                  ? 'text-blue-500 hover:text-blue-400'
+                  : 'text-gray-200 hover:text-white'
+              }`}
+            >
+              Season {new Date().getFullYear()}
+            </Link>
+            <Link
               href={'/'}
               onClick={() => {
                 supabase.auth.signOut();
@@ -186,6 +196,18 @@ export default function Navbar() {
                 }`}
               >
                 Races
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/season/${new Date().getFullYear()}`}
+                className={`mt-4 mr-4 block lg:mt-0 lg:inline-block ${
+                  router.pathname === '/races'
+                    ? 'text-blue-500 hover:text-blue-400'
+                    : 'text-gray-200 hover:text-white'
+                }`}
+              >
+                Season {new Date().getFullYear()}
               </Link>
             </li>
             <li>
