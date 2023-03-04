@@ -314,6 +314,15 @@ export default async function handler(
         });
       });
 
+      raceLaps.forEach((lapsObject: { player: string; laps: Lap[] }) => {
+        lapsObject.laps.reduce((prev, curr) => {
+          if (prev.tyre !== curr.tyre) {
+            curr.pit = true;
+          }
+          return curr;
+        }, lapsObject.laps[0]);
+      });
+
       const allSectors = allLaps.map((lap) => lap.sectors);
 
       const bestSector1 = allSectors.reduce((prev, curr) => {

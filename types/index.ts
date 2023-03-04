@@ -124,6 +124,7 @@ export type Lap = {
   best_sector_2?: boolean;
   best_sector_3?: boolean;
   bad_lap?: boolean;
+  pit?: boolean;
 };
 
 export type ResultResponse = {

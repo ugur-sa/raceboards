@@ -65,6 +65,11 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                           lap.personal_best === true
                             ? 'bg-green-400 hover:bg-green-300 hover:text-black'
                             : ''
+                        }
+                        ${
+                          lap.pit === true
+                            ? 'bg-slate-700 hover:bg-slate-700 hover:text-white'
+                            : ''
                         } 
                         ${
                           lap.bad_lap === true
@@ -79,17 +84,19 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
                         `}
                         key={index}
                       >
-                        <td className="w-16">
+                        <td className="w-16 text-left">
                           {lap.cuts !== 0 ? (
                             <div className="flex items-center gap-1">
                               <p>{lap.lap + 1}</p>
                               <p className="text-[3px] lg:text-xs">(INVALID)</p>
                             </div>
-                          ) : (
+                          ) : lap.pit === true ? (
                             <div className="flex items-center gap-1">
                               <p>{lap.lap + 1}</p>
-                              <p className="text-xs"></p>
+                              <p className="text-[3px] lg:text-xs">(PIT)</p>
                             </div>
+                          ) : (
+                            <p>{lap.lap + 1}</p>
                           )}
                         </td>
                         <td>{lap.cuts > 0 ? '-' : convertTime(lap.time)}</td>
