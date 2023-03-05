@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['Roboto', 'sans-serif'],
+      formula: ['Formula1-Regular', 'sans-serif'],
     },
     extend: {
       zIndex: {
