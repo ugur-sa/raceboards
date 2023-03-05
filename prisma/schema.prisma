@@ -43,10 +43,11 @@ model Users {
 }
 
 model Results {
-  id         Int       @id @default(autoincrement())
-  created_at DateTime? @default(now()) @db.Timestamptz(6)
-  result     Json      @default("{}")
-  track_name String?
+  id          Int       @id @default(autoincrement())
+  created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  result      Json      @default("{}")
+  track_name  String?
+  season_year Int?      @db.SmallInt
 }
 
 model Cars {
