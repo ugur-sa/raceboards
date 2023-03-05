@@ -28,13 +28,13 @@ export default function Leaderboards() {
   return (
     <>
       <Head>
-        <title>Season {new Date().getFullYear()}</title>
+        <title>{`Season ${new Date().getFullYear()}`}</title>
       </Head>
       <div className="flex h-screen flex-col bg-gray-800">
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col items-center gap-10 text-white">
           <h1 className="text-6xl font-bold">
-            Season {new Date().getFullYear()}
+            {`Season ${new Date().getFullYear()}`}
           </h1>
         </main>
       </div>

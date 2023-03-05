@@ -34,7 +34,7 @@ const Laps = ({ race, session }: { race: string; session: string }) => {
     <>
       {lapsResponse.Race ? (
         <div className="mt-3 lg:p-5">
-          <h1 className="mb-10 text-center text-3xl">{session} laps</h1>
+          <h1 className="mb-10 text-center text-3xl">{`${session} laps`}</h1>
           {response.map((lapsObject, index) => (
             <div key={index} className="flex w-full flex-col gap-5">
               <h2 className="text-md lg:text-3xl">{lapsObject.player}</h2>
