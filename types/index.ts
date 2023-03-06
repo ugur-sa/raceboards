@@ -85,6 +85,7 @@ export type Player = {
   name: string;
   car: string;
   skin: string;
+  points?: number;
 };
 
 export type Session = {
