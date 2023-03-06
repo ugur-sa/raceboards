@@ -3,15 +3,8 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import { useEffect, useState } from 'react';
-import Laps from '@/components/Races/Laps';
-import RaceResult from '@/components/Races/RaceResult';
-import Dropdown from '@/components/Dropdown';
-import useSWR from 'swr';
-import { Session } from 'types';
-import Legend from '@/components/Races/Legend';
-import QualificationResult from '@/components/Races/QualificationResult';
-import PracticeResults from '@/components/Races/PracticeResults';
 import RacesTable from '@/components/Seasons/RacesTable';
+import StandingsTable from '@/components/Seasons/StandingsTable';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -37,13 +30,16 @@ export default function Page() {
           <h1 className="text-6xl font-bold">{`Season ${new Date().getFullYear()}`}</h1>
 
           <div className="block lg:flex lg:gap-16">
-            <div className="flex h-52 w-64 justify-center rounded-lg bg-slate-600 shadow-2xl lg:h-[300px] lg:w-[600px]">
+            <div className="mt-8 flex h-52 w-64 flex-col items-center lg:mt-0 lg:h-[300px] lg:w-[600px]">
               <h2 className="mt-2 text-xl font-bold">Standings</h2>
+              <div className="lg:h-full lg:w-full">
+                <StandingsTable year={year as string} />
+              </div>
             </div>
-            <div className="mt-8 flex h-52 w-64 flex-col items-center rounded-lg bg-slate-600 shadow-2xl lg:mt-0 lg:h-[300px] lg:w-[600px]">
+            <div className="mt-8 flex h-52 w-64 flex-col items-center lg:mt-0 lg:h-[300px] lg:w-[600px]">
               <h2 className="mt-2 text-xl font-bold">Races</h2>
-              <div className="h-full w-full border">
-                <RacesTable />
+              <div className="lg:h-full lg:w-full">
+                <RacesTable year={year as string} />
               </div>
             </div>
           </div>
