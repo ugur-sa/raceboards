@@ -79,7 +79,7 @@ export default function Navbar() {
             <Link
               href={`/season/${new Date().getFullYear()}`}
               className={`mt-4 mr-4 block lg:mt-0 lg:inline-block ${
-                router.pathname === '/races'
+                router.pathname === `/season/${new Date().getFullYear()}`
                   ? 'text-blue-500 hover:text-blue-400'
                   : 'text-gray-200 hover:text-white'
               }`}
