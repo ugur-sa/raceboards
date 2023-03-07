@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react';
 import RacesTable from '@/components/Seasons/RacesTable';
 import StandingsTable from '@/components/Seasons/StandingsTable';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export default function Page() {
   const router = useRouter();
   const { year } = router.query;
