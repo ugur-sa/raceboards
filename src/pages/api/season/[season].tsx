@@ -34,18 +34,20 @@ export default async function handler(
 
       const standings: Player[] = [];
 
-      raceResult.forEach((car) => {
+      raceResult.forEach((car, index) => {
         if (players[car].name !== '') {
           const playerLaps = race.laps.filter((lap) => lap.car === car).length;
           if (playerLaps !== race.lapsCount) {
             players[car].points = 0;
             standings.push(players[car]);
           } else {
-            players[car].points = racePoints[car - 1];
+            players[car].points = racePoints[index];
             standings.push(players[car]);
           }
         }
       });
+
+      console.log(standings);
 
       standings.forEach((player) => {
         const fastestLap = race.bestLaps.reduce((prev, current) =>
