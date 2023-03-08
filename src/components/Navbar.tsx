@@ -16,6 +16,10 @@ export default function Navbar() {
     (document.activeElement as HTMLElement).blur();
   };
 
+  const handleUserClick = () => {
+    router.push(`/user/${session?.user.user_metadata.full_name}`);
+  };
+
   //create a nav bar with links to the home page and the tracks page and times page
   return (
     <>
@@ -106,6 +110,7 @@ export default function Navbar() {
               alt="avatar"
               width={50}
               height={50}
+              onClick={handleUserClick}
             />
           </div>
         </div>
@@ -147,6 +152,7 @@ export default function Navbar() {
                   alt="avatar"
                   width={70}
                   height={70}
+                  onClick={handleUserClick}
                 />
               </div>
             </li>
