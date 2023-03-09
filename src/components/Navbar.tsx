@@ -105,7 +105,7 @@ export default function Navbar() {
               Welcome, {session?.user.user_metadata.full_name}
             </p>
             <Image
-              className="h-8 w-auto rounded-full lg:h-12"
+              className="h-8 w-auto cursor-pointer rounded-full lg:h-12"
               src={session?.user.user_metadata.avatar_url ?? 'vercel.svg'}
               alt="avatar"
               width={50}
