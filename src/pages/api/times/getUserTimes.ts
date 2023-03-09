@@ -28,6 +28,7 @@ export default async function handler(
 
     const response = userTimes.map((time) => {
       return {
+        id: time.id,
         time: time.time,
         time_in_ms: time.time_in_ms,
         track: t?.name,
