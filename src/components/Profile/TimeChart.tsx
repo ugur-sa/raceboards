@@ -2,7 +2,7 @@ import { useSession } from '@supabase/auth-helpers-react';
 import { ChartOptions } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import useSWR from 'swr';
-import { Time } from 'types';
+import { Time, UserTimes } from 'types';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -31,25 +31,15 @@ const TimeChart = () => {
   const session = useSession();
   const [trackName, setTrackName] = useState<string>('');
 
-  const { data: userTimes, error: userTimesError } = useSWR<Time[]>(
-    `/api/times/getUserTimes?id=${session?.user.id}&track=1`,
+  const { data: userTimes, error: userTimesError } = useSWR<UserTimes[]>(
+    `/api/times/getUserTimes?id=${session?.user.id}&track=13`,
     fetcher
   );
 
   if (userTimesError) return <div>failed to load</div>;
   if (!userTimes) return <div>loading...</div>;
 
-  if (userTimes !== undefined) {
-    fetch(`/api/track/getTrackById?id=${userTimes![0].track_id}`, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setTrackName(data.name);
-      });
-  }
-
-  const parseData = (data: Time[]) => {
+  const parseData = (data: UserTimes[]) => {
     const parsedData = data.map((time) => {
       return {
         x: new Date(time.created_at),
@@ -67,10 +57,11 @@ const TimeChart = () => {
     labels,
     datasets: [
       {
-        label: trackName,
+        label: userTimes[0].track,
         data: parseData(userTimes),
         borderColor: 'rgb(169, 208, 255)',
         backgroundColor: 'rgb(255, 255, 255)',
+        fill: false,
         tension: 0.1,
       },
     ],
@@ -78,6 +69,16 @@ const TimeChart = () => {
 
   const options: ChartOptions<'line'> = {
     responsive: true,
+    maintainAspectRatio: true,
+    elements: {
+      point: {
+        radius: 5,
+      },
+    },
+    layout: {
+      autoPadding: true,
+    },
+
     scales: {
       x: {
         title: {
@@ -98,12 +99,31 @@ const TimeChart = () => {
       },
     },
     plugins: {
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const minutes = Math.floor(context.parsed.y / 60);
+            const seconds = Math.floor(context.parsed.y % 60);
+            const milliseconds = Math.round(
+              (context.parsed.y % 1) * 1000
+            ).toString();
+            return `${minutes}:${seconds}.${milliseconds.padStart(3, '0')}`;
+          },
+        },
+      },
       legend: {
-        position: 'top' as const,
+        position: 'bottom' as const,
+        labels: {
+          color: 'white',
+        },
       },
       title: {
         display: true,
         text: 'Your lap times over time',
+        color: 'white',
+        font: {
+          size: 14,
+        },
       },
     },
   };

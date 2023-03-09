@@ -20,6 +20,21 @@ export default async function handler(
       },
     });
 
-    res.status(200).json(userTimes);
+    const t = await prisma.tracks.findUnique({
+      where: {
+        id: Number(track),
+      },
+    });
+
+    const response = userTimes.map((time) => {
+      return {
+        time: time.time,
+        time_in_ms: time.time_in_ms,
+        track: t?.name,
+        created_at: time.created_at,
+      };
+    });
+
+    res.status(200).json(response);
   }
 }

@@ -189,3 +189,11 @@ export type Practice = {
     gap: number;
   }[];
 };
+
+export type UserTimes = {
+  id: number;
+  time_in_ms: number;
+  time: string;
+  track: string;
+  created_at: Date;
+};
