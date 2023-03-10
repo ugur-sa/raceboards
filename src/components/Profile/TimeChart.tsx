@@ -13,7 +13,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useState } from 'react';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -27,17 +26,17 @@ ChartJS.register(
   Legend
 );
 
-const TimeChart = () => {
+const TimeChart: React.FC<{ track: number }> = ({ track }) => {
   const session = useSession();
-  const [trackName, setTrackName] = useState<string>('');
 
   const { data: userTimes, error: userTimesError } = useSWR<UserTimes[]>(
-    `/api/times/getUserTimes?id=${session?.user.id}&track=13`,
+    `/api/times/getUserTimes?id=${session?.user.id}&track=${track}`,
     fetcher
   );
 
   if (userTimesError) return <div>failed to load</div>;
   if (!userTimes) return <div>loading...</div>;
+  if (userTimes.length === 0) return <div>no times</div>;
 
   const parseData = (data: UserTimes[]) => {
     const parsedData = data.map((time) => {
@@ -78,7 +77,6 @@ const TimeChart = () => {
     layout: {
       autoPadding: true,
     },
-
     scales: {
       x: {
         title: {
@@ -112,10 +110,11 @@ const TimeChart = () => {
         },
       },
       legend: {
-        position: 'bottom' as const,
-        labels: {
-          color: 'white',
-        },
+        display: false,
+        // position: 'bottom' as const,
+        // labels: {
+        //   color: 'white',
+        // },
       },
       title: {
         display: true,
