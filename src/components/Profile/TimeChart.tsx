@@ -82,10 +82,16 @@ const TimeChart: React.FC<{ track: number }> = ({ track }) => {
         title: {
           display: true,
         },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
       },
       y: {
         title: {
           display: true,
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',
         },
         ticks: {
           callback: (value) => {
