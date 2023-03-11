@@ -97,7 +97,7 @@ const TimeChart: React.FC<{ track: number }> = ({ track }) => {
           callback: (value) => {
             const minutes = Math.floor(+value / 60);
             const seconds = Math.floor(+value % 60);
-            return `${minutes}:${seconds}.000`;
+            return `${minutes}:${seconds.toString().padStart(2, '0')}.000`;
           },
         },
       },
@@ -111,7 +111,9 @@ const TimeChart: React.FC<{ track: number }> = ({ track }) => {
             const milliseconds = Math.round(
               (context.parsed.y % 1) * 1000
             ).toString();
-            return `${minutes}:${seconds}.${milliseconds.padStart(3, '0')}`;
+            return `${minutes}:${seconds
+              .toString()
+              .padStart(2, '0')}.${milliseconds.padStart(3, '0')}`;
           },
         },
       },
@@ -124,16 +126,16 @@ const TimeChart: React.FC<{ track: number }> = ({ track }) => {
       },
       title: {
         display: true,
-        text: 'Your lap times over time',
-        color: 'white',
-        font: {
-          size: 14,
-        },
       },
     },
   };
 
-  return <Line data={data} options={options} height="500px" width="800px" />;
+  return (
+    <div>
+      <h2 className="text-center font-formula">Your progress</h2>
+      <Line data={data} options={options} height="500px" width="800px" />
+    </div>
+  );
 };
 
 export default TimeChart;
