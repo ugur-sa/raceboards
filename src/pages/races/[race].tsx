@@ -11,6 +11,7 @@ import { Session } from 'types';
 import Legend from '@/components/Races/Legend';
 import QualificationResult from '@/components/Races/QualificationResult';
 import PracticeResults from '@/components/Races/PracticeResults';
+import GapsChart from '@/components/Races/GapsChart';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -84,7 +85,7 @@ export default function Page() {
             )}
             {selection === 'Race2' && <h1>sectors</h1>}
             {selection === 'Race3' && <h1>positions</h1>}
-            {selection === 'Race4' && <h1>gaps</h1>}
+            {selection === 'Race4' && <GapsChart />}
             {selection === 'Qualification0' && (
               <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
                 <QualificationResult race={race as string} />
