@@ -200,5 +200,6 @@ export type UserTimes = {
 
 export type PlayerGaps = {
   player: string;
+  totalTime: number;
   gaps: number[];
 };
