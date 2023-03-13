@@ -50,22 +50,26 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
   };
 
   const colors = [
-    'rgb(255, 0, 0)',
+    'rgb(237, 60, 60)',
     'rgb(26, 255, 0)',
-    'rgb(0, 8, 255)',
-    'rgb(250, 233, 0)',
+    'rgb(51, 118, 242)',
+    'rgb(250, 183, 33)',
+    'rgb(213, 3, 228)',
+    'rgb(2, 207, 176)',
+    'rgb(240, 152, 0)',
+    'rgb(72, 252, 255)',
+    'rgb(171, 234, 0)',
+    'rgb(128, 0, 255)',
+    'rgb(5, 0, 92)',
+    'rgb(59, 0, 0)',
+    'rgb(255, 0, 179)',
+    'rgb(0, 90, 92)',
     'rgb(255, 255, 255)',
-    'rgb(169, 208, 255)',
-    'rgb(255, 255, 255)',
-    'rgb(169, 208, 255)',
-    'rgb(255, 255, 255)',
-    'rgb(169, 208, 255)',
-    'rgb(255, 255, 255)',
-    'rgb(169, 208, 255)',
-    'rgb(255, 255, 255)',
-    'rgb(169, 208, 255)',
-    'rgb(255, 255, 255)',
-    'rgb(169, 208, 255)',
+    'rgb(0, 0, 0)',
+    'rgb(78, 78, 78)',
+    'rgb(120, 104, 0)',
+    'rgb(0, 69, 104)',
+    'rgb(112, 32, 69)',
   ];
 
   const datasets = gaps.playerGaps.map((gap, index) => {
@@ -73,7 +77,7 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
       label: gap.player,
       data: parseData(gap.gaps),
       borderColor: colors[index],
-      backgroundColor: 'rgb(255, 255, 255)',
+      backgroundColor: 'white',
       fill: false,
       tension: 0.1,
     };
@@ -92,10 +96,11 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
 
   const options: ChartOptions<'line'> = {
     responsive: true,
-    maintainAspectRatio: true,
     elements: {
       point: {
         radius: 5,
+        hoverRadius: 8,
+        borderWidth: 2,
       },
     },
     layout: {
@@ -138,16 +143,23 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
         position: 'bottom' as const,
         labels: {
           color: 'white',
+          boxHeight: 10,
+          boxWidth: 20,
         },
       },
       title: {
         display: true,
+        text: 'Gaps',
+        color: 'white',
+        font: {
+          size: 20,
+        },
       },
     },
   };
 
   return (
-    <div className="">
+    <div className="w-screen md:h-full md:w-full">
       <Line data={data} options={options} height="500px" width="800px" />
     </div>
   );
