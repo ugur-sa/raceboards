@@ -54,7 +54,7 @@ export default function Page() {
       <Head>
         <title>Races</title>
       </Head>
-      <div className="flex min-h-screen flex-col bg-gray-800 xl:h-screen">
+      <div className="flex min-h-screen flex-col bg-gray-800">
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col p-10 text-white">
           <div className="rounded-lg bg-slate-700 p-10 shadow-xl">
@@ -85,7 +85,11 @@ export default function Page() {
             )}
             {selection === 'Race2' && <h1>sectors</h1>}
             {selection === 'Race3' && <h1>positions</h1>}
-            {selection === 'Race4' && <GapsChart race_id={race as string} />}
+            {selection === 'Race4' && (
+              <div className="overflow-x-scroll md:overflow-hidden">
+                <GapsChart race_id={race as string} />
+              </div>
+            )}
             {selection === 'Qualification0' && (
               <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
                 <QualificationResult race={race as string} />
