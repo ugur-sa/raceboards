@@ -57,16 +57,16 @@ export default async function handler(
 
     let min: number[] = [];
 
-    for (let i = 0; i < lapsCount; i++) {
+    for (let i = 0; i <= lapsCount; i++) {
       min.push(
         Math.min(...[...playerGaps].map((player) => player.totalTime[i]))
       );
     }
 
     playerGaps.forEach((player, index) => {
-      player.totalTime.forEach((time, index) =>
-        player.gaps.push(time - min[index])
-      );
+      player.totalTime.forEach((time, index) => {
+        player.gaps.push(time - min[index]);
+      });
     });
 
     res.status(200).json({ playerGaps });
