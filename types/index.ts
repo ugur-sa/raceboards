@@ -197,3 +197,8 @@ export type UserTimes = {
   track: string;
   created_at: Date;
 };
+
+export type PlayerGaps = {
+  player: string;
+  gaps: number[];
+};
