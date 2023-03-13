@@ -61,7 +61,7 @@ const TimeChart: React.FC<{ track: number }> = ({ track }) => {
         borderColor: 'rgb(169, 208, 255)',
         backgroundColor: 'rgb(255, 255, 255)',
         fill: false,
-        tension: 0.1,
+        tension: 0.2,
       },
     ],
   };
@@ -71,7 +71,7 @@ const TimeChart: React.FC<{ track: number }> = ({ track }) => {
     maintainAspectRatio: true,
     elements: {
       point: {
-        radius: 5,
+        radius: 3,
       },
     },
     layout: {
