@@ -168,7 +168,7 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
   };
 
   return (
-    <div className="flex max-h-[800px] justify-center">
+    <div className="flex max-h-[400px] min-h-[200px] w-screen justify-center md:max-h-[1000px] md:min-h-[800px] md:w-full">
       <Line data={data} options={options} />
     </div>
   );
