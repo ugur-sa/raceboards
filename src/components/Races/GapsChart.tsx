@@ -84,9 +84,17 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
   });
 
   const labels = gaps.playerGaps[0].gaps.map((gap, index) => {
-    if (index === 0) return 'Start';
-    if (index === gaps.playerGaps[0].gaps.length - 1) return 'Finish';
-    return `Lap ${index}`;
+    if (gaps.playerGaps[0].gaps.length > 20) {
+      if (index % 2 === 0) {
+        if (index === 0) return 'Start';
+        if (index === gaps.playerGaps[0].gaps.length - 1) return 'Finish';
+        return `Lap ${index}`;
+      }
+    } else {
+      if (index === 0) return 'Start';
+      if (index === gaps.playerGaps[0].gaps.length - 1) return 'Finish';
+      return `Lap ${index + 1}`;
+    }
   });
 
   const data = {
@@ -96,6 +104,7 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
 
   const options: ChartOptions<'line'> = {
     responsive: true,
+    maintainAspectRatio: false,
     elements: {
       point: {
         radius: 5,
@@ -159,8 +168,8 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
   };
 
   return (
-    <div className="w-screen md:h-full md:w-full">
-      <Line data={data} options={options} height="500px" width="800px" />
+    <div className="flex max-h-[800px] justify-center">
+      <Line data={data} options={options} />
     </div>
   );
 };
