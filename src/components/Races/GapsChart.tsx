@@ -72,7 +72,11 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
     'rgb(112, 32, 69)',
   ];
 
-  const datasets = gaps.playerGaps.map((gap, index) => {
+  const filteredGaps = gaps.playerGaps.filter((gap) => {
+    return gap.player !== '';
+  });
+
+  const datasets = filteredGaps.map((gap, index) => {
     return {
       label: gap.player,
       data: parseData(gap.gaps),
