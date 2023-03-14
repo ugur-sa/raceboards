@@ -5,8 +5,9 @@ import Navbar from '@/components/Navbar';
 import { useEffect, useState } from 'react';
 import RacesTable from '@/components/Seasons/RacesTable';
 import StandingsTable from '@/components/Seasons/StandingsTable';
+import { NextPage } from 'next';
 
-export default function Page() {
+const Page: NextPage = () => {
   const router = useRouter();
   const { year } = router.query;
   const session = useSession();
@@ -45,4 +46,6 @@ export default function Page() {
       </div>
     </>
   );
-}
+};
+
+export default Page;

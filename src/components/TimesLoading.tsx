@@ -1,4 +1,4 @@
-export default function TimesLoading() {
+const TimesLoading = () => {
   const loadingNumbers = Array.from(Array(10).keys());
   return (
     <>
@@ -38,4 +38,6 @@ export default function TimesLoading() {
       </div>
     </>
   );
-}
+};
+
+export default TimesLoading;

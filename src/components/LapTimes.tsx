@@ -1,12 +1,9 @@
 import { FastestTime, LeaderboardTime } from 'types';
 
-export default function LapTimesTable({
-  times,
-  fastestTime,
-}: {
+const LapTimesTable: React.FC<{
   times: LeaderboardTime[];
   fastestTime: FastestTime;
-}) {
+}> = ({ times, fastestTime }) => {
   return (
     <table className="mt-4 w-full place-self-center text-center">
       <thead className="bg-gray-800 text-sm uppercase">
@@ -40,4 +37,6 @@ export default function LapTimesTable({
       </tbody>
     </table>
   );
-}
+};
+
+export default LapTimesTable;

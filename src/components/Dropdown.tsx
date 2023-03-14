@@ -6,15 +6,11 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 
-const Dropdown = ({
-  title,
-  setSelection,
-  dropdownSections,
-}: {
+const Dropdown: React.FC<{
   title: string;
   setSelection: any;
   dropdownSections: string[];
-}) => {
+}> = ({ title, setSelection, dropdownSections }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>

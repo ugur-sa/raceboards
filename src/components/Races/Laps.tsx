@@ -1,9 +1,12 @@
 import useSWR from 'swr';
-import { Lap, LapResponse } from 'types';
+import { LapResponse } from 'types';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const Laps = ({ race, session }: { race: string; session: string }) => {
+const Laps: React.FC<{ race: string; session: string }> = ({
+  race,
+  session,
+}) => {
   const {
     data: lapsResponse,
     error: lapsError,

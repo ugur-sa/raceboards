@@ -13,7 +13,7 @@ const getURL = () => {
   return url;
 };
 
-export default function Login() {
+const Login = () => {
   const supabase = useSupabaseClient();
 
   return (
@@ -30,4 +30,6 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+export default Login;

@@ -4,7 +4,7 @@ import convertTime from 'utils/convertTime';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const RaceResult = ({ race }: { race: string }) => {
+const RaceResult: React.FC<{ race: string }> = ({ race }) => {
   const { data: results, error: raceResultsError } = useSWR<ResultResponse>(
     `/api/races/getResults?id=${race}`,
     fetcher

@@ -1,4 +1,4 @@
-import { Time, Track, BestTimeArr } from 'types';
+import { BestTimeArr } from 'types';
 import useSWR from 'swr';
 import { useSession } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
@@ -7,9 +7,7 @@ import BestTimeLoading from './BestTimeLoading';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function BestTimeTable() {
-  const session = useSession();
-
+const BestTimeTable = () => {
   const { data: bestTimes, error: timesError } = useSWR<BestTimeArr[]>(
     `/api/times/bestTimes`,
     fetcher
@@ -69,4 +67,6 @@ export default function BestTimeTable() {
       ))}
     </div>
   );
-}
+};
+
+export default BestTimeTable;

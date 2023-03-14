@@ -7,15 +7,15 @@ import Laps from '@/components/Races/Laps';
 import RaceResult from '@/components/Races/RaceResult';
 import Dropdown from '@/components/Dropdown';
 import useSWR from 'swr';
-import { Session } from 'types';
 import Legend from '@/components/Races/Legend';
 import QualificationResult from '@/components/Races/QualificationResult';
 import PracticeResults from '@/components/Races/PracticeResults';
 import GapsChart from '@/components/Races/GapsChart';
+import { NextPage } from 'next';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Page() {
+const Page: NextPage = () => {
   const router = useRouter();
   const { race } = router.query;
   const session = useSession();
@@ -125,4 +125,6 @@ export default function Page() {
       </div>
     </>
   );
-}
+};
+
+export default Page;

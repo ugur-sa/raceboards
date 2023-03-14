@@ -12,7 +12,7 @@ import TracksLoading from '@/components/TracksLoading';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Page() {
+const Page = () => {
   const router = useRouter();
   const { track } = router.query;
   const session = useSession();
@@ -132,4 +132,6 @@ export default function Page() {
       </div>
     </>
   );
-}
+};
+
+export default Page;

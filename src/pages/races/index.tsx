@@ -1,10 +1,10 @@
 import Navbar from '@/components/Navbar';
 import { useSession } from '@supabase/auth-helpers-react';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR from 'swr';
+
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 interface ResultFromDB {

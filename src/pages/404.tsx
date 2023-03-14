@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from '@supabase/auth-helpers-react';
 
-export default function Error() {
+const Error = () => {
   const session = useSession();
 
   let page: string;
@@ -48,4 +48,6 @@ export default function Error() {
       </div>
     </div>
   );
-}
+};
+
+export default Error;

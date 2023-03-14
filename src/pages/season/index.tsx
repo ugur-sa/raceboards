@@ -9,7 +9,7 @@ import { UserWithMedals } from 'types';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Leaderboards() {
+const Leaderboards = () => {
   const session = useSession();
   const router = useRouter();
 
@@ -40,4 +40,6 @@ export default function Leaderboards() {
       </div>
     </>
   );
-}
+};
+
+export default Leaderboards;

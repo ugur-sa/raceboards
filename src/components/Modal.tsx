@@ -1,11 +1,4 @@
-import {
-  Dispatch,
-  Fragment,
-  MutableRefObject,
-  SetStateAction,
-  useRef,
-  useState,
-} from 'react';
+import { Dispatch, Fragment, MutableRefObject, SetStateAction } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { Time, Track } from 'types';
@@ -13,21 +6,21 @@ import useSWR from 'swr';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Modal({
-  open,
-  setOpen,
-  cancelButtonRef,
-  timeToDelete,
-  setShowToast,
-  mutate,
-}: {
+const Modal: React.FC<{
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   cancelButtonRef: MutableRefObject<null>;
   timeToDelete: Time | null;
   setShowToast: Dispatch<SetStateAction<boolean>>;
   mutate: any;
-}) {
+}> = ({
+  open,
+  setOpen,
+  cancelButtonRef,
+  timeToDelete,
+  setShowToast,
+  mutate,
+}) => {
   const { data: track, error: trackError } = useSWR<Track>(
     timeToDelete
       ? `/api/track/getTrackById?id=${timeToDelete?.track_id}`
@@ -124,7 +117,7 @@ export default function Modal({
       </Dialog>
     </Transition.Root>
   );
-}
+};
 
 function deleteTimeFromDB(time: Time | null, mutate: any, setShowToast: any) {
   if (time === null) {
@@ -174,3 +167,5 @@ function deleteTimeFromDB(time: Time | null, mutate: any, setShowToast: any) {
     }
   });
 }
+
+export default Modal;

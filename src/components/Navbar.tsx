@@ -2,9 +2,9 @@ import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
-export default function Navbar() {
+const Navbar = () => {
   //get the current route
   const router = useRouter();
   const supabase = useSupabaseClient();
@@ -232,4 +232,6 @@ export default function Navbar() {
       </div>
     </>
   );
-}
+};
+
+export default Navbar;

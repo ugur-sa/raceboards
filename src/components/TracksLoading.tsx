@@ -1,4 +1,4 @@
-export default function TracksLoading() {
+const TracksLoading = () => {
   return (
     <main className="flex min-h-0 flex-grow flex-col items-center">
       <div className="w-50 flex h-44 animate-pulse flex-col items-center justify-center gap-2 opacity-100">
@@ -44,4 +44,6 @@ export default function TracksLoading() {
       </div>
     </main>
   );
-}
+};
+
+export default TracksLoading;

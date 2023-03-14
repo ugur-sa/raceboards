@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function TracksPage() {
+const TracksPage = () => {
   const session = useSession();
   const router = useRouter();
 
@@ -39,4 +39,6 @@ export default function TracksPage() {
       <div className="min-h-screen bg-gray-800 pb-10 text-white"></div>
     </>
   );
-}
+};
+
+export default TracksPage;

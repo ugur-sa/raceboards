@@ -2,17 +2,12 @@ import { useRef, useState } from 'react';
 import { Time, Track } from 'types';
 import Modal from './Modal';
 
-export default function Times({
-  times,
-  tracks,
-  setShowToast,
-  mutate,
-}: {
+const Times: React.FC<{
   times: Time[];
   tracks: Track[];
   setShowToast: any;
   mutate: any;
-}) {
+}> = ({ times, tracks, setShowToast, mutate }) => {
   const [open, setOpen] = useState(false);
   const [timeToDelete, setTimeToDelete] = useState<Time | null>(null);
   const cancelButtonRef = useRef(null);
@@ -80,4 +75,6 @@ export default function Times({
       />
     </>
   );
-}
+};
+
+export default Times;

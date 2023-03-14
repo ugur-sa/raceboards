@@ -5,8 +5,6 @@ import Times from '@/components/Times';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import Spinner from '@/components/Spinner';
 import TimesLoading from '@/components/TimesLoading';
 import { useRouter } from 'next/router';
 
@@ -62,7 +60,7 @@ function submitTime(e: any, setLoading: any, setShowToast: any, mutate: any) {
   });
 }
 
-export default function TimesPage() {
+const TimesPage = () => {
   const session = useSession();
   const router = useRouter();
 
@@ -227,4 +225,6 @@ export default function TimesPage() {
       </div>
     </>
   );
-}
+};
+
+export default TimesPage;
