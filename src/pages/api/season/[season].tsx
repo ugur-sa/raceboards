@@ -47,8 +47,6 @@ export default async function handler(
         }
       });
 
-      console.log(standings);
-
       standings.forEach((player) => {
         const fastestLap = race.bestLaps.reduce((prev, current) =>
           prev.time < current.time ? prev : current
