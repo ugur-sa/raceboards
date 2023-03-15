@@ -88,17 +88,9 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
   });
 
   const labels = gaps.playerGaps[0].gaps.map((gap, index) => {
-    if (gaps.playerGaps[0].gaps.length > 20) {
-      if (index % 2 === 0) {
-        if (index === 0) return 'Start';
-        if (index === gaps.playerGaps[0].gaps.length - 1) return 'Finish';
-        return `Lap ${index}`;
-      }
-    } else {
-      if (index === 0) return 'Start';
-      if (index === gaps.playerGaps[0].gaps.length - 1) return 'Finish';
-      return `Lap ${index + 1}`;
-    }
+    if (index === 0) return 'Start';
+    if (index === gaps.playerGaps[0].gaps.length - 1) return 'Finish';
+    return `Lap ${index}`;
   });
 
   const data = {
@@ -126,6 +118,9 @@ const GapsChart: React.FC<{ race_id: string }> = ({ race_id }) => {
         },
         grid: {
           color: 'rgba(255, 255, 255, 0.1)',
+        },
+        ticks: {
+          maxTicksLimit: 16,
         },
       },
       y: {
