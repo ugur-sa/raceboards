@@ -1,6 +1,5 @@
 import { BestTimeArr } from 'types';
 import useSWR from 'swr';
-import { useSession } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import BestTimeLoading from './BestTimeLoading';
