@@ -123,7 +123,16 @@ function deleteTimeFromDB(time: Time | null, mutate: any, setShowToast: any) {
   if (time === null) {
     return;
   }
-  //delete the time from the database
+  //get bestTimeIds from localstorage
+  const storedIds = localStorage.getItem('bestTimeIds');
+  //remove the time id from the array
+  const bestTimeIds = storedIds
+    ?.split(',')
+    .filter((id) => id !== time.id.toString());
+  //save the new array to localstorage
+  localStorage.setItem('bestTimeIds', bestTimeIds?.join(',') ?? '');
+
+  // delete the time from the database
   fetch('/api/times/', {
     method: 'DELETE',
     headers: {
