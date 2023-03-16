@@ -125,12 +125,12 @@ function deleteTimeFromDB(time: Time | null, mutate: any, setShowToast: any) {
   }
   //get bestTimeIds from localstorage
   const storedIds = localStorage.getItem('bestTimeIds');
+  //split the string into an array but keep in mind that [] are also included
+  const arr = JSON.parse(`{"data": ${storedIds}}`).data;
   //remove the time id from the array
-  const bestTimeIds = storedIds
-    ?.split(',')
-    .filter((id) => id !== time.id.toString());
+  const bestTimeIds = arr.filter((id: number) => id !== time.id);
   //save the new array to localstorage
-  localStorage.setItem('bestTimeIds', bestTimeIds?.join(',') ?? '');
+  localStorage.setItem('bestTimeIds', JSON.stringify(bestTimeIds));
 
   // delete the time from the database
   fetch('/api/times/', {
