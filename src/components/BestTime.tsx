@@ -3,6 +3,7 @@ import useSWR from 'swr';
 import Link from 'next/link';
 import Image from 'next/image';
 import BestTimeLoading from './BestTimeLoading';
+import { useEffect, useState } from 'react';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -11,6 +12,30 @@ const BestTimeTable = () => {
     `/api/times/bestTimes`,
     fetcher
   );
+
+  const [newIds, setNewIds] = useState<number[]>([]);
+
+  useEffect(() => {
+    const ids =
+      bestTimes?.flatMap(({ times }) => times.map(({ id }) => id)) || [];
+
+    const storedIds = JSON.parse(localStorage.getItem('bestTimeIds') || '[]');
+
+    if (storedIds.length === 0) {
+      localStorage.setItem('bestTimeIds', JSON.stringify(ids));
+      return;
+    }
+
+    const diffIds = ids.filter((id) => !storedIds.includes(id));
+
+    if (diffIds.length > 0) {
+      setNewIds(diffIds);
+      localStorage.setItem(
+        'bestTimeIds',
+        JSON.stringify([...storedIds, ...diffIds])
+      );
+    }
+  }, [bestTimes]);
 
   if (timesError) return <div>failed to load</div>;
   if (!bestTimes) return <BestTimeLoading />;
@@ -45,9 +70,7 @@ const BestTimeTable = () => {
                   {index === 2 && '🥉'}
                   {time.time} {'-'} {time.username}
                 </p>
-                {/* check if the time updated is under 30 minutes ago */}
-                {new Date(time.created_at) >
-                  new Date(Date.now() - 30 * 60 * 1000) && (
+                {newIds.includes(time.id) && (
                   <div className="h-2 w-2 animate-pulse rounded-full bg-green-400 opacity-100 duration-100"></div>
                 )}
               </div>
