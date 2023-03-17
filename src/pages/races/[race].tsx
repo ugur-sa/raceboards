@@ -38,12 +38,11 @@ const Page: NextPage = () => {
 
   const dropdownSections = sessions.map((session) => {
     if (session === 'Practice' || session === 'Qualification')
-      return [`${session} result`, `${session} laps`, `${session} sectors`];
+      return [`${session} result`, `${session} laps`];
 
     return [
       `${session} result`,
       `${session} laps`,
-      `${session} sectors`,
       `${session} positions`,
       `${session} gaps`,
     ];
@@ -83,9 +82,8 @@ const Page: NextPage = () => {
                 <Laps race={race as string} session="Race" />
               </div>
             )}
-            {selection === 'Race2' && <h1>sectors</h1>}
-            {selection === 'Race3' && <h1>positions</h1>}
-            {selection === 'Race4' && (
+            {selection === 'Race2' && <h1>positions</h1>}
+            {selection === 'Race3' && (
               <div className="overflow-x-scroll md:overflow-hidden">
                 <GapsChart race_id={race as string} />
               </div>
@@ -100,11 +98,6 @@ const Page: NextPage = () => {
                 <Laps race={race as string} session="Qualification" />
               </div>
             )}
-            {selection === 'Qualification2' && (
-              <div>
-                <h1>test</h1>
-              </div>
-            )}
             {selection === 'Practice0' && (
               <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
                 <PracticeResults race={race as string} />
@@ -113,11 +106,6 @@ const Page: NextPage = () => {
             {selection === 'Practice1' && (
               <div>
                 <Laps race={race as string} session="Practice" />
-              </div>
-            )}
-            {selection === 'Practice2' && (
-              <div>
-                <h1>test</h1>
               </div>
             )}
           </div>
