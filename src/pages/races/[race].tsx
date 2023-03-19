@@ -12,6 +12,7 @@ import QualificationResult from '@/components/Races/QualificationResult';
 import PracticeResults from '@/components/Races/PracticeResults';
 import GapsChart from '@/components/Races/GapsChart';
 import { NextPage } from 'next';
+import Positions from '@/components/Races/Positions';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -82,7 +83,7 @@ const Page: NextPage = () => {
                 <Laps race={race as string} session="Race" />
               </div>
             )}
-            {selection === 'Race2' && <h1>positions</h1>}
+            {selection === 'Race2' && <Positions />}
             {selection === 'Race3' && (
               <div className="overflow-x-scroll md:overflow-hidden">
                 <GapsChart race_id={race as string} />
