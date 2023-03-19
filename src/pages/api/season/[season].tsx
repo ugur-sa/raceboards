@@ -37,7 +37,7 @@ export default async function handler(
       raceResult.forEach((car, index) => {
         if (players[car].name !== '') {
           const playerLaps = race.laps.filter((lap) => lap.car === car).length;
-          if (playerLaps !== race.lapsCount) {
+          if (playerLaps < Math.floor(race.lapsCount * 0.9)) {
             players[car].points = 0;
             standings.push(players[car]);
           } else {
