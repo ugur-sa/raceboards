@@ -74,12 +74,11 @@ export default async function handler(
             }
           });
         }
-
         session.bestLaps.forEach((bestLap, index) => {
           practice.results?.push({
             player: result.players[bestLap.car].name,
             vehicle: result.players[bestLap.car].car,
-            laps: session.laps.filter((lap) => lap.car === index).length,
+            laps: session.laps.filter((lap) => lap.car === bestLap.car).length,
             best_lap: bestLap.time,
             gap: bestLap.time - practice.best_lap?.time!,
           });
@@ -127,7 +126,7 @@ export default async function handler(
           qualification.results?.push({
             player: result.players[bestLap.car].name,
             vehicle: result.players[bestLap.car].car,
-            laps: session.laps.filter((lap) => lap.car === index).length,
+            laps: session.laps.filter((lap) => lap.car === bestLap.car).length,
             best_lap: bestLap.time,
             gap: bestLap.time - qualification.pole?.time!,
           });
