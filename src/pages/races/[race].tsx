@@ -54,62 +54,60 @@ const Page: NextPage = () => {
       <Head>
         <title>Races</title>
       </Head>
-      <div className="flex min-h-screen flex-col bg-gray-800">
+      <div className="flex min-h-screen flex-col bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col p-10 text-white">
-          <div className="rounded-lg bg-slate-700 p-10 shadow-xl">
-            <div className="flex justify-between">
-              <div className="flex gap-5">
-                {sessions.map((session, index) => (
-                  <Dropdown
-                    key={index}
-                    title={session}
-                    setSelection={setSelection}
-                    dropdownSections={dropdownSections[index]}
-                  />
-                ))}
-              </div>
-              {selection === 'Race1' && <Legend />}
-              {selection === 'Qualification1' && <Legend />}
-              {selection === 'Practice1' && <Legend />}
+          <div className="flex justify-between">
+            <div className="flex gap-5">
+              {sessions.map((session, index) => (
+                <Dropdown
+                  key={index}
+                  title={session}
+                  setSelection={setSelection}
+                  dropdownSections={dropdownSections[index]}
+                />
+              ))}
             </div>
-            {selection === 'Race0' && (
-              <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
-                <RaceResult race={race as string} />
-              </div>
-            )}
-            {selection === 'Race1' && (
-              <div>
-                <Laps race={race as string} session="Race" />
-              </div>
-            )}
-            {selection === 'Race2' && <Positions />}
-            {selection === 'Race3' && (
-              <div className="overflow-x-scroll md:overflow-hidden">
-                <GapsChart race_id={race as string} />
-              </div>
-            )}
-            {selection === 'Qualification0' && (
-              <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
-                <QualificationResult race={race as string} />
-              </div>
-            )}
-            {selection === 'Qualification1' && (
-              <div>
-                <Laps race={race as string} session="Qualification" />
-              </div>
-            )}
-            {selection === 'Practice0' && (
-              <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
-                <PracticeResults race={race as string} />
-              </div>
-            )}
-            {selection === 'Practice1' && (
-              <div>
-                <Laps race={race as string} session="Practice" />
-              </div>
-            )}
+            {selection === 'Race1' && <Legend />}
+            {selection === 'Qualification1' && <Legend />}
+            {selection === 'Practice1' && <Legend />}
           </div>
+          {selection === 'Race0' && (
+            <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
+              <RaceResult race={race as string} />
+            </div>
+          )}
+          {selection === 'Race1' && (
+            <div>
+              <Laps race={race as string} session="Race" />
+            </div>
+          )}
+          {selection === 'Race2' && <Positions />}
+          {selection === 'Race3' && (
+            <div className="overflow-x-scroll md:overflow-hidden">
+              <GapsChart race_id={race as string} />
+            </div>
+          )}
+          {selection === 'Qualification0' && (
+            <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
+              <QualificationResult race={race as string} />
+            </div>
+          )}
+          {selection === 'Qualification1' && (
+            <div>
+              <Laps race={race as string} session="Qualification" />
+            </div>
+          )}
+          {selection === 'Practice0' && (
+            <div className="mt-10 grid grid-cols-1 grid-rows-3 gap-10 xl:grid-cols-2 xl:grid-rows-2">
+              <PracticeResults race={race as string} />
+            </div>
+          )}
+          {selection === 'Practice1' && (
+            <div>
+              <Laps race={race as string} session="Practice" />
+            </div>
+          )}
         </main>
       </div>
     </>

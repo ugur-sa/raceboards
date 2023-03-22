@@ -42,13 +42,13 @@ const RacesPage = () => {
       <Head>
         <title>Races</title>
       </Head>
-      <div className="flex h-screen flex-col bg-gray-800">
+      <div className="flex h-screen flex-col bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col items-center gap-10 text-white">
           <h1 className="text-xl font-bold lg:text-6xl">Races</h1>
-          <div className="h-1/2 w-1/2 rounded-lg bg-slate-700 p-5 shadow-xl xl:h-auto xl:w-[600px]">
+          <div className="h-1/2 w-1/2 xl:h-auto xl:w-[600px]">
             {results ? (
-              <table className="w-full text-center">
+              <table className="table w-full text-center shadow-2xl">
                 <thead className="bg-gray-800 text-[8px] uppercase xl:text-sm">
                   <tr>
                     <th>#</th>
@@ -59,7 +59,7 @@ const RacesPage = () => {
                 <tbody>
                   {results.map((result, index) => (
                     <tr
-                      className="cursor-pointer border-b border-slate-500 text-[8px] hover:bg-slate-600 xl:text-lg"
+                      className="cursor-pointer text-[8px] hover:text-gray-300 xl:text-lg"
                       key={result.id}
                       onClick={() => {
                         handleClick(result.id);
