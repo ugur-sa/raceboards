@@ -46,7 +46,7 @@ const Page = () => {
       <Head>
         <title>{trackData?.name}</title>
       </Head>
-      <div className="flex min-h-screen flex-col bg-gray-800 pb-10 xl:h-full">
+      <div className="flex min-h-screen flex-col bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 pb-10 xl:h-full">
         <Navbar />
         {trackData && fastestTime && times ? (
           <main className="flex min-h-0 flex-grow flex-col items-center">
@@ -66,13 +66,13 @@ const Page = () => {
               </p>
             </div>
             <div className="flex min-h-screen w-full flex-col items-center justify-center gap-10 xl:flex-row xl:items-start">
-              <div className="flex h-full w-5/6 flex-col rounded-lg bg-slate-700 pb-10 shadow-2xl xl:h-[600px] xl:w-[800px]">
+              <div className="flex h-full w-5/6 flex-col rounded-lg pb-10 shadow-2xl xl:h-[600px] xl:w-[800px]">
                 <h2 className="pt-5 pl-5 text-xl text-white">Lap Times</h2>
                 <div className="relative overflow-x-auto">
                   <LapTimesTable times={times} fastestTime={fastestTime} />
                 </div>
               </div>
-              <div className="flex flex-col gap-5 rounded-lg bg-slate-700 pt-5 pl-5 shadow-2xl xl:h-[800px] xl:w-[400px]">
+              <div className="flex flex-col gap-5 rounded-lg pt-5 pl-5 shadow-2xl xl:h-[850px] xl:w-[400px]">
                 <h2 className="text-xl text-white">Track Details</h2>
                 <div>
                   <h3 className="text-sm">Grand Prix Name</h3>
@@ -121,6 +121,11 @@ const Page = () => {
                       height={500}
                       alt="track_image"
                     />
+                  </div>
+                  <div className="flex justify-center gap-2 pr-5">
+                    <p className="text-[rgb(237,60,60)]">Sector 1</p>
+                    <p className="text-[rgb(51,118,242)]">Sector 2</p>
+                    <p className="text-[rgb(250,183,33)]">Sector 3</p>
                   </div>
                 </div>
               </div>

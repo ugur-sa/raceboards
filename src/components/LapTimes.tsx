@@ -19,7 +19,7 @@ const LapTimesTable: React.FC<{
         {times.map((time, index) => (
           <tr
             key={time.id}
-            className={`border-b border-gray-600 xl:text-lg ${
+            className={` xl:text-lg ${
               time.id === fastestTime.time.id ? 'bg-slate-600' : 'bg-slate-700'
             }`}
           >
