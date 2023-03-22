@@ -2,7 +2,7 @@ const LeaderboardsLoading = () => {
   const loadingArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
-    <table className="w-full text-center">
+    <table className="table w-full text-center">
       <thead className="bg-gray-800 text-xs uppercase xl:text-sm">
         <tr>
           <th className="">#</th>
