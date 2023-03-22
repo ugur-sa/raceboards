@@ -83,7 +83,9 @@ const RaceResult: React.FC<{ race: string }> = ({ race }) => {
                 <td className="">{driver.vehicle}</td>
                 <td className="">{driver.laps}</td>
                 <td className="">
-                  {driver.time.retired! > 0
+                  {driver.time.retired! === -1
+                    ? 'DNF'
+                    : driver.time.retired! > 0
                     ? driver.time.retired === 1
                       ? `+${driver.time.retired} lap`
                       : `+${driver.time.retired} laps`
