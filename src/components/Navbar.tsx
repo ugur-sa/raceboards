@@ -116,7 +116,7 @@ const Navbar = () => {
         </div>
       </nav>
       <div
-        className={`dropdown-end dropdown flex justify-between bg-gray-800 pr-10 lg:hidden`}
+        className={`dropdown-end dropdown flex justify-between pr-10 lg:hidden`}
         ref={dropdown}
       >
         <div className="flex items-center justify-center gap-2 pl-5">
