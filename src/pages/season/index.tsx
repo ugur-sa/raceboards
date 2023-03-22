@@ -4,10 +4,6 @@ import { useSession } from '@supabase/auth-helpers-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import useSWR from 'swr';
-import { UserWithMedals } from 'types';
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Leaderboards = () => {
   const session = useSession();
@@ -19,18 +15,12 @@ const Leaderboards = () => {
     }
   }, [session, router]);
 
-  const { data: usersWithMedals, error: usersWithMedalsError } = useSWR<
-    UserWithMedals[]
-  >('/api/times/getAllUsersMedals', fetcher);
-
-  if (usersWithMedalsError) return <div>failed to load</div>;
-
   return (
     <>
       <Head>
         <title>{`Season ${new Date().getFullYear()}`}</title>
       </Head>
-      <div className="flex h-screen flex-col bg-gray-800">
+      <div className="flex h-screen flex-col bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col items-center gap-10 text-white">
           <h1 className="text-6xl font-bold">

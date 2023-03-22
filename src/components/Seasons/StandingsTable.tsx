@@ -22,18 +22,18 @@ const StandingsTable: React.FC<{ year: string }> = ({ year }) => {
   return (
     <table className="table w-full text-center text-[12px] shadow-2xl lg:text-lg">
       <thead>
-        <tr className="border border-slate-500">
-          <th className="border border-slate-500">Pos</th>
-          <th className="border border-slate-500">Name</th>
-          <th className="border border-slate-500">Points</th>
+        <tr className="">
+          <th className="">Pos</th>
+          <th className="">Name</th>
+          <th className="">Points</th>
         </tr>
       </thead>
       <tbody>
         {standings.standings.map((player, index) => (
-          <tr key={index} className="border border-slate-500">
-            <td className="border border-slate-500">{index + 1}</td>
-            <td className="border border-slate-500">{player.name}</td>
-            <td className="border border-slate-500">{player.points}</td>
+          <tr key={index} className="">
+            <td className="">{index + 1}</td>
+            <td className="">{player.name}</td>
+            <td className="">{player.points}</td>
           </tr>
         ))}
       </tbody>
