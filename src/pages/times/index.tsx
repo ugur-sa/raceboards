@@ -97,10 +97,10 @@ const TimesPage = () => {
       <Head>
         <title>Times</title>
       </Head>
-      <div className="flex h-screen flex-col bg-gray-800">
+      <div className="flex h-full flex-col bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col">
-          <div className="flex flex-col items-center justify-center gap-10 bg-gray-800 text-white">
+          <div className="flex flex-col items-center justify-center gap-10 text-white">
             <h1 className="text-6xl font-bold">Times</h1>
             {!userTimes || !tracks ? (
               <TimesLoading />
@@ -112,7 +112,7 @@ const TimesPage = () => {
                 mutate={mutate}
               />
             )}
-            <div className="card mb-5 w-96 bg-base-100 shadow-xl md:w-1/2">
+            <div className="card mb-5 w-96 bg-slate-800 shadow-xl md:w-1/2">
               <form
                 className="card-body"
                 onSubmit={(e) =>
