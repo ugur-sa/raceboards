@@ -122,7 +122,7 @@ const Page = () => {
                       alt="track_image"
                     />
                   </div>
-                  <div className="flex justify-center gap-2 pr-5">
+                  <div className="flex justify-center gap-2 pr-5 text-xs">
                     <p className="text-[rgb(237,60,60)]">Sector 1</p>
                     <p className="text-[rgb(51,118,242)]">Sector 2</p>
                     <p className="text-[rgb(250,183,33)]">Sector 3</p>
