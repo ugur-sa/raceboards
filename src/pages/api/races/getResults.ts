@@ -227,6 +227,8 @@ function getTime(
 
   if (playerLaps.length != lapsCount) {
     return { time: time, retired: lapsCount - playerLaps.length };
+  } else if (playerLaps.length < Math.floor(lapsCount * 0.9)) {
+    return { time: time, retired: -1 };
   }
 
   return { time: time };
