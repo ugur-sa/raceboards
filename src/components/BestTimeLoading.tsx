@@ -10,7 +10,7 @@ const BestTimeLoading = () => {
       {loadingArray.map((loading) => (
         <div
           key={loading}
-          className="grid h-28 grid-cols-12 place-items-center rounded-lg border border-gray-600 bg-gray-800 p-4 shadow-lg"
+          className="grid h-28 grid-cols-12 place-items-center rounded-lg border border-gray-700 bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 p-4 shadow-lg"
         >
           <p className="animate-pulse text-3xl font-bold text-slate-400 opacity-20 blur-sm">
             {loading}

@@ -45,7 +45,7 @@ const BestTimeTable = () => {
       {bestTimes.map((bestTimeObject) => (
         <div
           key={bestTimeObject.track.id}
-          className="grid grid-cols-12 place-items-center rounded-lg border border-gray-600 bg-gray-800 p-4 shadow-lg"
+          className="grid grid-cols-12 place-items-center rounded-lg border border-gray-700 bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 p-4 shadow-lg"
         >
           <p className=" text-3xl font-medium text-gray-300">
             {bestTimeObject.track.season_order}
