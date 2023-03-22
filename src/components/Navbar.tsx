@@ -23,7 +23,7 @@ const Navbar = () => {
   //create a nav bar with links to the home page and the tracks page and times page
   return (
     <>
-      <nav className="hidden bg-gray-800 p-6 lg:visible lg:flex lg:items-center lg:justify-between">
+      <nav className="hidden p-6 lg:visible lg:flex lg:items-center lg:justify-between">
         <div className="mr-6 flex flex-shrink-0 items-center text-white">
           <Link href={'/'}>
             <Image
