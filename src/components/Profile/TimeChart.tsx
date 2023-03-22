@@ -72,6 +72,7 @@ const TimeChart: React.FC<{ track: number }> = ({ track }) => {
     elements: {
       point: {
         radius: 3,
+        hoverRadius: 5,
       },
     },
     layout: {

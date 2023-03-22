@@ -23,19 +23,19 @@ const RaceResult: React.FC<{ race: string }> = ({ race }) => {
               <td className="pl-1">{results.result[2].session}</td>
             </tr>
             <tr className="">
-              <th className="">Track</th>
+              <th className="z-0">Track</th>
               <td className="pl-1">{results.track_name}</td>
             </tr>
             <tr className="">
-              <th className="">Winner</th>
+              <th className="z-0">Winner</th>
               <td className="pl-1">{results.result[2].winner}</td>
             </tr>
             <tr className="">
-              <th className="">Led most laps</th>
+              <th className="z-0">Led most laps</th>
               <td className="pl-1">{results.result[2].most_laps_led}</td>
             </tr>
             <tr className="">
-              <th className="">Best Lap</th>
+              <th className="z-0">Best Lap</th>
               <td className="pl-1">
                 {results.result[2].best_lap?.player} (
                 {results.result[2].best_lap

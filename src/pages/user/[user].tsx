@@ -26,13 +26,13 @@ const UserPage = () => {
       <Head>
         <title>{user}</title>
       </Head>
-      <div className="flex h-screen flex-col bg-gray-800">
+      <div className="flex h-screen flex-col bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col items-center gap-10 text-white">
           <h1 className="text-6xl font-bold">{user}</h1>
           <TrackSelector setTrack={setTrack} />
           {track > 0 && (
-            <div className="h-auto w-1/2 rounded-lg border border-slate-600 bg-slate-800 shadow-2xl">
+            <div className="h-auto w-3/4">
               <TimeChart track={track} />
             </div>
           )}
