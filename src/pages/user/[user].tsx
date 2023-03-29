@@ -19,14 +19,12 @@ const UserPage = () => {
     }
   }, [session, router]);
 
-  console.log(track);
-
   return (
     <>
       <Head>
         <title>{user}</title>
       </Head>
-      <div className="flex h-screen flex-col bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
+      <div className="flex min-h-screen flex-col bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col items-center gap-10 text-white">
           <h1 className="text-6xl font-bold">{user}</h1>
