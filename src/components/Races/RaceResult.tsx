@@ -95,7 +95,7 @@ const RaceResult: React.FC<{ race: string }> = ({ race }) => {
                 {/* <td className="">
                   {driver.consistency}%
                 </td> */}
-                <td className="">{driver.led}</td>
+                <td className="">{driver.laps > 0 ? driver.led : 'DNS'}</td>
               </tr>
             ))}
           </tbody>
