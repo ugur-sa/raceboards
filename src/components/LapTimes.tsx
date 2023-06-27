@@ -30,7 +30,7 @@ const LapTimesTable: React.FC<{
             <td className="text-slate-200">{time.time}</td>
             <td className="text-slate-200">{time.username}</td>
             <td className="text-slate-200">
-              {time.delta !== 0 ? -time.delta / 1000 : ''}
+              {time.delta !== 0 ? '+' + time.delta / 1000 : ''}
             </td>
           </tr>
         ))}
