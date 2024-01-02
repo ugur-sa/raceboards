@@ -26,7 +26,7 @@ const Page: NextPage = () => {
       <div className="flex min-h-screen flex-col bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 xl:h-screen">
         <Navbar />
         <main className="flex min-h-0 flex-grow flex-col items-center gap-10 font-formula text-white">
-          <h1 className="text-6xl font-bold">{`Season ${new Date().getFullYear()}`}</h1>
+          <h1 className="text-6xl font-bold">{`Season ${year}`}</h1>
 
           <div className="block lg:flex lg:gap-16">
             <div className="mt-8 flex h-52 w-64 flex-col items-center lg:mt-0 lg:h-[300px] lg:w-[600px]">
