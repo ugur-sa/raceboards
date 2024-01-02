@@ -21,7 +21,7 @@ const Page: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{`Season ${new Date().getFullYear()}`}</title>
+        <title>{`Season ${year}`}</title>
       </Head>
       <div className="flex min-h-screen flex-col bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 xl:h-screen">
         <Navbar />
